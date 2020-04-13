@@ -1,0 +1,562 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		5025671E2433FFE000F20406 /* CartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5025671D2433FFE000F20406 /* CartTableViewCell.swift */; };
+		508644CF2433E2BD00002984 /* PersistenceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508644CE2433E2BD00002984 /* PersistenceHelper.swift */; };
+		508644D12433E30A00002984 /* RecipePersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508644D02433E30A00002984 /* RecipePersistence.swift */; };
+		50D7B52F24324271007C4866 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D7B52E24324271007C4866 /* AppDelegate.swift */; };
+		50D7B53124324271007C4866 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D7B53024324271007C4866 /* SceneDelegate.swift */; };
+		50D7B53824324272007C4866 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 50D7B53724324272007C4866 /* Assets.xcassets */; };
+		50D7B53B24324272007C4866 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 50D7B53924324272007C4866 /* LaunchScreen.storyboard */; };
+		50D7B54624324273007C4866 /* AzureOverallAlbertTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D7B54524324273007C4866 /* AzureOverallAlbertTests.swift */; };
+		50D7B551243245BA007C4866 /* Secretes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D7B550243245BA007C4866 /* Secretes.swift */; };
+		50D7B556243246E1007C4866 /* DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D7B555243246E1007C4866 /* DetailVC.swift */; };
+		50D7B558243246EA007C4866 /* CartVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D7B557243246EA007C4866 /* CartVC.swift */; };
+		50D7B55B24324825007C4866 /* BrowseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D7B55A24324825007C4866 /* BrowseVC.swift */; };
+		50ED88D624324B6E0092C94A /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50ED88D524324B6E0092C94A /* MainTabBarController.swift */; };
+		50ED88D924324D860092C94A /* RecipeCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50ED88D824324D860092C94A /* RecipeCollectionCell.swift */; };
+		50ED88DC2432515A0092C94A /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50ED88DB2432515A0092C94A /* NetworkManager.swift */; };
+		50ED88DE243257420092C94A /* RecipeFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50ED88DD243257420092C94A /* RecipeFetcher.swift */; };
+		50ED88E1243258390092C94A /* Recipes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50ED88E0243258390092C94A /* Recipes.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		50D7B54224324273007C4866 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 50D7B52324324271007C4866 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 50D7B52A24324271007C4866;
+			remoteInfo = AzureOverallAlbert;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		5025671D2433FFE000F20406 /* CartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartTableViewCell.swift; sourceTree = "<group>"; };
+		508644CE2433E2BD00002984 /* PersistenceHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistenceHelper.swift; sourceTree = "<group>"; };
+		508644D02433E30A00002984 /* RecipePersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipePersistence.swift; sourceTree = "<group>"; };
+		50D7B52B24324271007C4866 /* AzureOverallAlbert.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AzureOverallAlbert.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		50D7B52E24324271007C4866 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		50D7B53024324271007C4866 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		50D7B53724324272007C4866 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		50D7B53A24324272007C4866 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		50D7B53C24324272007C4866 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		50D7B54124324273007C4866 /* AzureOverallAlbertTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AzureOverallAlbertTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		50D7B54524324273007C4866 /* AzureOverallAlbertTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AzureOverallAlbertTests.swift; sourceTree = "<group>"; };
+		50D7B54724324273007C4866 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		50D7B550243245BA007C4866 /* Secretes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secretes.swift; sourceTree = "<group>"; };
+		50D7B555243246E1007C4866 /* DetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVC.swift; sourceTree = "<group>"; };
+		50D7B557243246EA007C4866 /* CartVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartVC.swift; sourceTree = "<group>"; };
+		50D7B55A24324825007C4866 /* BrowseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseVC.swift; sourceTree = "<group>"; };
+		50ED88D524324B6E0092C94A /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		50ED88D824324D860092C94A /* RecipeCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeCollectionCell.swift; sourceTree = "<group>"; };
+		50ED88DB2432515A0092C94A /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		50ED88DD243257420092C94A /* RecipeFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeFetcher.swift; sourceTree = "<group>"; };
+		50ED88E0243258390092C94A /* Recipes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipes.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		50D7B52824324271007C4866 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		50D7B53E24324273007C4866 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		508644CC2433E28800002984 /* Persistence */ = {
+			isa = PBXGroup;
+			children = (
+				508644CE2433E2BD00002984 /* PersistenceHelper.swift */,
+				508644D02433E30A00002984 /* RecipePersistence.swift */,
+			);
+			path = Persistence;
+			sourceTree = "<group>";
+		};
+		508644CD2433E29300002984 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				50ED88DB2432515A0092C94A /* NetworkManager.swift */,
+				50ED88DD243257420092C94A /* RecipeFetcher.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		50D7B52224324271007C4866 = {
+			isa = PBXGroup;
+			children = (
+				50D7B52D24324271007C4866 /* AzureOverallAlbert */,
+				50D7B54424324273007C4866 /* AzureOverallAlbertTests */,
+				50D7B52C24324271007C4866 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		50D7B52C24324271007C4866 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				50D7B52B24324271007C4866 /* AzureOverallAlbert.app */,
+				50D7B54124324273007C4866 /* AzureOverallAlbertTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		50D7B52D24324271007C4866 /* AzureOverallAlbert */ = {
+			isa = PBXGroup;
+			children = (
+				50ED88DF243258270092C94A /* Models */,
+				50ED88DA243251480092C94A /* Helpers */,
+				50ED88D724324D500092C94A /* Views */,
+				50D7B559243246FF007C4866 /* Supporting */,
+				50D7B554243246C4007C4866 /* ViewControllers */,
+				50D7B52E24324271007C4866 /* AppDelegate.swift */,
+				50D7B53024324271007C4866 /* SceneDelegate.swift */,
+				50D7B53924324272007C4866 /* LaunchScreen.storyboard */,
+				50D7B53C24324272007C4866 /* Info.plist */,
+			);
+			path = AzureOverallAlbert;
+			sourceTree = "<group>";
+		};
+		50D7B54424324273007C4866 /* AzureOverallAlbertTests */ = {
+			isa = PBXGroup;
+			children = (
+				50D7B54524324273007C4866 /* AzureOverallAlbertTests.swift */,
+				50D7B54724324273007C4866 /* Info.plist */,
+			);
+			path = AzureOverallAlbertTests;
+			sourceTree = "<group>";
+		};
+		50D7B554243246C4007C4866 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				50D7B555243246E1007C4866 /* DetailVC.swift */,
+				50D7B557243246EA007C4866 /* CartVC.swift */,
+				50D7B55A24324825007C4866 /* BrowseVC.swift */,
+				50ED88D524324B6E0092C94A /* MainTabBarController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		50D7B559243246FF007C4866 /* Supporting */ = {
+			isa = PBXGroup;
+			children = (
+				50D7B53724324272007C4866 /* Assets.xcassets */,
+				50D7B550243245BA007C4866 /* Secretes.swift */,
+			);
+			path = Supporting;
+			sourceTree = "<group>";
+		};
+		50ED88D724324D500092C94A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				50ED88D824324D860092C94A /* RecipeCollectionCell.swift */,
+				5025671D2433FFE000F20406 /* CartTableViewCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		50ED88DA243251480092C94A /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				508644CD2433E29300002984 /* Network */,
+				508644CC2433E28800002984 /* Persistence */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		50ED88DF243258270092C94A /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				50ED88E0243258390092C94A /* Recipes.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		50D7B52A24324271007C4866 /* AzureOverallAlbert */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 50D7B54A24324273007C4866 /* Build configuration list for PBXNativeTarget "AzureOverallAlbert" */;
+			buildPhases = (
+				50D7B52724324271007C4866 /* Sources */,
+				50D7B52824324271007C4866 /* Frameworks */,
+				50D7B52924324271007C4866 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AzureOverallAlbert;
+			productName = AzureOverallAlbert;
+			productReference = 50D7B52B24324271007C4866 /* AzureOverallAlbert.app */;
+			productType = "com.apple.product-type.application";
+		};
+		50D7B54024324273007C4866 /* AzureOverallAlbertTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 50D7B54D24324273007C4866 /* Build configuration list for PBXNativeTarget "AzureOverallAlbertTests" */;
+			buildPhases = (
+				50D7B53D24324273007C4866 /* Sources */,
+				50D7B53E24324273007C4866 /* Frameworks */,
+				50D7B53F24324273007C4866 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				50D7B54324324273007C4866 /* PBXTargetDependency */,
+			);
+			name = AzureOverallAlbertTests;
+			productName = AzureOverallAlbertTests;
+			productReference = 50D7B54124324273007C4866 /* AzureOverallAlbertTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		50D7B52324324271007C4866 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1140;
+				LastUpgradeCheck = 1140;
+				ORGANIZATIONNAME = "albert coelho oliveira";
+				TargetAttributes = {
+					50D7B52A24324271007C4866 = {
+						CreatedOnToolsVersion = 11.4;
+					};
+					50D7B54024324273007C4866 = {
+						CreatedOnToolsVersion = 11.4;
+						TestTargetID = 50D7B52A24324271007C4866;
+					};
+				};
+			};
+			buildConfigurationList = 50D7B52624324271007C4866 /* Build configuration list for PBXProject "AzureOverallAlbert" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 50D7B52224324271007C4866;
+			productRefGroup = 50D7B52C24324271007C4866 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				50D7B52A24324271007C4866 /* AzureOverallAlbert */,
+				50D7B54024324273007C4866 /* AzureOverallAlbertTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		50D7B52924324271007C4866 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				50D7B53B24324272007C4866 /* LaunchScreen.storyboard in Resources */,
+				50D7B53824324272007C4866 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		50D7B53F24324273007C4866 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		50D7B52724324271007C4866 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				50D7B556243246E1007C4866 /* DetailVC.swift in Sources */,
+				508644D12433E30A00002984 /* RecipePersistence.swift in Sources */,
+				50ED88E1243258390092C94A /* Recipes.swift in Sources */,
+				50ED88D924324D860092C94A /* RecipeCollectionCell.swift in Sources */,
+				50D7B558243246EA007C4866 /* CartVC.swift in Sources */,
+				50D7B52F24324271007C4866 /* AppDelegate.swift in Sources */,
+				50ED88D624324B6E0092C94A /* MainTabBarController.swift in Sources */,
+				5025671E2433FFE000F20406 /* CartTableViewCell.swift in Sources */,
+				50ED88DC2432515A0092C94A /* NetworkManager.swift in Sources */,
+				508644CF2433E2BD00002984 /* PersistenceHelper.swift in Sources */,
+				50D7B53124324271007C4866 /* SceneDelegate.swift in Sources */,
+				50D7B55B24324825007C4866 /* BrowseVC.swift in Sources */,
+				50D7B551243245BA007C4866 /* Secretes.swift in Sources */,
+				50ED88DE243257420092C94A /* RecipeFetcher.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		50D7B53D24324273007C4866 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				50D7B54624324273007C4866 /* AzureOverallAlbertTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		50D7B54324324273007C4866 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 50D7B52A24324271007C4866 /* AzureOverallAlbert */;
+			targetProxy = 50D7B54224324273007C4866 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		50D7B53924324272007C4866 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				50D7B53A24324272007C4866 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		50D7B54824324273007C4866 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		50D7B54924324273007C4866 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		50D7B54B24324273007C4866 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = NR846ZRL26;
+				INFOPLIST_FILE = AzureOverallAlbert/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = albert.AzureOverallAlbert;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		50D7B54C24324273007C4866 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = NR846ZRL26;
+				INFOPLIST_FILE = AzureOverallAlbert/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = albert.AzureOverallAlbert;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		50D7B54E24324273007C4866 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = NR846ZRL26;
+				INFOPLIST_FILE = AzureOverallAlbertTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = albert.AzureOverallAlbertTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AzureOverallAlbert.app/AzureOverallAlbert";
+			};
+			name = Debug;
+		};
+		50D7B54F24324273007C4866 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = NR846ZRL26;
+				INFOPLIST_FILE = AzureOverallAlbertTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = albert.AzureOverallAlbertTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AzureOverallAlbert.app/AzureOverallAlbert";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		50D7B52624324271007C4866 /* Build configuration list for PBXProject "AzureOverallAlbert" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				50D7B54824324273007C4866 /* Debug */,
+				50D7B54924324273007C4866 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		50D7B54A24324273007C4866 /* Build configuration list for PBXNativeTarget "AzureOverallAlbert" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				50D7B54B24324273007C4866 /* Debug */,
+				50D7B54C24324273007C4866 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		50D7B54D24324273007C4866 /* Build configuration list for PBXNativeTarget "AzureOverallAlbertTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				50D7B54E24324273007C4866 /* Debug */,
+				50D7B54F24324273007C4866 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 50D7B52324324271007C4866 /* Project object */;
+}
