@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		50151613244512EB0056E933 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50151612244512EB0056E933 /* Secrets.swift */; };
+		50151615244517ED0056E933 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50151614244517ED0056E933 /* Secrets.swift */; };
 		5025671E2433FFE000F20406 /* CartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5025671D2433FFE000F20406 /* CartTableViewCell.swift */; };
 		508644CF2433E2BD00002984 /* PersistenceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508644CE2433E2BD00002984 /* PersistenceHelper.swift */; };
 		508644D12433E30A00002984 /* RecipePersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508644D02433E30A00002984 /* RecipePersistence.swift */; };
@@ -37,7 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		50151612244512EB0056E933 /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
+		50151614244517ED0056E933 /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		5025671D2433FFE000F20406 /* CartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartTableViewCell.swift; sourceTree = "<group>"; };
 		508644CE2433E2BD00002984 /* PersistenceHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistenceHelper.swift; sourceTree = "<group>"; };
 		508644D02433E30A00002984 /* RecipePersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipePersistence.swift; sourceTree = "<group>"; };
@@ -92,6 +92,7 @@
 			children = (
 				50ED88DB2432515A0092C94A /* NetworkManager.swift */,
 				50ED88DD243257420092C94A /* RecipeFetcher.swift */,
+				50151614244517ED0056E933 /* Secrets.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -154,7 +155,6 @@
 			isa = PBXGroup;
 			children = (
 				50D7B53724324272007C4866 /* Assets.xcassets */,
-				50151612244512EB0056E933 /* Secrets.swift */,
 			);
 			path = Supporting;
 			sourceTree = "<group>";
@@ -294,9 +294,9 @@
 				50ED88D624324B6E0092C94A /* MainTabBarController.swift in Sources */,
 				5025671E2433FFE000F20406 /* CartTableViewCell.swift in Sources */,
 				50ED88DC2432515A0092C94A /* NetworkManager.swift in Sources */,
+				50151615244517ED0056E933 /* Secrets.swift in Sources */,
 				508644CF2433E2BD00002984 /* PersistenceHelper.swift in Sources */,
 				50D7B53124324271007C4866 /* SceneDelegate.swift in Sources */,
-				50151613244512EB0056E933 /* Secrets.swift in Sources */,
 				50D7B55B24324825007C4866 /* BrowseVC.swift in Sources */,
 				50ED88DE243257420092C94A /* RecipeFetcher.swift in Sources */,
 			);
