@@ -74,25 +74,14 @@ extension CartVC: UITableViewDelegate, UITableViewDataSource{
         if let imageData = data.persistedImage{
             cell.recipeImage.image = UIImage(data: imageData)
         }
-        cell.parallaxImageHeight.constant = self.parallaxImageHeight
-        cell.parallaxTopConstraint.constant = self.parralaxOffset(newOffsetY: cartTableVC.contentOffset.y, cell: cell)
+      
         cell.itemsInCart.text = "\(data.itemsInCart?.description ?? 0.description) Items"
         cell.recipeName.text = data.title
         return cell
     }
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return parallaxImageHeight
-    }
     
-    func parralaxOffset(newOffsetY: CGFloat, cell: UITableViewCell) -> CGFloat{
-        return (newOffsetY - cell.frame.origin.y) / parallaxImageHeight * parallaxOffsetSpeed
-    }
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let OffsetY = cartTableVC.contentOffset.y
-        for cell in cartTableVC.visibleCells as! [CartTableViewCell]{
-            cell.parallaxTopConstraint.constant = parralaxOffset(newOffsetY: OffsetY, cell: cell)
-        }
-    }
+    
+   
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let detailVC = DetailVC()

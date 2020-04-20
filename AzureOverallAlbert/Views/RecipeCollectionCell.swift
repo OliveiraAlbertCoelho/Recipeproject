@@ -15,6 +15,7 @@ class RecipeCollectionCell: UICollectionViewCell {
            super.init(frame: frame)
     
         //        constrainDarkView()
+constrainImageView()
 constrainRecipeImage()
         //        constrainRecipeName()
 //        constrainNumServingsLabel()
@@ -22,13 +23,23 @@ constrainRecipeImage()
        }
     //MARK: - Variables
     lazy var parallaxImageHeight: NSLayoutConstraint = {
-        self.recipeImage.heightAnchor.constraint(equalToConstant: 250)
+        self.recipeImage.heightAnchor.constraint(equalToConstant: 200)
     }()
-    lazy var parallaxTopAnchor: NSLayoutConstraint = {
-        self.recipeImage.topAnchor.constraint(equalTo: self.contentView.topAnchor)
+    lazy var parallaxCenterYAnchor: NSLayoutConstraint = {
+        self.recipeImage.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor)
     }()
-    
-  
+    var parallaxOffset: CGFloat = 0 {
+        didSet{
+            parallaxCenterYAnchor.constant = parallaxOffset
+        }
+    }
+    func updateParallaxOffset(CollectionViewBonds bonds: CGRect){
+        let center = CGPoint(x: ( bonds.midX), y: bonds.midY)
+        let offsetFromCenter = CGPoint(x: center.x - self.center.x, y: center.y - self.center.y)
+        let maxVerticalOffset = (bonds.height / 2) + (self.bounds.height / 2)
+        let scaleFactor = 40 / maxVerticalOffset
+        parallaxOffset = -offsetFromCenter.y * scaleFactor
+    }
     
        required init?(coder: NSCoder) {
            fatalError("init(coder:) has not been implemented")
@@ -37,7 +48,6 @@ constrainRecipeImage()
     //MARK: - UI Objects
     lazy var recipeImage: UIImageView = {
        let image = UIImageView()
-        image.clipsToBounds = true
         image.contentMode = .scaleAspectFill
         return image
     }()
@@ -73,19 +83,34 @@ constrainRecipeImage()
         view.backgroundColor = .gray
         return view
     }()
+    lazy var parallaxContainerView: UIView = {
+        let view = UIView()
+        view.clipsToBounds = true
+        return view
+    }()
 
     //MARK: - Regular Functions
    
     //MARK: - Constraints
   
     private func constrainRecipeImage(){
-        contentView.addSubview(recipeImage)
+        parallaxContainerView.addSubview(recipeImage)
         recipeImage.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             parallaxImageHeight,
-            parallaxTopAnchor,
+            parallaxCenterYAnchor,
             recipeImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            recipeImage.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
+            recipeImage.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+        ])
+    }
+    private func constrainImageView(){
+        contentView.addSubview(parallaxContainerView)
+        parallaxContainerView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+        parallaxContainerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+                   parallaxContainerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+                   parallaxContainerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+             parallaxContainerView.topAnchor.constraint(equalTo: contentView.topAnchor),
         ])
     }
     
