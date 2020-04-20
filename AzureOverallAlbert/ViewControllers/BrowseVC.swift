@@ -20,12 +20,7 @@ class BrowseVC: UIViewController {
             recipeCV.reloadData()
         }
     }
-    var parallaxOffsetSpeed : CGFloat = 30
-    var cellHeight: CGFloat = 250
-    var parallaxImageHeight: CGFloat {
-        let maxOffset = (sqrt(pow(cellHeight, 2) + 4 * parallaxOffsetSpeed * self.recipeCV.frame.height) - cellHeight) / 2
-        return maxOffset + self.cellHeight
-    }
+ 
 
     //MARK: - UI Objects
     lazy var recipeSearchBar: UISearchBar = {
@@ -67,9 +62,7 @@ class BrowseVC: UIViewController {
             }
         }
     }
-    func parallaxOffset(newOffsetY: CGFloat, cell: UICollectionViewCell) -> CGFloat {
-        return (newOffsetY - cell.frame.origin.y) / parallaxImageHeight * parallaxOffsetSpeed
-    }
+   
     //MARK: - Constraints
     private func constrainRecipeSearchBar(){
         view.addSubview(recipeSearchBar)
