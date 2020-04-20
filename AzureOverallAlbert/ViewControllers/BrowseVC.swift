@@ -104,8 +104,7 @@ extension BrowseVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
                 }
             }
         }
-        cell.parallaxImageHeight.constant = self.parallaxImageHeight
-        cell.parallaxTopAnchor.constant = parallaxOffset(newOffsetY: collectionView.contentOffset.y, cell: cell)
+        cell.updateParallaxOffset(CollectionViewBonds: collectionView.bounds)
         cell.recipeName.text = data.title
         cell.timePrepLabel.text = "\(data.readyInMinutes.description) Mins"
         cell.numServingsLabel.text = "\(data.servings.description) Servings"
@@ -113,9 +112,10 @@ extension BrowseVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
     }
  
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let offsetY = recipeCV.contentOffset.y
-        for cell in recipeCV.visibleCells as! [RecipeCollectionCell]{
-            cell.parallaxTopAnchor.constant = parallaxOffset(newOffsetY: offsetY , cell: cell)
+        let cells = recipeCV.visibleCells as! [RecipeCollectionCell]
+        let bonds = recipeCV.bounds
+        for cell in cells {
+            cell.updateParallaxOffset(CollectionViewBonds: bonds)
         }
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

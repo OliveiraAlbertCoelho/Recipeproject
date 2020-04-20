@@ -12,7 +12,6 @@ class CartVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpView()
-        self.cartTableVC.rowHeight = 250
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -24,12 +23,7 @@ class CartVC: UIViewController {
             cartTableVC.reloadData()
         }
     }
-    var parallaxOffsetSpeed: CGFloat  = 50
-    var cellHeight: CGFloat = 250
-    var parallaxImageHeight: CGFloat {
-        let maxOffset = (sqrt(pow(cellHeight, 2) + 4 * parallaxOffsetSpeed * self.cartTableVC.frame.height) - cellHeight ) / 2
-        return maxOffset + self.cellHeight
-    }
+   
     //MARK: - UI Objects
     lazy var cartTableVC: UITableView = {
         let layout = UITableView()
