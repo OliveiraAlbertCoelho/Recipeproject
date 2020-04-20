@@ -20,6 +20,12 @@ class BrowseVC: UIViewController {
             recipeCV.reloadData()
         }
     }
+    var parallaxOffsetSpeed : CGFloat = 30
+    var cellHeight: CGFloat = 250
+    var parallaxImageHeight: CGFloat {
+        let maxOffset = (sqrt(pow(cellHeight, 2) + 4 * parallaxOffsetSpeed * self.recipeCV.frame.height) - cellHeight) / 2
+        return maxOffset + self.cellHeight
+    }
 
     //MARK: - UI Objects
     lazy var recipeSearchBar: UISearchBar = {
@@ -60,6 +66,9 @@ class BrowseVC: UIViewController {
                 }
             }
         }
+    }
+    func parallaxOffset(newOffsetY: CGFloat, cell: UICollectionViewCell) -> CGFloat {
+        return (newOffsetY - cell.frame.origin.y) / parallaxImageHeight * parallaxOffsetSpeed
     }
     //MARK: - Constraints
     private func constrainRecipeSearchBar(){
@@ -102,24 +111,24 @@ extension BrowseVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
                 }
             }
         }
-//        cell.updateParallaxOffset(collectionViewBonds: recipeCV.bounds)
+        cell.parallaxImageHeight.constant = self.parallaxImageHeight
+        cell.parallaxTopAnchor.constant = parallaxOffset(newOffsetY: collectionView.contentOffset.y, cell: cell)
         cell.recipeName.text = data.title
         cell.timePrepLabel.text = "\(data.readyInMinutes.description) Mins"
         cell.numServingsLabel.text = "\(data.servings.description) Servings"
         return cell
     }
  
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = recipeCV.contentOffset.y
+        for cell in recipeCV.visibleCells as! [RecipeCollectionCell]{
+            cell.parallaxTopAnchor.constant = parallaxOffset(newOffsetY: offsetY , cell: cell)
+        }
+    }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let detailVC = DetailVC()
         detailVC.recipe = recipes[indexPath.row]
         self.navigationController?.pushViewController(detailVC, animated: true)
-    }
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let cells = recipeCV.visibleCells  as! [RecipeCollectionCell]
-        let bonds = recipeCV.bounds
-        for cell in cells{
-            cell.updateParallaxOffset(collectionViewBonds: bonds)
-        }
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: recipeCV.bounds.width, height: 200)

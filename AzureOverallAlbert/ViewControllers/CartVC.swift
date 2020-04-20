@@ -12,6 +12,7 @@ class CartVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpView()
+        self.cartTableVC.rowHeight = 250
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)

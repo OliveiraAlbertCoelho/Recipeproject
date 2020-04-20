@@ -13,37 +13,32 @@ class RecipeCollectionCell: UICollectionViewCell {
     //MARK: - Lifecycle
        override init(frame: CGRect) {
            super.init(frame: frame)
-        constrainRecipeView()
-//        constrainDarkView()
-        constrainRecipeImage()
-//        constrainRecipeName()
+    
+        //        constrainDarkView()
+constrainRecipeImage()
+        //        constrainRecipeName()
 //        constrainNumServingsLabel()
 //        constrainTimePrepLabel()
        }
     //MARK: - Variables
     lazy var parallaxImageHeight: NSLayoutConstraint = {
-        self.recipeImage.heightAnchor.constraint(equalToConstant: 200)
+        self.recipeImage.heightAnchor.constraint(equalToConstant: 250)
     }()
-    lazy var parallaxCenterYConstraint: NSLayoutConstraint = {
-        self.recipeImage.centerYAnchor.constraint(equalTo: recipeView.centerYAnchor)
+    lazy var parallaxTopAnchor: NSLayoutConstraint = {
+        self.recipeImage.topAnchor.constraint(equalTo: self.contentView.topAnchor)
     }()
-    var parralaxOffset: CGFloat = 0{
-        didSet{
-            parallaxCenterYConstraint.constant =  parralaxOffset
-        }
-    }
+    
+  
     
        required init?(coder: NSCoder) {
            fatalError("init(coder:) has not been implemented")
     }
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        recipeImage.image = nil
-    }
+   
     //MARK: - UI Objects
     lazy var recipeImage: UIImageView = {
        let image = UIImageView()
         image.clipsToBounds = true
+        image.contentMode = .scaleAspectFill
         return image
     }()
     lazy var recipeName: UILabel = {
@@ -78,37 +73,19 @@ class RecipeCollectionCell: UICollectionViewCell {
         view.backgroundColor = .gray
         return view
     }()
-    lazy var recipeView: UIView = {
-           let view = UIView()
-           return view
-       }()
+
     //MARK: - Regular Functions
-    func updateParallaxOffset(collectionViewBonds bonds: CGRect){
-        let center = CGPoint(x: bonds.midX, y: bonds.midY)
-        let offsetFromCenter = CGPoint(x: center.x - self.center.x, y: center.y - self.center.y)
-        let maxVerticalOffset = (bonds.height / 2) + (self.bounds.height / 2)
-        let scaleFactor = 40 /  maxVerticalOffset
-        parralaxOffset = -offsetFromCenter.y * scaleFactor
-    }
+   
     //MARK: - Constraints
-    private func constrainRecipeView(){
-             contentView.addSubview(recipeView)
-             recipeView.translatesAutoresizingMaskIntoConstraints = false
-             NSLayoutConstraint.activate([
-                 recipeView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-                 recipeView.topAnchor.constraint(equalTo: contentView.topAnchor),
-                 recipeView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),               recipeView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-             ])
-         }
+  
     private func constrainRecipeImage(){
-        recipeView.addSubview(recipeImage)
-//        contentView.sendSubviewToBack(recipeImage)
+        contentView.addSubview(recipeImage)
         recipeImage.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             parallaxImageHeight,
-            parallaxCenterYConstraint,
-            recipeImage.leadingAnchor.constraint(equalTo: recipeView.leadingAnchor),
-            recipeImage.trailingAnchor.constraint(equalTo: recipeView.trailingAnchor),
+            parallaxTopAnchor,
+            recipeImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            recipeImage.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
         ])
     }
     
