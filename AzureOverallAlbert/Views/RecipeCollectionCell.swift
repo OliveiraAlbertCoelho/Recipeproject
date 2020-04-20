@@ -43,6 +43,7 @@ class RecipeCollectionCell: UICollectionViewCell {
     lazy var recipeImage: UIImageView = {
        let image = UIImageView()
         image.contentMode = .scaleAspectFill
+        image.alpha = 0.5
         return image
     }()
     lazy var recipeName: UILabel = {
@@ -69,7 +70,7 @@ class RecipeCollectionCell: UICollectionViewCell {
     }()
     lazy var darkBackgroundView: UIView = {
         let view = UIView()
-        view.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.6019103168)
+       
         return view
     }()
     lazy var labelSeparator: UIView = {
@@ -87,10 +88,10 @@ class RecipeCollectionCell: UICollectionViewCell {
     private func setUpViewConstraints(){
         constrainImageView()
         constrainRecipeImage()
-                           constrainDarkView()
-                        constrainRecipeName()
-                constrainNumServingsLabel()
-                constrainTimePrepLabel()
+        constrainDarkView()
+        constrainRecipeName()
+        constrainNumServingsLabel()
+        constrainTimePrepLabel()
     }
     //MARK: - Constraints
   
