@@ -13,13 +13,7 @@ class RecipeCollectionCell: UICollectionViewCell {
     //MARK: - Lifecycle
        override init(frame: CGRect) {
            super.init(frame: frame)
-    
-        //        constrainDarkView()
-constrainImageView()
-constrainRecipeImage()
-        //        constrainRecipeName()
-//        constrainNumServingsLabel()
-//        constrainTimePrepLabel()
+    setUpViewConstraints()
        }
     //MARK: - Variables
     lazy var parallaxImageHeight: NSLayoutConstraint = {
@@ -90,7 +84,14 @@ constrainRecipeImage()
     }()
 
     //MARK: - Regular Functions
-   
+    private func setUpViewConstraints(){
+        constrainImageView()
+        constrainRecipeImage()
+                           constrainDarkView()
+                        constrainRecipeName()
+                constrainNumServingsLabel()
+                constrainTimePrepLabel()
+    }
     //MARK: - Constraints
   
     private func constrainRecipeImage(){
@@ -115,7 +116,7 @@ constrainRecipeImage()
     }
     
     private func constrainRecipeName(){
-        contentView.addSubview(recipeName)
+        parallaxContainerView.addSubview(recipeName)
         recipeName.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             recipeName.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
@@ -125,7 +126,7 @@ constrainRecipeImage()
         ])
     }
     private func constrainDarkView(){
-        contentView.addSubview(darkBackgroundView)
+        parallaxContainerView.addSubview(darkBackgroundView)
         darkBackgroundView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
         darkBackgroundView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 0),
@@ -135,7 +136,7 @@ constrainRecipeImage()
         ])
     }
     private func constrainTimePrepLabel(){
-        contentView.addSubview(timePrepLabel)
+        parallaxContainerView.addSubview(timePrepLabel)
         timePrepLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             timePrepLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -3),
@@ -145,7 +146,7 @@ constrainRecipeImage()
         ])
     }
     private func constrainNumServingsLabel(){
-        contentView.addSubview(numServingsLabel)
+        parallaxContainerView.addSubview(numServingsLabel)
         numServingsLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             numServingsLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -3),
