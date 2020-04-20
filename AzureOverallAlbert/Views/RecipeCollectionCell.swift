@@ -11,39 +11,27 @@ import UIKit
 class RecipeCollectionCell: UICollectionViewCell {
     
     //MARK: - Lifecycle
-       override init(frame: CGRect) {
-           super.init(frame: frame)
-    setUpViewConstraints()
-       }
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setUpViewConstraints()
+    }
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     //MARK: - Variables
-    lazy var parallaxImageHeight: NSLayoutConstraint = {
-        self.recipeImage.heightAnchor.constraint(equalToConstant: 200)
-    }()
-    lazy var parallaxCenterYAnchor: NSLayoutConstraint = {
-        self.recipeImage.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor)
-    }()
+    
     var parallaxOffset: CGFloat = 0 {
         didSet{
             parallaxCenterYAnchor.constant = parallaxOffset
         }
     }
-    func updateParallaxOffset(CollectionViewBonds bonds: CGRect){
-        let center = CGPoint(x: ( bonds.midX), y: bonds.midY)
-        let offsetFromCenter = CGPoint(x: center.x - self.center.x, y: center.y - self.center.y)
-        let maxVerticalOffset = (bonds.height / 2) + (self.bounds.height / 2)
-        let scaleFactor = 40 / maxVerticalOffset
-        parallaxOffset = -offsetFromCenter.y * scaleFactor
-    }
     
-       required init?(coder: NSCoder) {
-           fatalError("init(coder:) has not been implemented")
-    }
-   
+    
     //MARK: - UI Objects
     lazy var recipeImage: UIImageView = {
-       let image = UIImageView()
+        let image = UIImageView()
         image.contentMode = .scaleAspectFill
-        image.alpha = 0.5
+        image.alpha = 0.4
         return image
     }()
     lazy var recipeName: UILabel = {
@@ -58,7 +46,7 @@ class RecipeCollectionCell: UICollectionViewCell {
         let label = UILabel()
         label.textAlignment = .left
         label.font = .boldSystemFont(ofSize: 16)
-  label.textColor = .white
+        label.textColor = .white
         return label
     }()
     lazy var numServingsLabel: UILabel = {
@@ -70,7 +58,6 @@ class RecipeCollectionCell: UICollectionViewCell {
     }()
     lazy var darkBackgroundView: UIView = {
         let view = UIView()
-       
         return view
     }()
     lazy var labelSeparator: UIView = {
@@ -83,8 +70,17 @@ class RecipeCollectionCell: UICollectionViewCell {
         view.clipsToBounds = true
         return view
     }()
-
+    
     //MARK: - Regular Functions
+    
+    func updateParallaxOffset(CollectionViewBonds bonds: CGRect){
+        let center = CGPoint(x: ( bonds.midX), y: bonds.midY)
+        let offsetFromCenter = CGPoint(x: center.x - self.center.x, y: center.y - self.center.y)
+        let maxVerticalOffset = (bonds.height / 2) + (self.bounds.height / 2)
+        let scaleFactor = 40 / maxVerticalOffset
+        parallaxOffset = -offsetFromCenter.y * scaleFactor
+    }
+    
     private func setUpViewConstraints(){
         constrainImageView()
         constrainRecipeImage()
@@ -94,25 +90,30 @@ class RecipeCollectionCell: UICollectionViewCell {
         constrainTimePrepLabel()
     }
     //MARK: - Constraints
-  
-    private func constrainRecipeImage(){
-        parallaxContainerView.addSubview(recipeImage)
-        recipeImage.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            parallaxImageHeight,
-            parallaxCenterYAnchor,
-            recipeImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            recipeImage.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-        ])
-    }
+
+    lazy var parallaxCenterYAnchor: NSLayoutConstraint = {
+        self.recipeImage.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor)
+    }()
+    
     private func constrainImageView(){
         contentView.addSubview(parallaxContainerView)
         parallaxContainerView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-        parallaxContainerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-                   parallaxContainerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-                   parallaxContainerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-             parallaxContainerView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            parallaxContainerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            parallaxContainerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            parallaxContainerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            parallaxContainerView.topAnchor.constraint(equalTo: contentView.topAnchor),
+        ])
+    }
+    
+    private func constrainRecipeImage(){
+        parallaxContainerView.addSubview(recipeImage)
+        recipeImage.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+
+            parallaxCenterYAnchor,
+            recipeImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            recipeImage.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
         ])
     }
     
@@ -130,10 +131,10 @@ class RecipeCollectionCell: UICollectionViewCell {
         parallaxContainerView.addSubview(darkBackgroundView)
         darkBackgroundView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-        darkBackgroundView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 0),
-        darkBackgroundView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0),
-       darkBackgroundView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0),
-        darkBackgroundView.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.30)
+            darkBackgroundView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 0),
+            darkBackgroundView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0),
+            darkBackgroundView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0),
+            darkBackgroundView.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.30)
         ])
     }
     private func constrainTimePrepLabel(){
@@ -154,8 +155,8 @@ class RecipeCollectionCell: UICollectionViewCell {
             numServingsLabel.leadingAnchor.constraint(equalTo: contentView.centerXAnchor, constant: 5),
             numServingsLabel.heightAnchor.constraint(equalTo: darkBackgroundView.heightAnchor, multiplier: 0.4),
             numServingsLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.30)
-         
+            
         ])
     }
-  
+    
 }
