@@ -13,7 +13,10 @@ class BrowseVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpView()
+      
+       
     }
+  
     //MARK: - Variables
     var recipes = [RecipeWrapper](){
         didSet{
@@ -21,8 +24,15 @@ class BrowseVC: UIViewController {
         }
     }
  
-
+    //MARK: - Objc Functions
+    @objc func DismissKeyboard(){
+             view.endEditing(true)
+             }
     //MARK: - UI Objects
+    lazy var dismissTap: UITapGestureRecognizer = {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(DismissKeyboard))
+        return tap
+    }()
     lazy var recipeSearchBar: UISearchBar = {
         let searchBar = UISearchBar()
         searchBar.delegate = self
@@ -41,6 +51,7 @@ class BrowseVC: UIViewController {
     }()
     //MARK: - Regular Functions
     private func setUpView(){
+        view.addGestureRecognizer(dismissTap)
         setUpViewDesign()
         constrainRecipeSearchBar()
         constrainRecipeCV()

@@ -23,19 +23,19 @@ class FavoritesVC: UIViewController {
             favoritesCV.reloadData()
         }
     }
-   
+    
     //MARK: - UI Objects
     lazy var favoritesCV: UICollectionView = {
-    let layout = UICollectionViewFlowLayout()
-               layout.scrollDirection = .vertical
-               let cv = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
-               cv.register(RecipeCollectionCell.self, forCellWithReuseIdentifier: "recipeCell")
-               cv.backgroundColor = .clear
-               cv.delegate = self
-               cv.dataSource = self
-               return cv
-           }()
-   
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        let cv = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
+        cv.register(RecipeCollectionCell.self, forCellWithReuseIdentifier: "recipeCell")
+        cv.backgroundColor = .clear
+        cv.delegate = self
+        cv.dataSource = self
+        return cv
+    }()
+    
     //MARK: - Regular Functions
     private func loadRecipes(){
         do {
@@ -64,14 +64,41 @@ class FavoritesVC: UIViewController {
 }
 
 //MARK: - UiCollectionViewDelegates
-extension FavoritesVC: UICollectionViewDelegate, UICollectionViewDataSource{
+extension FavoritesVC: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        <#code#>
+        return recipes.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        <#code#>
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "recipeCell", for: indexPath) as? RecipeCollectionCell else {return UICollectionViewCell()}
+        let data = recipes[indexPath.row]
+        cell.recipeImage.image = UIImage(data: data.persistedImage!)
+        cell.updateParallaxOffset(CollectionViewBonds: collectionView.bounds)
+        cell.recipeName.text = data.title
+        cell.timePrepLabel.text = "\(data.readyInMinutes.description) Mins"
+        cell.numServingsLabel.text = "\(data.servings.description) Servings"
+        return cell
     }
     
     
-}
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let cells = favoritesCV.visibleCells as! [RecipeCollectionCell]
+        let bonds = favoritesCV.bounds
+        for cell in cells {
+            cell.updateParallaxOffset(CollectionViewBonds: bonds)
+        }
+    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let detailVC = DetailVC()
+        detailVC.recipe = recipes[indexPath.row]
+        self.navigationController?.pushViewController(detailVC, animated: true)
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: favoritesCV.bounds.width, height: 250)
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }}
+
+
+
