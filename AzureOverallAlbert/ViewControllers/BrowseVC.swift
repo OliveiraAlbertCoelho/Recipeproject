@@ -13,9 +13,11 @@ class BrowseVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpView()
-      
-       
+
+        recipeCV.keyboardDismissMode = UIScrollView.KeyboardDismissMode.onDrag
     }
+
+
   
     //MARK: - Variables
     var recipes = [RecipeWrapper](){
@@ -23,17 +25,7 @@ class BrowseVC: UIViewController {
             recipeCV.reloadData()
         }
     }
- 
-    //MARK: - Objc Functions
-    @objc private func DismissKeyboard(){
-        
-             view.endEditing(true)
-    }
     //MARK: - UI Objects
-    lazy var dismissTap: UITapGestureRecognizer = {
-        let tap = UITapGestureRecognizer(target: self, action: #selector(DismissKeyboard))
-        return tap
-    }()
     lazy var recipeSearchBar: UISearchBar = {
         let searchBar = UISearchBar()
         searchBar.delegate = self
@@ -52,7 +44,6 @@ class BrowseVC: UIViewController {
     }()
     //MARK: - Regular Functions
     private func setUpView(){
-        view.addGestureRecognizer(dismissTap)
         setUpViewDesign()
         constrainRecipeSearchBar()
         constrainRecipeCV()

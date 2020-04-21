@@ -17,7 +17,6 @@ class DetailVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         setUpViewObjects()
-        getPersistedRecipe()
     }
     //MARK: - Variables
     var recipe: RecipeWrapper?
@@ -37,56 +36,13 @@ class DetailVC: UIViewController {
         
         return label
     }()
-    lazy var itemsInCartLable: UILabel = {
-        let label = UILabel()
-        label.text = "Add to cart"
-        label.textAlignment = .center
-        label.textColor = .white
-        label.font = .boldSystemFont(ofSize: 20)
-        return label
-    }()
-    lazy var cartStepper: UIStepper = {
-        var stepper = UIStepper()
-        stepper.autorepeat = true
-        stepper.minimumValue = 0
-        stepper.addTarget(self, action: #selector(stepperValueChanged), for: .touchUpInside)
-        return stepper
-    }()
+  
+    
     
     //MARK: - Objc Functions
-    @objc private func stepperValueChanged(){
-
-        if cartStepper.value == 0{
-        itemsInCartLable.text = "Add to cart"}else{
-        itemsInCartLable.text = "\(Int(cartStepper.value).description) Items"}
-        recipe?.itemsInCart = Int(cartStepper.value)
-        
-        if let imageData = recipeImageView.image  {
-            recipe?.persistedImage = imageData.jpegData(compressionQuality: 1)
-        }
-        
-        if RecipePersistence.manager.checkIfSave(id: recipe?.id ?? 0){
-            try? RecipePersistence.manager.editRecipe(id: recipe?.id ?? 0, newElement: recipe!)
-            if cartStepper.value == 0{
-                try? RecipePersistence.manager.deleteRecipe(id: recipe?.id ?? 0)
-            }
-        }else {
-            try? RecipePersistence.manager.saveRecipe(info: recipe!)
-        }
-    }
     
-    private func getPersistedRecipe(){
-        
-        if RecipePersistence.manager.checkIfSave(id: recipe?.id ?? 0){
-            recipe = try? RecipePersistence.manager.getRecipe(id: recipe?.id ?? 0)
-            if let recipInfo = recipe?.itemsInCart{
-                itemsInCartLable.text = "\(Int(recipInfo).description) Items"
-                cartStepper.value = Double(recipInfo)
-                if cartStepper.value == 0{
-                    itemsInCartLable.text = "Add to cart"
-            }
-        }}
-    }
+    
+   
     
     //MARK: - Regular Functions
     private func setUpViewObjects(){
@@ -138,26 +94,6 @@ class DetailVC: UIViewController {
             recipeName.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
             recipeName.heightAnchor.constraint(equalToConstant: 60)
             
-        ])
-    }
-    private func constrainCartStepper(){
-        view.addSubview(cartStepper)
-        cartStepper.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            cartStepper.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            cartStepper.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -90),
-            cartStepper.widthAnchor.constraint(equalToConstant: 100),
-            cartStepper.heightAnchor.constraint(equalToConstant: 25)
-        ])
-    }
-    private func constrainItemsInCartLable(){
-        view.addSubview(itemsInCartLable)
-        itemsInCartLable.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            itemsInCartLable.bottomAnchor.constraint(equalTo: cartStepper.topAnchor, constant: -10),
-            itemsInCartLable.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0),
-            itemsInCartLable.widthAnchor.constraint(equalToConstant: 150),
-            itemsInCartLable.heightAnchor.constraint(equalToConstant: 30)
         ])
     }
 }
