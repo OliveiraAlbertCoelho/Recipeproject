@@ -56,7 +56,7 @@ class RecipeCollectionCell: UICollectionViewCell {
         label.numberOfLines = 0
         return label
     }()
-  
+    
     lazy var labelSeparator: UIView = {
         let view  = UIView()
         view.backgroundColor = .gray
@@ -81,12 +81,12 @@ class RecipeCollectionCell: UICollectionViewCell {
     private func setUpViewConstraints(){
         constrainImageView()
         constrainRecipeImage()
-        constrainRecipeName()
-        constrainNumServingsLabel()
         constrainTimePrepLabel()
+        constrainNumServingsLabel()
+                constrainRecipeName()
     }
     //MARK: - Constraints
-
+    
     lazy var parallaxCenterYAnchor: NSLayoutConstraint = {
         self.recipeImage.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor)
     }()
@@ -107,7 +107,7 @@ class RecipeCollectionCell: UICollectionViewCell {
         recipeImage.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             parallaxCenterYAnchor,
-            recipeImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+        recipeImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             recipeImage.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
         ])
     }
@@ -118,30 +118,30 @@ class RecipeCollectionCell: UICollectionViewCell {
         NSLayoutConstraint.activate([
             recipeName.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
             recipeName.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.80),
-            recipeName.topAnchor.constraint(equalTo: darkBackgroundView.topAnchor, constant: 0),
+            recipeName.bottomAnchor.constraint(equalTo: timePrepLabel.topAnchor , constant: -5),
             recipeName.heightAnchor.constraint(equalToConstant: 60)
         ])
     }
-  
-    private func constrainTimePrepLabel(){
-        parallaxContainerView.addSubview(timePrepLabel)
-        timePrepLabel.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            timePrepLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -3),
-            timePrepLabel.trailingAnchor.constraint(equalTo: contentView.centerXAnchor, constant: -5),
-            timePrepLabel.heightAnchor.constraint(equalTo: darkBackgroundView.heightAnchor, multiplier: 0.4),
-            timePrepLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.30)
-        ])
-    }
-    private func constrainNumServingsLabel(){
-        parallaxContainerView.addSubview(numServingsLabel)
-        numServingsLabel.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            numServingsLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -3),
-            numServingsLabel.leadingAnchor.constraint(equalTo: contentView.centerXAnchor, constant: 5),
-            numServingsLabel.heightAnchor.constraint(equalTo: darkBackgroundView.heightAnchor, multiplier: 0.4),
-            numServingsLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.30)
-        ])
-    }
+    
+        private func constrainTimePrepLabel(){
+            parallaxContainerView.addSubview(timePrepLabel)
+            timePrepLabel.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                timePrepLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
+                timePrepLabel.trailingAnchor.constraint(equalTo: contentView.centerXAnchor, constant: -5),
+                timePrepLabel.heightAnchor.constraint(equalToConstant: 20),
+                timePrepLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.30)
+            ])
+        }
+        private func constrainNumServingsLabel(){
+            parallaxContainerView.addSubview(numServingsLabel)
+            numServingsLabel.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                numServingsLabel.bottomAnchor.constraint(equalTo: timePrepLabel.bottomAnchor, constant: 0),
+                numServingsLabel.leadingAnchor.constraint(equalTo: contentView.centerXAnchor, constant: 5),
+                numServingsLabel.heightAnchor.constraint(equalToConstant: 20),
+                numServingsLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.30)
+            ])
+        }
     
 }
