@@ -33,8 +33,11 @@ class DetailVC: UIViewController {
         label.numberOfLines = 0
         label.font = .systemFont(ofSize: 20)
         label.textColor = .white
-        
         return label
+    }()
+    lazy var favoriteButton: UIButton = {
+       let button = UIButton()
+        return button
     }()
   
     
@@ -67,8 +70,6 @@ class DetailVC: UIViewController {
     private func setUpConstraints(){
         constrainRecipeImage()
         constrainRecipeName()
-        constrainCartStepper()
-        constrainItemsInCartLable()
     }
     
     
