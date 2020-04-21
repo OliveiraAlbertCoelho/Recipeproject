@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		50151615244517ED0056E933 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50151614244517ED0056E933 /* Secrets.swift */; };
-		5025671E2433FFE000F20406 /* CartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5025671D2433FFE000F20406 /* CartTableViewCell.swift */; };
 		508644CF2433E2BD00002984 /* PersistenceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508644CE2433E2BD00002984 /* PersistenceHelper.swift */; };
 		508644D12433E30A00002984 /* RecipePersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508644D02433E30A00002984 /* RecipePersistence.swift */; };
 		50D7B52F24324271007C4866 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D7B52E24324271007C4866 /* AppDelegate.swift */; };
@@ -17,7 +16,7 @@
 		50D7B53B24324272007C4866 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 50D7B53924324272007C4866 /* LaunchScreen.storyboard */; };
 		50D7B54624324273007C4866 /* AzureOverallAlbertTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D7B54524324273007C4866 /* AzureOverallAlbertTests.swift */; };
 		50D7B556243246E1007C4866 /* DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D7B555243246E1007C4866 /* DetailVC.swift */; };
-		50D7B558243246EA007C4866 /* CartVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D7B557243246EA007C4866 /* CartVC.swift */; };
+		50D7B558243246EA007C4866 /* FavoritesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D7B557243246EA007C4866 /* FavoritesVC.swift */; };
 		50D7B55B24324825007C4866 /* BrowseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D7B55A24324825007C4866 /* BrowseVC.swift */; };
 		50ED88D624324B6E0092C94A /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50ED88D524324B6E0092C94A /* MainTabBarController.swift */; };
 		50ED88D924324D860092C94A /* RecipeCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50ED88D824324D860092C94A /* RecipeCollectionCell.swift */; };
@@ -38,7 +37,6 @@
 
 /* Begin PBXFileReference section */
 		50151614244517ED0056E933 /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
-		5025671D2433FFE000F20406 /* CartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartTableViewCell.swift; sourceTree = "<group>"; };
 		508644CE2433E2BD00002984 /* PersistenceHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistenceHelper.swift; sourceTree = "<group>"; };
 		508644D02433E30A00002984 /* RecipePersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipePersistence.swift; sourceTree = "<group>"; };
 		50D7B52B24324271007C4866 /* AzureOverallAlbert.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AzureOverallAlbert.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -51,7 +49,7 @@
 		50D7B54524324273007C4866 /* AzureOverallAlbertTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AzureOverallAlbertTests.swift; sourceTree = "<group>"; };
 		50D7B54724324273007C4866 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		50D7B555243246E1007C4866 /* DetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVC.swift; sourceTree = "<group>"; };
-		50D7B557243246EA007C4866 /* CartVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartVC.swift; sourceTree = "<group>"; };
+		50D7B557243246EA007C4866 /* FavoritesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesVC.swift; sourceTree = "<group>"; };
 		50D7B55A24324825007C4866 /* BrowseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseVC.swift; sourceTree = "<group>"; };
 		50ED88D524324B6E0092C94A /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		50ED88D824324D860092C94A /* RecipeCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeCollectionCell.swift; sourceTree = "<group>"; };
@@ -144,7 +142,7 @@
 			isa = PBXGroup;
 			children = (
 				50D7B555243246E1007C4866 /* DetailVC.swift */,
-				50D7B557243246EA007C4866 /* CartVC.swift */,
+				50D7B557243246EA007C4866 /* FavoritesVC.swift */,
 				50D7B55A24324825007C4866 /* BrowseVC.swift */,
 				50ED88D524324B6E0092C94A /* MainTabBarController.swift */,
 			);
@@ -163,7 +161,6 @@
 			isa = PBXGroup;
 			children = (
 				50ED88D824324D860092C94A /* RecipeCollectionCell.swift */,
-				5025671D2433FFE000F20406 /* CartTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -289,10 +286,9 @@
 				508644D12433E30A00002984 /* RecipePersistence.swift in Sources */,
 				50ED88E1243258390092C94A /* Recipes.swift in Sources */,
 				50ED88D924324D860092C94A /* RecipeCollectionCell.swift in Sources */,
-				50D7B558243246EA007C4866 /* CartVC.swift in Sources */,
+				50D7B558243246EA007C4866 /* FavoritesVC.swift in Sources */,
 				50D7B52F24324271007C4866 /* AppDelegate.swift in Sources */,
 				50ED88D624324B6E0092C94A /* MainTabBarController.swift in Sources */,
-				5025671E2433FFE000F20406 /* CartTableViewCell.swift in Sources */,
 				50ED88DC2432515A0092C94A /* NetworkManager.swift in Sources */,
 				50151615244517ED0056E933 /* Secrets.swift in Sources */,
 				508644CF2433E2BD00002984 /* PersistenceHelper.swift in Sources */,

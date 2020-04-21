@@ -110,7 +110,6 @@ class RecipeCollectionCell: UICollectionViewCell {
         parallaxContainerView.addSubview(recipeImage)
         recipeImage.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-
             parallaxCenterYAnchor,
             recipeImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             recipeImage.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
@@ -155,7 +154,6 @@ class RecipeCollectionCell: UICollectionViewCell {
             numServingsLabel.leadingAnchor.constraint(equalTo: contentView.centerXAnchor, constant: 5),
             numServingsLabel.heightAnchor.constraint(equalTo: darkBackgroundView.heightAnchor, multiplier: 0.4),
             numServingsLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.30)
-            
         ])
     }
     
