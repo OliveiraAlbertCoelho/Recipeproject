@@ -25,9 +25,9 @@ class BrowseVC: UIViewController {
     }
  
     //MARK: - Objc Functions
-    @objc func DismissKeyboard(){
+    @objc private func DismissKeyboard(){
              view.endEditing(true)
-             }
+    }
     //MARK: - UI Objects
     lazy var dismissTap: UITapGestureRecognizer = {
         let tap = UITapGestureRecognizer(target: self, action: #selector(DismissKeyboard))
@@ -116,7 +116,8 @@ extension BrowseVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
             }
         }
         cell.updateParallaxOffset(CollectionViewBonds: collectionView.bounds)
-        cell.recipeName.text = data.title
+        let ex = "dhsfjhdksjhkfhsdkjhfkjhadskjfhkjashddhsfjhdksjhkfhsdkjhfkjhadskjfhkjashddhsfjhdksjhkfhsdkjhfkjhadskjfhkjashddhsfjhdksjhkfhsdkjhfkjhadskjfhkjashddhsfjhdksjhkfhsdkjhfkjhadskjfhkjashd"
+        cell.recipeName.text = ex
         cell.timePrepLabel.text = "\(data.readyInMinutes.description) Mins"
         cell.numServingsLabel.text = "\(data.servings.description) Servings"
         return cell

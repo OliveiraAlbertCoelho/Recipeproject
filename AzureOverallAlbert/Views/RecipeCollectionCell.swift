@@ -56,10 +56,7 @@ class RecipeCollectionCell: UICollectionViewCell {
         label.numberOfLines = 0
         return label
     }()
-    lazy var darkBackgroundView: UIView = {
-        let view = UIView()
-        return view
-    }()
+  
     lazy var labelSeparator: UIView = {
         let view  = UIView()
         view.backgroundColor = .gray
@@ -84,7 +81,6 @@ class RecipeCollectionCell: UICollectionViewCell {
     private func setUpViewConstraints(){
         constrainImageView()
         constrainRecipeImage()
-        constrainDarkView()
         constrainRecipeName()
         constrainNumServingsLabel()
         constrainTimePrepLabel()
@@ -126,16 +122,7 @@ class RecipeCollectionCell: UICollectionViewCell {
             recipeName.heightAnchor.constraint(equalToConstant: 60)
         ])
     }
-    private func constrainDarkView(){
-        parallaxContainerView.addSubview(darkBackgroundView)
-        darkBackgroundView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            darkBackgroundView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 0),
-            darkBackgroundView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0),
-            darkBackgroundView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0),
-            darkBackgroundView.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.30)
-        ])
-    }
+  
     private func constrainTimePrepLabel(){
         parallaxContainerView.addSubview(timePrepLabel)
         timePrepLabel.translatesAutoresizingMaskIntoConstraints = false
