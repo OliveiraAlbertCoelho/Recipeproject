@@ -21,6 +21,9 @@ class ImageHelper {
             completionHandler(.failure(.badURL))
             return
         }
+        if let image = ImageHelper.shared.image(forKey: urlString as NSString) {
+            completionHandler(.success(image))} else {
+
         URLSession.shared.dataTask(with: url) { (data, _, error) in
             guard error == nil else {
                 completionHandler(.failure(.noData))
@@ -41,12 +44,13 @@ class ImageHelper {
         } .resume()
         
 }
-  
+    
+    }
     public func image(forKey key: NSString) -> UIImage? {
       return imageCache.object(forKey: key)
         
     }
-    
+
 }
 enum NetWorkError: Error {
     case badURL

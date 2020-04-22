@@ -50,13 +50,13 @@ class DetailVC: UIViewController {
     private func setUpViewObjects(){
         recipeName.text = recipe?.title ?? "Title not found"
         if let recipeUrl = recipe?.recipeUrl{
-            NetworkManager.manager.fetchData(urlString: recipeUrl) { (result) in
+            ImageHelper.shared.fetchImage(urlString: recipeUrl) { (result) in
                 DispatchQueue.main.async {
                     switch result{
                     case .failure(let error):
                         print(error)
                     case .success(let data):
-                        self.recipeImageView.image = UIImage(data: data)
+                        self.recipeImageView.image = data
                     }
                 }
             }
