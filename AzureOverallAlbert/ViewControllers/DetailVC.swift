@@ -37,6 +37,7 @@ class DetailVC: UIViewController {
     }()
     lazy var favoriteButton: UIButton = {
        let button = UIButton()
+        button.setImage(UIImage(systemName: "heart"), for: .normal)
         return button
     }()
     
@@ -69,6 +70,7 @@ class DetailVC: UIViewController {
     private func setUpConstraints(){
         constrainRecipeImage()
         constrainRecipeName()
+        constrainFavoriteButtton()
     }
     
     
@@ -93,6 +95,17 @@ class DetailVC: UIViewController {
             recipeName.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
             recipeName.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
             recipeName.heightAnchor.constraint(equalToConstant: 60)
+            
+        ])
+    }
+    private func constrainFavoriteButtton(){
+        view.addSubview(favoriteButton)
+        favoriteButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            favoriteButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 10),
+            favoriteButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
+            favoriteButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
+            favoriteButton.heightAnchor.constraint(equalToConstant: 40)
             
         ])
     }
