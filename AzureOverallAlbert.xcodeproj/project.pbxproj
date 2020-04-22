@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		50151615244517ED0056E933 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50151614244517ED0056E933 /* Secrets.swift */; };
+		50753F19244FCA18004CF49B /* ImageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50753F18244FCA18004CF49B /* ImageHelper.swift */; };
 		508644CF2433E2BD00002984 /* PersistenceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508644CE2433E2BD00002984 /* PersistenceHelper.swift */; };
 		508644D12433E30A00002984 /* RecipePersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508644D02433E30A00002984 /* RecipePersistence.swift */; };
 		50D7B52F24324271007C4866 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D7B52E24324271007C4866 /* AppDelegate.swift */; };
@@ -37,6 +38,7 @@
 
 /* Begin PBXFileReference section */
 		50151614244517ED0056E933 /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
+		50753F18244FCA18004CF49B /* ImageHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageHelper.swift; sourceTree = "<group>"; };
 		508644CE2433E2BD00002984 /* PersistenceHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistenceHelper.swift; sourceTree = "<group>"; };
 		508644D02433E30A00002984 /* RecipePersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipePersistence.swift; sourceTree = "<group>"; };
 		50D7B52B24324271007C4866 /* AzureOverallAlbert.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AzureOverallAlbert.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -89,6 +91,7 @@
 			isa = PBXGroup;
 			children = (
 				50ED88DB2432515A0092C94A /* NetworkManager.swift */,
+				50753F18244FCA18004CF49B /* ImageHelper.swift */,
 				50ED88DD243257420092C94A /* RecipeFetcher.swift */,
 				50151614244517ED0056E933 /* Secrets.swift */,
 			);
@@ -295,6 +298,7 @@
 				50D7B53124324271007C4866 /* SceneDelegate.swift in Sources */,
 				50D7B55B24324825007C4866 /* BrowseVC.swift in Sources */,
 				50ED88DE243257420092C94A /* RecipeFetcher.swift in Sources */,
+				50753F19244FCA18004CF49B /* ImageHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

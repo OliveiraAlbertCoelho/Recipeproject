@@ -7,7 +7,6 @@
 //
 
 import UIKit
-
 class BrowseVC: UIViewController {
     //MARK: - Lifecycle
     override func viewDidLoad() {
@@ -97,16 +96,18 @@ extension BrowseVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "recipeCell", for: indexPath) as? RecipeCollectionCell else {return UICollectionViewCell()}
         let data = recipes[indexPath.row]
-        NetworkManager.manager.fetchData(urlString: data.recipeUrl ) { (result) in
+        if let image = ImageHelper.shared.image(forKey: data.recipeUrl as NSString) {
+            cell.recipeImage.image = image} else {
+            ImageHelper.shared.fetchImage(urlString: data.recipeUrl ) { (result) in
             DispatchQueue.main.async {
                 switch result{
                 case .failure(let error):
                     print(error)
                 case .success(let data):
-                    cell.recipeImage.image = UIImage(data: data)
-                }
-            }
-        }
+                    cell.recipeImage.image = data
+                }}
+            
+            }}
         cell.updateParallaxOffset(CollectionViewBonds: collectionView.bounds)
         cell.recipeName.text = data.title
         cell.timePrepLabel.text = "\(data.readyInMinutes.description) Mins"

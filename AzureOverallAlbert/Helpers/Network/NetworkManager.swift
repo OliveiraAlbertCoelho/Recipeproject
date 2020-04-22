@@ -37,12 +37,3 @@ class NetworkManager{
         }.resume()
     }
 }
-enum NetWorkError: Error {
-    case badURL
-    case noNetwork
-    case noData
-    case badHTTPResponse
-    case notFound
-    case unauthorized
-    case error
-}

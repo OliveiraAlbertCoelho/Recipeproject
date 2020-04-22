@@ -39,7 +39,6 @@ class DetailVC: UIViewController {
        let button = UIButton()
         return button
     }()
-  
     
     
     //MARK: - Objc Functions

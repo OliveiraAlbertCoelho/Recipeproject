@@ -83,7 +83,7 @@ class RecipeCollectionCell: UICollectionViewCell {
         constrainRecipeImage()
         constrainTimePrepLabel()
         constrainNumServingsLabel()
-                constrainRecipeName()
+        constrainRecipeName()
     }
     //MARK: - Constraints
     
@@ -119,7 +119,7 @@ class RecipeCollectionCell: UICollectionViewCell {
             recipeName.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
             recipeName.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.80),
             recipeName.bottomAnchor.constraint(equalTo: timePrepLabel.topAnchor , constant: -5),
-            recipeName.heightAnchor.constraint(equalToConstant: 60)
+            recipeName.heightAnchor.constraint(equalToConstant: 80)
         ])
     }
     
