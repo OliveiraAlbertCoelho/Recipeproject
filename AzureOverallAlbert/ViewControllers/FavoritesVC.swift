@@ -94,7 +94,9 @@ extension FavoritesVC: UICollectionViewDelegate, UICollectionViewDelegateFlowLay
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let detailVC = DetailVC()
         detailVC.recipe = recipes[indexPath.row]
-        self.navigationController?.pushViewController(detailVC, animated: true)
+    detailVC.modalPresentationStyle = .fullScreen 
+        self.present(detailVC, animated: true, completion: nil)
+
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: favoritesCV.bounds.width, height: 250)

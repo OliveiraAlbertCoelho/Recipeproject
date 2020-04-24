@@ -18,13 +18,10 @@ class DetailVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         setUpViewObjects()
-        self.navigationController?.navigationBar.isHidden = true
         
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        self.navigationController?.navigationBar.isHidden = false
-    }
+  
     //MARK: - Variables
     var recipe: RecipeWrapper?
     var recipes = [RecipeWrapper]()
