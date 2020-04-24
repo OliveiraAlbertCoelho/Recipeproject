@@ -11,7 +11,7 @@ import Foundation
 class RecipeFetcher {
     static let manager = RecipeFetcher()
     func fetchRecipes(searchInfo: String, completionHandler: @escaping(Result<[RecipeWrapper], NetWorkError>)-> ()){
-        let urlString = "https://api.spoonacular.com/recipes/search?&query=\(searchInfo)&number=50&apiKey=\(Secrets.apiKey)"
+        let urlString = "https://api.spoonacular.com/recipes/search?&query=\(searchInfo)&number=10&apiKey=\(Secrets.apiKey)"
         NetworkManager.manager.fetchData(urlString: urlString) { (result) in
             switch result{
             case .failure(let error):

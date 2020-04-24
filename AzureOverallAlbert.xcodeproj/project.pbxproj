@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		50151615244517ED0056E933 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50151614244517ED0056E933 /* Secrets.swift */; };
+		506D9B452452352300DF0A37 /* DetailViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506D9B442452352300DF0A37 /* DetailViewCell.swift */; };
 		50753F19244FCA18004CF49B /* ImageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50753F18244FCA18004CF49B /* ImageHelper.swift */; };
 		508644CF2433E2BD00002984 /* PersistenceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508644CE2433E2BD00002984 /* PersistenceHelper.swift */; };
 		508644D12433E30A00002984 /* RecipePersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508644D02433E30A00002984 /* RecipePersistence.swift */; };
@@ -38,6 +39,7 @@
 
 /* Begin PBXFileReference section */
 		50151614244517ED0056E933 /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
+		506D9B442452352300DF0A37 /* DetailViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewCell.swift; sourceTree = "<group>"; };
 		50753F18244FCA18004CF49B /* ImageHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageHelper.swift; sourceTree = "<group>"; };
 		508644CE2433E2BD00002984 /* PersistenceHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistenceHelper.swift; sourceTree = "<group>"; };
 		508644D02433E30A00002984 /* RecipePersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipePersistence.swift; sourceTree = "<group>"; };
@@ -164,6 +166,7 @@
 			isa = PBXGroup;
 			children = (
 				50ED88D824324D860092C94A /* RecipeCollectionCell.swift */,
+				506D9B442452352300DF0A37 /* DetailViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -297,6 +300,7 @@
 				508644CF2433E2BD00002984 /* PersistenceHelper.swift in Sources */,
 				50D7B53124324271007C4866 /* SceneDelegate.swift in Sources */,
 				50D7B55B24324825007C4866 /* BrowseVC.swift in Sources */,
+				506D9B452452352300DF0A37 /* DetailViewCell.swift in Sources */,
 				50ED88DE243257420092C94A /* RecipeFetcher.swift in Sources */,
 				50753F19244FCA18004CF49B /* ImageHelper.swift in Sources */,
 			);

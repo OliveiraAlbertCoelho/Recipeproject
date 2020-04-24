@@ -13,10 +13,17 @@ class DetailVC: UIViewController {
         super.viewDidLoad()
         setUpViewDesign()
         setUpConstraints()
+        
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         setUpViewObjects()
+        self.navigationController?.navigationBar.isHidden = true
+        
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.navigationController?.navigationBar.isHidden = false
     }
     //MARK: - Variables
     var recipe: RecipeWrapper?
@@ -24,7 +31,10 @@ class DetailVC: UIViewController {
     //MARK: - UI Objects
     
     lazy var recipeImageView: UIImageView = {
-        let image = UIImageView()
+        let image = UIImageView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 300))
+        image.clipsToBounds = true
+        image.layer.cornerRadius = 60
+        image.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         return image
     }()
     lazy var recipeName: UILabel = {
@@ -36,16 +46,25 @@ class DetailVC: UIViewController {
         return label
     }()
     lazy var favoriteButton: UIButton = {
-       let button = UIButton()
+        let button = UIButton()
         button.setImage(UIImage(systemName: "heart"), for: .normal)
         return button
+    }()
+    lazy var recipeInfoTableView: UITableView = {
+        let layout = UITableView()
+        layout.register(DetailViewCell.self, forCellReuseIdentifier: "detailCell")
+        layout.backgroundColor = .clear
+        layout.delegate = self
+        layout.dataSource = self
+        return layout
+        
     }()
     
     
     //MARK: - Objc Functions
     
     
-   
+    
     
     //MARK: - Regular Functions
     private func setUpViewObjects(){
@@ -64,27 +83,37 @@ class DetailVC: UIViewController {
         }
     }
     private func setUpViewDesign(){
-        view.backgroundColor = #colorLiteral(red: 0.773673594, green: 0.6645101905, blue: 0.4229003191, alpha: 1)
+        view.backgroundColor = #colorLiteral(red: 0.2024219334, green: 0.3040059209, blue: 0.3669947386, alpha: 1)
         self.navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.8, green: 0.6718267202, blue: 0.3871548772, alpha: 0.4229719606)
     }
     private func setUpConstraints(){
+        constrainTableView()
         constrainRecipeImage()
-        constrainRecipeName()
-        constrainFavoriteButtton()
+        //        constrainRecipeName()
+        //        constrainFavoriteButtton()
     }
     
     
     //MARK: - Constraints
     
     private func constrainRecipeImage(){
-        view.addSubview(recipeImageView)
+        recipeInfoTableView.tableHeaderView = recipeImageView
         recipeImageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            recipeImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0),
+            recipeImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0),
             recipeImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
             recipeImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
-            recipeImageView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.3)
-            
+            recipeImageView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.35)
+        ])
+    }
+    private func constrainTableView(){
+        view.addSubview(recipeInfoTableView)
+        recipeInfoTableView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            recipeInfoTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0),
+            recipeInfoTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
+            recipeInfoTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
+            recipeInfoTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
     private func constrainRecipeName(){
@@ -110,3 +139,16 @@ class DetailVC: UIViewController {
         ])
     }
 }
+extension DetailVC: UITableViewDelegate, UITableViewDataSource{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "detailCell", for: indexPath) as? DetailViewCell else {return UITableViewCell()}
+        
+        return cell
+    }
+}
+
+

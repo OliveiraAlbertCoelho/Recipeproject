@@ -28,7 +28,7 @@ class BrowseVC: UIViewController {
     lazy var recipeSearchBar: UISearchBar = {
         let searchBar = UISearchBar()
         searchBar.delegate = self
-        searchBar.barTintColor = #colorLiteral(red: 0.8, green: 0.6718267202, blue: 0.3871548772, alpha: 0.4229719606)
+        searchBar.barTintColor = #colorLiteral(red: 0.2024219334, green: 0.3040059209, blue: 0.3669947386, alpha: 1)
         return searchBar
     }()
     lazy var recipeCV: UICollectionView = {
@@ -48,9 +48,9 @@ class BrowseVC: UIViewController {
         constrainRecipeCV()
     }
     private func setUpViewDesign(){
-        self.navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.8, green: 0.6718267202, blue: 0.3871548772, alpha: 0.4229719606)
+        self.navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.1269915402, green: 0.241232276, blue: 0.3125525415, alpha: 1)
         navigationItem.title = "AzureOverall"
-        view.backgroundColor = #colorLiteral(red: 0.3387526274, green: 0.2810974419, blue: 0.1645904183, alpha: 1)
+        view.backgroundColor = #colorLiteral(red: 0.1957240403, green: 0.2921617031, blue: 0.3509372175, alpha: 1)
     }
     private func getRecipeData(searchInfo: String){
         RecipeFetcher.manager.fetchRecipes(searchInfo: searchInfo) { (result) in

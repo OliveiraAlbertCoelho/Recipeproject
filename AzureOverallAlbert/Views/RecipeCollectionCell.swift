@@ -31,7 +31,7 @@ class RecipeCollectionCell: UICollectionViewCell {
     lazy var recipeImage: UIImageView = {
         let image = UIImageView()
         image.contentMode = .scaleAspectFill
-        image.alpha = 0.4
+        image.alpha = 0.6
         return image
     }()
     lazy var recipeName: UILabel = {

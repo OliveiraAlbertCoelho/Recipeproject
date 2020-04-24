@@ -18,12 +18,14 @@ class FavoritesVC: UIViewController {
         super.viewWillAppear(true)
         loadRecipes()
     }
+   
     //MARK: - Variables
     var recipes = [RecipeWrapper](){
         didSet{
             favoritesCV.reloadData()
         }
     }
+    
     
     //MARK: - UI Objects
     lazy var favoritesCV: UICollectionView = {
