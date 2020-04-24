@@ -69,13 +69,7 @@ class DetailVC: UIViewController {
         return label
     }()
     
-    
-    
-    
     //MARK: - Objc Functions
-    
-    
-    
     
     //MARK: - Regular Functions
     private func setUpViewObjects(){
@@ -105,9 +99,19 @@ class DetailVC: UIViewController {
     
     
     //MARK: - Constraints
-    
+    private func setUpHeaderView(){
+        recipeInfoTableView.tableHeaderView = topHeaderView
+        topHeaderView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            topHeaderView.topAnchor.constraint(equalTo: view.topAnchor),
+            topHeaderView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
+            topHeaderView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
+            topHeaderView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.35)
+        ])
+        
+    }
     private func constrainRecipeImage(){
-        recipeInfoTableView.tableHeaderView = recipeImageView
+        topHeaderView.addSubview(recipeImageView)
         recipeImageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             recipeImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0),
