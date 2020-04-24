@@ -12,12 +12,12 @@ class BrowseVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpView()
-
+        
         recipeCV.keyboardDismissMode = UIScrollView.KeyboardDismissMode.onDrag
     }
-
-
-  
+    
+    
+    
     //MARK: - Variables
     var recipes = [RecipeWrapper](){
         didSet{
@@ -64,7 +64,7 @@ class BrowseVC: UIViewController {
             }
         }
     }
-   
+    
     //MARK: - Constraints
     private func constrainRecipeSearchBar(){
         view.addSubview(recipeSearchBar)
@@ -96,7 +96,7 @@ extension BrowseVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "recipeCell", for: indexPath) as? RecipeCollectionCell else {return UICollectionViewCell()}
         let data = recipes[indexPath.row]
-            ImageHelper.shared.fetchImage(urlString: data.recipeUrl ) { (result) in
+        ImageHelper.shared.fetchImage(urlString: data.recipeUrl ) { (result) in
             DispatchQueue.main.async {
                 switch result{
                 case .failure(let error):
@@ -104,14 +104,14 @@ extension BrowseVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
                 case .success(let data):
                     cell.recipeImage.image = data
                 }}
-            }
+        }
         cell.updateParallaxOffset(CollectionViewBonds: collectionView.bounds)
         cell.recipeName.text = data.title
         cell.timePrepLabel.text = "\(data.readyInMinutes.description) Mins"
         cell.numServingsLabel.text = "\(data.servings.description) Servings"
         return cell
     }
- 
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let cells = recipeCV.visibleCells as! [RecipeCollectionCell]
         let bonds = recipeCV.bounds
@@ -122,7 +122,9 @@ extension BrowseVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let detailVC = DetailVC()
         detailVC.recipe = recipes[indexPath.row]
-        self.navigationController?.pushViewController(detailVC, animated: true)
+        detailVC.modalPresentationStyle = .fullScreen
+        self.present(detailVC, animated: true, completion: nil)
+        
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: recipeCV.bounds.width, height: 250)
@@ -130,7 +132,7 @@ extension BrowseVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
-
+    
 }
 //MARK: - UISearchBarDelegate
 extension BrowseVC: UISearchBarDelegate{

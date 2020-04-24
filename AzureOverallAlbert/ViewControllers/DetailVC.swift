@@ -54,7 +54,10 @@ class DetailVC: UIViewController {
         layout.delegate = self
         layout.dataSource = self
         return layout
-        
+    }()
+    lazy var topHeaderView: UIView = {
+       let header = UIView()
+       return header
     }()
     
     
