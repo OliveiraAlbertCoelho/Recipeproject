@@ -57,8 +57,19 @@ class DetailVC: UIViewController {
     }()
     lazy var topHeaderView: UIView = {
        let header = UIView()
+        header.backgroundColor = .clear
        return header
     }()
+    lazy var servingsLabel: UILabel = {
+        let label = UILabel()
+        return label
+    }()
+    lazy var prepTimeLabel: UILabel = {
+        let label = UILabel()
+        return label
+    }()
+    
+    
     
     
     //MARK: - Objc Functions
@@ -84,7 +95,6 @@ class DetailVC: UIViewController {
     }
     private func setUpViewDesign(){
         view.backgroundColor = #colorLiteral(red: 0.2024219334, green: 0.3040059209, blue: 0.3669947386, alpha: 1)
-        self.navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.8, green: 0.6718267202, blue: 0.3871548772, alpha: 0.4229719606)
     }
     private func setUpConstraints(){
         constrainTableView()
