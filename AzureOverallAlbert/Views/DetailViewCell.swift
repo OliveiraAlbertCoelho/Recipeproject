@@ -21,6 +21,7 @@ class DetailViewCell: UITableViewCell {
              required init(coder aDecoder: NSCoder) {
                  fatalError("init(coder:) has not been implemented")
              }
+
         //MARK: - UI Objects
           lazy var recipeImage: UIImageView = {
              let image = UIImageView()

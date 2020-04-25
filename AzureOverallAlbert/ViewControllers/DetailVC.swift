@@ -11,6 +11,8 @@ class DetailVC: UIViewController {
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        recipeInfoTableView.contentInset = UIEdgeInsets(top: 300, left: 0, bottom: 0, right: 0)
+        
         setUpViewDesign()
         setUpConstraints()
         
@@ -18,20 +20,19 @@ class DetailVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         setUpViewObjects()
-        
     }
     
-  
     //MARK: - Variables
     var recipe: RecipeWrapper?
     var recipes = [RecipeWrapper]()
     //MARK: - UI Objects
     
     lazy var recipeImageView: UIImageView = {
-        let image = UIImageView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 300))
+        let image = UIImageView()
         image.clipsToBounds = true
-        image.layer.cornerRadius = 60
-        image.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+        //        image.layer.cornerRadius = 60
+        image.contentMode = .scaleAspectFill
+        //        image.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         return image
     }()
     lazy var recipeName: UILabel = {
@@ -50,15 +51,15 @@ class DetailVC: UIViewController {
     lazy var recipeInfoTableView: UITableView = {
         let layout = UITableView()
         layout.register(DetailViewCell.self, forCellReuseIdentifier: "detailCell")
-        layout.backgroundColor = .clear
+        layout.backgroundColor = .gray
         layout.delegate = self
         layout.dataSource = self
         return layout
     }()
     lazy var topHeaderView: UIView = {
-       let header = UIView()
+        let header = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height / 3))
         header.backgroundColor = .clear
-       return header
+        return header
     }()
     lazy var servingsLabel: UILabel = {
         let label = UILabel()
@@ -69,9 +70,9 @@ class DetailVC: UIViewController {
         return label
     }()
     
-    //MARK: - Objc Functions
     
     //MARK: - Regular Functions
+    
     private func setUpViewObjects(){
         recipeName.text = recipe?.title ?? "Title not found"
         if let recipeUrl = recipe?.recipeUrl{
@@ -92,34 +93,12 @@ class DetailVC: UIViewController {
     }
     private func setUpConstraints(){
         constrainTableView()
+        constrainTopHeaderView()
         constrainRecipeImage()
-        //        constrainRecipeName()
-        //        constrainFavoriteButtton()
     }
     
     
     //MARK: - Constraints
-    private func setUpHeaderView(){
-        recipeInfoTableView.tableHeaderView = topHeaderView
-        topHeaderView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            topHeaderView.topAnchor.constraint(equalTo: view.topAnchor),
-            topHeaderView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
-            topHeaderView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
-            topHeaderView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.35)
-        ])
-        
-    }
-    private func constrainRecipeImage(){
-        topHeaderView.addSubview(recipeImageView)
-        recipeImageView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            recipeImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0),
-            recipeImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
-            recipeImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
-            recipeImageView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.35)
-        ])
-    }
     private func constrainTableView(){
         view.addSubview(recipeInfoTableView)
         recipeInfoTableView.translatesAutoresizingMaskIntoConstraints = false
@@ -130,6 +109,32 @@ class DetailVC: UIViewController {
             recipeInfoTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
+    private func constrainTopHeaderView(){
+        view.addSubview(topHeaderView)
+        topHeaderView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            topHeaderView.topAnchor.constraint(equalTo: view.topAnchor),
+            topHeaderView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
+            topHeaderView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
+            recipeHeaderHeight
+        ])
+    }
+    
+    private func constrainRecipeImage(){
+        topHeaderView.addSubview(recipeImageView)
+        recipeImageView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            recipeImageView.topAnchor.constraint(equalTo: topHeaderView.topAnchor),
+            recipeImageView.leadingAnchor.constraint(equalTo: topHeaderView.leadingAnchor, constant: 0),
+            recipeImageView.trailingAnchor.constraint(equalTo: topHeaderView.trailingAnchor, constant: 0),
+            recipeImageView.bottomAnchor.constraint(equalTo: topHeaderView.bottomAnchor)
+        ])
+    }
+    lazy var recipeHeaderHeight: NSLayoutConstraint = {
+        self.topHeaderView.heightAnchor.constraint(equalToConstant: 300)
+    }()
+    
+    
     private func constrainRecipeName(){
         view.addSubview(recipeName)
         recipeName.translatesAutoresizingMaskIntoConstraints = false
@@ -153,16 +158,31 @@ class DetailVC: UIViewController {
         ])
     }
 }
+
+
+
+
+
+
 extension DetailVC: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return 10
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "detailCell", for: indexPath) as? DetailViewCell else {return UITableViewCell()}
-        
         return cell
     }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
+    }
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let y = 300 - (scrollView.contentOffset.y + 300)
+        let height = min(max(y, 170), 400)
+        recipeHeaderHeight.constant = height
+    }
 }
+
+
 
 

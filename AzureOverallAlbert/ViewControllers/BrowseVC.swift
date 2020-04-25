@@ -12,7 +12,6 @@ class BrowseVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpView()
-        
         recipeCV.keyboardDismissMode = UIScrollView.KeyboardDismissMode.onDrag
     }
     
