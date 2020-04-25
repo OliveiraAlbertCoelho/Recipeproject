@@ -11,7 +11,7 @@ class DetailVC: UIViewController {
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        recipeInfoTableView.contentInset = UIEdgeInsets(top: 300, left: 0, bottom: 0, right: 0)
+        recipeInfoTableView.contentInset = UIEdgeInsets(top: 310, left: 0, bottom: 0, right: 0)
         
         setUpViewDesign()
         setUpConstraints()
@@ -39,9 +39,7 @@ class DetailVC: UIViewController {
         let label = UILabel()
         label.textAlignment = .center
         label.numberOfLines = 0
-
-       label.font = UIFont(name: "Hiragino Mincho ProN", size: 20)
-
+       label.font = UIFont(name: "Hiragino Mincho ProN", size:  20)
         label.textColor = .white
         return label
     }()
@@ -65,18 +63,31 @@ class DetailVC: UIViewController {
     }()
     lazy var servingsLabel: UILabel = {
         let label = UILabel()
+        label.font = UIFont(name: "Hiragino Mincho ProN", size:  12)
+        label.textAlignment = .left
         return label
     }()
     lazy var prepTimeLabel: UILabel = {
         let label = UILabel()
+        label.textAlignment = .right
+        label.font = UIFont(name: "Hiragino Mincho ProN", size:  12)
         return label
     }()
+    lazy var lineSeparator: UIView = {
+        let line = UIView()
+        line.backgroundColor = .white
+        return line
+    }()
+ 
+  
     
     
     //MARK: - Regular Functions
     
     private func setUpViewObjects(){
         recipeName.text = recipe?.title ?? "Title not found"
+        prepTimeLabel.text = "Prep Time: \(recipe?.readyInMinutes.description ?? "")"
+        servingsLabel.text = "Servings: \(recipe?.servings.description ?? "")"
         if let recipeUrl = recipe?.recipeUrl{
             ImageHelper.shared.fetchImage(urlString: recipeUrl) { (result) in
                 DispatchQueue.main.async {
@@ -98,6 +109,9 @@ class DetailVC: UIViewController {
         constrainTopHeaderView()
         constrainRecipeImage()
         constrainRecipeName()
+        constrainBottomLine()
+        constrainServingSizeLabel()
+        constrainPrepLabel()
     }
     
     
@@ -112,6 +126,10 @@ class DetailVC: UIViewController {
             recipeInfoTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
+    
+    lazy var recipeHeaderHeight: NSLayoutConstraint = {
+          self.topHeaderView.heightAnchor.constraint(equalToConstant: 310)
+      }()
     private func constrainTopHeaderView(){
         view.addSubview(topHeaderView)
         topHeaderView.translatesAutoresizingMaskIntoConstraints = false
@@ -134,31 +152,49 @@ class DetailVC: UIViewController {
             
         ])
     }
-    lazy var recipeHeaderHeight: NSLayoutConstraint = {
-        self.topHeaderView.heightAnchor.constraint(equalToConstant: 300)
-    }()
-    
+  
     private func constrainRecipeName(){
-        view.addSubview(recipeName)
+        topHeaderView.addSubview(recipeName)
         recipeName.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            recipeName.bottomAnchor.constraint(equalTo: topHeaderView.bottomAnchor, constant: 0),
-            recipeImageView.leadingAnchor.constraint(equalTo: topHeaderView.leadingAnchor, constant: 0),
-            recipeImageView.trailingAnchor.constraint(equalTo: topHeaderView.trailingAnchor, constant: 0),
-            recipeImageView.heightAnchor.constraint(equalToConstant: 20)
-        ])
-    }
-    private func constrainFavoriteButtton(){
-        view.addSubview(favoriteButton)
-        favoriteButton.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            favoriteButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 10),
-            favoriteButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
-            favoriteButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
-            favoriteButton.heightAnchor.constraint(equalToConstant: 40)
+            recipeName.topAnchor.constraint(equalTo: recipeImageView.bottomAnchor, constant: 5),
+            recipeName.centerXAnchor.constraint(equalTo: topHeaderView.centerXAnchor, constant: 0),
+            recipeName.heightAnchor.constraint(equalToConstant: 40),
+            recipeName.widthAnchor.constraint(equalTo: topHeaderView.widthAnchor, multiplier: 0.5)
             
         ])
     }
+    private func constrainBottomLine(){
+        topHeaderView.addSubview(lineSeparator)
+        lineSeparator.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            lineSeparator.topAnchor.constraint(equalTo: recipeName.bottomAnchor, constant: 0),
+            lineSeparator.widthAnchor.constraint(equalTo: topHeaderView.widthAnchor, multiplier: 0.5),
+            lineSeparator.heightAnchor.constraint(equalToConstant: 1),
+            lineSeparator.centerXAnchor.constraint(equalTo: topHeaderView.centerXAnchor, constant: 0),
+        ])
+    }
+    private func constrainServingSizeLabel(){
+        topHeaderView.addSubview(servingsLabel)
+        servingsLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            servingsLabel.topAnchor.constraint(equalTo: lineSeparator.bottomAnchor, constant: 0),
+            servingsLabel.widthAnchor.constraint(equalTo: topHeaderView.widthAnchor, multiplier: 0.3),
+            servingsLabel.heightAnchor.constraint(equalToConstant: 15),
+            servingsLabel.centerXAnchor.constraint(equalTo: topHeaderView.centerXAnchor, constant: -40),
+        ])
+    }
+    private func constrainPrepLabel(){
+        topHeaderView.addSubview(prepTimeLabel)
+        prepTimeLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            prepTimeLabel.topAnchor.constraint(equalTo: lineSeparator.bottomAnchor, constant: 0),
+            prepTimeLabel.widthAnchor.constraint(equalTo: topHeaderView.widthAnchor, multiplier: 0.3),
+            prepTimeLabel.heightAnchor.constraint(equalToConstant: 15),
+            prepTimeLabel.centerXAnchor.constraint(equalTo: topHeaderView.centerXAnchor, constant: 40),
+        ])
+    }
+  
 }
 
 
