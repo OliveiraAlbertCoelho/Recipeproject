@@ -23,6 +23,7 @@ class DetailVC: UIViewController {
     }
     
     //MARK: - Variables
+    var recipeInfo: RecipeInfo?
     var recipe: RecipeWrapper?
     var recipes = [RecipeWrapper]()
     //MARK: - UI Objects
@@ -97,6 +98,16 @@ class DetailVC: UIViewController {
                     case .success(let data):
                         self.recipeImageView.image = data
                     }
+                }
+            }
+        }
+        RecipeInfoFetcher.manager.fetchRecipeInfo(recipeId: recipe?.id.description ?? "") { (result) in
+            DispatchQueue.main.async {
+                switch result{
+                case .failure(let error):
+                    print(error)
+                case .success(let recipeInfo):
+                    self.recipeInfo = recipeInfo
                 }
             }
         }

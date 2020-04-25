@@ -30,7 +30,8 @@ class NetworkManager{
             case 401, 403:
                 completionHandler(.failure(.unauthorized))
             case 200...299:
-                completionHandler(.success(data))
+                
+completionHandler(.success(data))
             default:
                 completionHandler(.failure(.error))
             }

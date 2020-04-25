@@ -25,6 +25,10 @@
 		50ED88DC2432515A0092C94A /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50ED88DB2432515A0092C94A /* NetworkManager.swift */; };
 		50ED88DE243257420092C94A /* RecipeFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50ED88DD243257420092C94A /* RecipeFetcher.swift */; };
 		50ED88E1243258390092C94A /* Recipes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50ED88E0243258390092C94A /* Recipes.swift */; };
+		50F84A3E2454E74D0009787A /* RecipeInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F84A3D2454E74D0009787A /* RecipeInfo.swift */; };
+		50F84A402454EABD0009787A /* RecipeInfoFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F84A3F2454EABD0009787A /* RecipeInfoFetcher.swift */; };
+		50F84A422454F2FB0009787A /* NutritionInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F84A412454F2FB0009787A /* NutritionInfoCell.swift */; };
+		50F84A442454F3B00009787A /* NutritionInfoCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F84A432454F3B00009787A /* NutritionInfoCVCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +64,10 @@
 		50ED88DB2432515A0092C94A /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		50ED88DD243257420092C94A /* RecipeFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeFetcher.swift; sourceTree = "<group>"; };
 		50ED88E0243258390092C94A /* Recipes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipes.swift; sourceTree = "<group>"; };
+		50F84A3D2454E74D0009787A /* RecipeInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeInfo.swift; sourceTree = "<group>"; };
+		50F84A3F2454EABD0009787A /* RecipeInfoFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeInfoFetcher.swift; sourceTree = "<group>"; };
+		50F84A412454F2FB0009787A /* NutritionInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NutritionInfoCell.swift; sourceTree = "<group>"; };
+		50F84A432454F3B00009787A /* NutritionInfoCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NutritionInfoCVCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +104,7 @@
 				50753F18244FCA18004CF49B /* ImageHelper.swift */,
 				50ED88DD243257420092C94A /* RecipeFetcher.swift */,
 				50151614244517ED0056E933 /* Secrets.swift */,
+				50F84A3F2454EABD0009787A /* RecipeInfoFetcher.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -167,6 +176,8 @@
 			children = (
 				50ED88D824324D860092C94A /* RecipeCollectionCell.swift */,
 				506D9B442452352300DF0A37 /* DetailViewCell.swift */,
+				50F84A412454F2FB0009787A /* NutritionInfoCell.swift */,
+				50F84A432454F3B00009787A /* NutritionInfoCVCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -184,6 +195,7 @@
 			isa = PBXGroup;
 			children = (
 				50ED88E0243258390092C94A /* Recipes.swift */,
+				50F84A3D2454E74D0009787A /* RecipeInfo.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -288,11 +300,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				50F84A442454F3B00009787A /* NutritionInfoCVCell.swift in Sources */,
 				50D7B556243246E1007C4866 /* DetailVC.swift in Sources */,
 				508644D12433E30A00002984 /* RecipePersistence.swift in Sources */,
 				50ED88E1243258390092C94A /* Recipes.swift in Sources */,
+				50F84A402454EABD0009787A /* RecipeInfoFetcher.swift in Sources */,
 				50ED88D924324D860092C94A /* RecipeCollectionCell.swift in Sources */,
 				50D7B558243246EA007C4866 /* FavoritesVC.swift in Sources */,
+				50F84A422454F2FB0009787A /* NutritionInfoCell.swift in Sources */,
 				50D7B52F24324271007C4866 /* AppDelegate.swift in Sources */,
 				50ED88D624324B6E0092C94A /* MainTabBarController.swift in Sources */,
 				50ED88DC2432515A0092C94A /* NetworkManager.swift in Sources */,
@@ -303,6 +318,7 @@
 				506D9B452452352300DF0A37 /* DetailViewCell.swift in Sources */,
 				50ED88DE243257420092C94A /* RecipeFetcher.swift in Sources */,
 				50753F19244FCA18004CF49B /* ImageHelper.swift in Sources */,
+				50F84A3E2454E74D0009787A /* RecipeInfo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
