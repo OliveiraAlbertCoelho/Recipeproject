@@ -39,7 +39,9 @@ class DetailVC: UIViewController {
         let label = UILabel()
         label.textAlignment = .center
         label.numberOfLines = 0
-        label.font = .systemFont(ofSize: 20)
+
+       label.font = UIFont(name: "Hiragino Mincho ProN", size: 20)
+
         label.textColor = .white
         return label
     }()
@@ -51,14 +53,14 @@ class DetailVC: UIViewController {
     lazy var recipeInfoTableView: UITableView = {
         let layout = UITableView()
         layout.register(DetailViewCell.self, forCellReuseIdentifier: "detailCell")
-        layout.backgroundColor = .gray
+        layout.backgroundColor = .clear
         layout.delegate = self
         layout.dataSource = self
         return layout
     }()
     lazy var topHeaderView: UIView = {
         let header = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height / 3))
-        header.backgroundColor = .clear
+        header.backgroundColor = #colorLiteral(red: 0.2024219334, green: 0.3040059209, blue: 0.3669947386, alpha: 1)
         return header
     }()
     lazy var servingsLabel: UILabel = {
@@ -95,6 +97,7 @@ class DetailVC: UIViewController {
         constrainTableView()
         constrainTopHeaderView()
         constrainRecipeImage()
+        constrainRecipeName()
     }
     
     
@@ -127,23 +130,22 @@ class DetailVC: UIViewController {
             recipeImageView.topAnchor.constraint(equalTo: topHeaderView.topAnchor),
             recipeImageView.leadingAnchor.constraint(equalTo: topHeaderView.leadingAnchor, constant: 0),
             recipeImageView.trailingAnchor.constraint(equalTo: topHeaderView.trailingAnchor, constant: 0),
-            recipeImageView.bottomAnchor.constraint(equalTo: topHeaderView.bottomAnchor)
+            recipeImageView.heightAnchor.constraint(equalTo: topHeaderView.heightAnchor, multiplier: 0.75)
+            
         ])
     }
     lazy var recipeHeaderHeight: NSLayoutConstraint = {
         self.topHeaderView.heightAnchor.constraint(equalToConstant: 300)
     }()
     
-    
     private func constrainRecipeName(){
         view.addSubview(recipeName)
         recipeName.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            recipeName.topAnchor.constraint(equalTo: recipeImageView.bottomAnchor, constant: 10),
-            recipeName.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
-            recipeName.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
-            recipeName.heightAnchor.constraint(equalToConstant: 60)
-            
+            recipeName.bottomAnchor.constraint(equalTo: topHeaderView.bottomAnchor, constant: 0),
+            recipeImageView.leadingAnchor.constraint(equalTo: topHeaderView.leadingAnchor, constant: 0),
+            recipeImageView.trailingAnchor.constraint(equalTo: topHeaderView.trailingAnchor, constant: 0),
+            recipeImageView.heightAnchor.constraint(equalToConstant: 20)
         ])
     }
     private func constrainFavoriteButtton(){
