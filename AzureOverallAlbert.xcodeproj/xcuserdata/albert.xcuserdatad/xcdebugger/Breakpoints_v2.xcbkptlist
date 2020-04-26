@@ -55,16 +55,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "5DB33887-7B8A-4020-8208-97ECD6D8F8CC"
+            uuid = "ACFDA631-016C-40A2-9AD6-15A7264F82B9"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "AzureOverallAlbert/Helpers/Network/RecipeInfoFetcher.swift"
+            filePath = "AzureOverallAlbert/ViewControllers/DetailVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "22"
-            endingLineNumber = "22"
-            landmarkName = "fetchRecipeInfo(recipeId:completionHandler:)"
+            startingLineNumber = "127"
+            endingLineNumber = "127"
+            landmarkName = "goBackAction()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
