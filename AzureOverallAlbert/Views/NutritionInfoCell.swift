@@ -58,13 +58,13 @@ class NutritionInfoCell: UITableViewCell {
 }
 extension NutritionInfoCell: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
-      return 5
-      
+      return nutritionInfo.count
    }
    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
       guard let cell = nutritionCV.dequeueReusableCell(withReuseIdentifier: "nutritionCVC", for: indexPath) as? NutritionCVC else { return UICollectionViewCell() }
-      cell.nutrientTitle.text = "potassium clorite"
-      cell.nutrientAmount.text =  "500 G"
+      let data = nutritionInfo[indexPath.row]
+      cell.nutrientTitle.text = data.title
+      cell.nutrientAmount.text =  "\(data.amount)\(data.unit)"
       return cell
    }
    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

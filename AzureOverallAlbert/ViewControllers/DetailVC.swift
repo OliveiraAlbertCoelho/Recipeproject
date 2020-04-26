@@ -21,6 +21,7 @@ final class DetailVC: UIViewController {
       
       
    }
+   let recipeId = "587000"
    lazy var swipeRight: UISwipeGestureRecognizer = {
       let swipe = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture(gesture:)))
       swipe.direction = UISwipeGestureRecognizer.Direction.right
@@ -44,6 +45,7 @@ final class DetailVC: UIViewController {
    var recipeInfo: RecipeInfo?{
       didSet{
          recipeInfoTableView.reloadData()
+         setUpRecipeView()
       }
    }
    var recipe: RecipeWrapper?
@@ -52,7 +54,6 @@ final class DetailVC: UIViewController {
    lazy var recipeImageView: UIImageView = {
       let image = UIImageView()
       image.clipsToBounds = true
-      image.image = UIImage(named: "food")
       image.layer.cornerRadius = 45
       image.contentMode = .scaleAspectFill
       image.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
@@ -126,35 +127,36 @@ final class DetailVC: UIViewController {
    @objc private func goBackAction(){
       dismiss(animated: true, completion: nil)
    }
+   private func setUpRecipeView(){
+      recipeName.text = recipeInfo?.title ?? "not found"
+           prepTimeLabel.text = "Prep Time: \(recipeInfo?.readyInMinutes.description ?? "")"
+           servingsLabel.text = "Servings: \(recipeInfo?.servings.description ?? "")"
+           if let recipeUrl = recipeInfo?.recipeUrl{
+               ImageHelper.shared.fetchImage(urlString: recipeUrl) { (result) in
+                   DispatchQueue.main.async {
+                       switch result{
+                       case .failure(let error):
+                           print(error)
+                       case .success(let data):
+                           self.recipeImageView.image = data
+                       }
+                   }
+               }
+           }
+   }
    private func setUpViewObjects(){
-      recipeName.text = recipe?.title ?? "not found"
-      prepTimeLabel.text = "Prep Time: \(recipe?.readyInMinutes.description ?? "")"
-      servingsLabel.text = "Servings: \(recipe?.servings.description ?? "")"
-      
-      //        if let recipeUrl = recipe?.recipeUrl{
-      //            ImageHelper.shared.fetchImage(urlString: recipeUrl) { (result) in
-      //                DispatchQueue.main.async {
-      //                    switch result{
-      //                    case .failure(let error):
-      //                        print(error)
-      //                    case .success(let data):
-      //                        self.recipeImageView.image = data
-      //                    }
-      //                }
-      //            }
-      //        }
-      //        RecipeInfoFetcher.manager.fetchRecipeInfo(recipeId: recipe?.id.description ?? "") { (result) in
-      //            DispatchQueue.main.async {
-      //                switch result{
-      //                case .failure(let error):
-      //                    print(error)
-      //                case .success(let recipeInfo):
-      //                    self.recipeInfo = recipeInfo
-      //                    self.constrainTableView()
-      //                }
-      //            }
-      //        }
-      self.constrainTableView()
+              RecipeInfoFetcher.manager.fetchRecipeInfo(recipeId: recipeId) { (result) in
+                  DispatchQueue.main.async {
+                      switch result{
+                      case .failure(let error):
+                          print(error)
+                      case .success(let recipeInfo):
+                          self.recipeInfo = recipeInfo
+                          self.constrainTableView()
+                      }
+                  }
+              }
+     
    }
    private func setUpViewDesign(){
       view.backgroundColor = #colorLiteral(red: 0.9489366412, green: 0.9490728974, blue: 0.9489069581, alpha: 1)
@@ -283,7 +285,7 @@ extension DetailVC: UITableViewDelegate, UITableViewDataSource{
       case 0:
          return 1
       default:
-         return 4
+         return recipeInfo?.extendedIngredients.count ?? 0
       }
    }
    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -304,7 +306,7 @@ extension DetailVC: UITableViewDelegate, UITableViewDataSource{
       return .leastNormalMagnitude
    }
    func numberOfSections(in tableView: UITableView) -> Int {
-      return 3
+      return 2
    }
    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
       switch indexPath.section{
@@ -316,7 +318,8 @@ extension DetailVC: UITableViewDelegate, UITableViewDataSource{
          return cell
       default:
          guard let cell = tableView.dequeueReusableCell(withIdentifier: "recipIngri", for: indexPath) as? RecipeIngredientsCell else {return UITableViewCell()}
-         cell.ingredientTitleLabel.text = "receitaaaas"
+         let data = recipeInfo?.extendedIngredients[indexPath.row]
+         cell.ingredientTitleLabel.text = data?.name
          return cell
       }
    }
