@@ -11,6 +11,18 @@ import Foundation
 struct RecipeInfo: Codable {
 
     let nutrition: NutrientsWrapper
+   let id: Int
+   let title: String
+   let readyInMinutes: Int
+   let servings: Int
+   let image: String
+   var recipeUrl: String {
+       return "https://spoonacular.com/recipeImages/\(id)-556x370.jpg"
+   }
+   extendedIngredients: [Ingredients]
+}
+struct Ingredients: Codable{
+   
 }
 struct NutrientsWrapper: Codable {
     let nutrients: [Nutrients]

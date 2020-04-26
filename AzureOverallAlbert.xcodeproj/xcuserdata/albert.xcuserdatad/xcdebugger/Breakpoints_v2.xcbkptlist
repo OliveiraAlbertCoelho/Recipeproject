@@ -30,8 +30,8 @@
             filePath = "AzureOverallAlbert/Models/RecipeInfo.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "16"
-            endingLineNumber = "16"
+            startingLineNumber = "28"
+            endingLineNumber = "28"
             landmarkName = "NutrientsWrapper"
             landmarkType = "14">
          </BreakpointContent>
@@ -46,25 +46,25 @@
             filePath = "AzureOverallAlbert/Models/RecipeInfo.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "19"
-            endingLineNumber = "19"
-            landmarkName = "Nutrients"
-            landmarkType = "14">
+            startingLineNumber = "31"
+            endingLineNumber = "31"
+            landmarkName = "amount"
+            landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "ACFDA631-016C-40A2-9AD6-15A7264F82B9"
+            uuid = "3183F797-6608-43B8-A366-6C0D56CDC072"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AzureOverallAlbert/ViewControllers/DetailVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "127"
-            endingLineNumber = "127"
-            landmarkName = "goBackAction()"
+            startingLineNumber = "159"
+            endingLineNumber = "159"
+            landmarkName = "setUpViewObjects()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
