@@ -17,8 +17,10 @@ final class DetailVC: UIViewController {
       setUpConstraints()
       setUpViewObjects()
       recipeInfoTableView.estimatedRowHeight = 80
+      self.navigationController?.navigationBar.isHidden = true
+      
    }
-   var mytrue = true
+   var isExpanded = false
    //MARK: - Variables
    var recipeInfo: RecipeInfo?{
       didSet{
@@ -35,7 +37,7 @@ final class DetailVC: UIViewController {
       swipe.direction = UISwipeGestureRecognizer.Direction.right
       return swipe
    }()
-
+   
    lazy var recipeImageView: UIImageView = {
       let image = UIImageView()
       image.clipsToBounds = true
@@ -111,7 +113,11 @@ final class DetailVC: UIViewController {
    
    //MARK: - Regular Functions
    @objc private func goBackAction(){
-      dismiss(animated: true, completion: nil)
+      self.navigationController?.popViewController(animated: true)
+   }
+   @objc private func expandSection() {
+      isExpanded = !isExpanded
+      isExpanded ?  recipeInfoTableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .fade) : recipeInfoTableView.deleteRows(at: [IndexPath(row: 0, section: 0)], with: .fade)
    }
    private func setUpRecipeView(){
       recipeName.text = recipeInfo?.title ?? "not found"
@@ -169,7 +175,7 @@ final class DetailVC: UIViewController {
       transition.type = CATransitionType.push
       transition.subtype = CATransitionSubtype.fromLeft
       view.window!.layer.add(transition, forKey: nil)
-      dismiss(animated: false, completion: nil)
+      navigationController?.popViewController(animated: false)
    }
    
    
@@ -280,17 +286,12 @@ final class DetailVC: UIViewController {
    
    
 }
-
+//MARK: - UITableViewDelegates
 extension DetailVC: UITableViewDelegate, UITableViewDataSource{
    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
       switch section{
       case 0:
-         if mytrue {
-            return 1
-         }else {
-            return 0
-         }
-         
+         return isExpanded ? 1 : 0
       case 1:
          return recipeInfo?.extendedIngredients.count ?? 0
       case 2:
@@ -299,9 +300,7 @@ extension DetailVC: UITableViewDelegate, UITableViewDataSource{
          return 0
       }
    }
-   @objc private func expandSection() {
-      recipeInfoTableView.deleteRows(at: [IndexPath(row: 0, section: 0)], with: .fade)
-   }
+   
    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
       let view = SectionHeaderView()
       switch  section {
@@ -309,7 +308,6 @@ extension DetailVC: UITableViewDelegate, UITableViewDataSource{
          view.headerTitle.text = "Nutrition"
          view.expandableSectionButton.addTarget(self, action: #selector(expandSection), for: .touchUpInside)
          view.expandableSectionButton.isHidden = false
-         mytrue = !mytrue
       case 1:
          view.headerTitle.text = "Ingredients"
       case 2:
@@ -317,18 +315,9 @@ extension DetailVC: UITableViewDelegate, UITableViewDataSource{
       default:
          view.headerTitle.text = ""
       }
-      
       return view
    }
-   func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-      return headerHeight
-   }
-   func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-      return .leastNormalMagnitude
-   }
-   func numberOfSections(in tableView: UITableView) -> Int {
-      return 3
-   }
+   
    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
       switch indexPath.section{
       case 0:
@@ -351,6 +340,7 @@ extension DetailVC: UITableViewDelegate, UITableViewDataSource{
          return cell
       }
    }
+   
    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
       switch indexPath.section{
       case 0:
@@ -367,6 +357,15 @@ extension DetailVC: UITableViewDelegate, UITableViewDataSource{
       let y = 300 - (scrollView.contentOffset.y + 300)
       let height = min(max(y, 170), 400)
       recipeHeaderHeight.constant = height
+   }
+   func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+      return headerHeight
+   }
+   func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+      return .leastNormalMagnitude
+   }
+   func numberOfSections(in tableView: UITableView) -> Int {
+      return 3
    }
 }
 

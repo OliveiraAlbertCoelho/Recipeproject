@@ -33,7 +33,6 @@ class SectionHeaderView: UIView {
       let button = UIButton()
       button.setImage(UIImage(systemName: "plus"), for: .normal)
       button.tintColor = .blue
-      button.backgroundColor = .blue
       button.isHidden = true
       return button
    }()
@@ -56,7 +55,7 @@ class SectionHeaderView: UIView {
         expandableSectionButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
            expandableSectionButton.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-           expandableSectionButton.trailingAnchor.constraint(equalToSystemSpacingAfter: self.trailingAnchor, multiplier: -1)
+           expandableSectionButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -30)
         ])
      }
    
