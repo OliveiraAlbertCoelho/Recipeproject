@@ -16,7 +16,9 @@ final class DetailVC: UIViewController {
       setUpViewDesign()
       setUpConstraints()
       setUpViewObjects()
+      recipeInfoTableView.estimatedRowHeight = 80
    }
+   var mytrue = true
    //MARK: - Variables
    var recipeInfo: RecipeInfo?{
       didSet{
@@ -283,7 +285,12 @@ extension DetailVC: UITableViewDelegate, UITableViewDataSource{
    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
       switch section{
       case 0:
-         return 1
+         if mytrue {
+            return 1
+         }else {
+            return 0
+         }
+         
       case 1:
          return recipeInfo?.extendedIngredients.count ?? 0
       case 2:
@@ -292,11 +299,17 @@ extension DetailVC: UITableViewDelegate, UITableViewDataSource{
          return 0
       }
    }
+   @objc private func expandSection() {
+      recipeInfoTableView.deleteRows(at: [IndexPath(row: 0, section: 0)], with: .fade)
+   }
    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
       let view = SectionHeaderView()
       switch  section {
       case 0:
          view.headerTitle.text = "Nutrition"
+         view.expandableSectionButton.addTarget(self, action: #selector(expandSection), for: .touchUpInside)
+         view.expandableSectionButton.isHidden = false
+         mytrue = !mytrue
       case 1:
          view.headerTitle.text = "Ingredients"
       case 2:
@@ -334,7 +347,7 @@ extension DetailVC: UITableViewDelegate, UITableViewDataSource{
          guard let cell = tableView.dequeueReusableCell(withIdentifier: "instructionCell", for: indexPath) as? InstructionsTableViewCell else {return UITableViewCell()}
          let data = recipeInfo?.analyzedInstructions.first?.steps[indexPath.row]
          cell.stepNumber.text = data?.number.description
-         cell.stepName.text = data?.step
+         cell.stepTitle.text = data?.step
          return cell
       }
    }
@@ -345,7 +358,7 @@ extension DetailVC: UITableViewDelegate, UITableViewDataSource{
       case 1:
          return 50
       case 2:
-         return 60
+         return UITableView.automaticDimension
       default:
          return 0
       }

@@ -13,10 +13,13 @@ class SectionHeaderView: UIView {
       super.init(frame: frame)
       setupView()
       constrainInsideLabel()
+      constrainexpandableSectionButton()
    }
    required init?(coder aDecoder: NSCoder) {
       super.init(coder: aDecoder)
       setupView()
+      constrainInsideLabel()
+      constrainexpandableSectionButton()
    }
    
    lazy var headerTitle: UILabel = {
@@ -25,6 +28,14 @@ class SectionHeaderView: UIView {
       label.textColor = .black
       label.textAlignment = .center
       return label
+   }()
+   lazy var expandableSectionButton : UIButton = {
+      let button = UIButton()
+      button.setImage(UIImage(systemName: "plus"), for: .normal)
+      button.tintColor = .blue
+      button.backgroundColor = .blue
+      button.isHidden = true
+      return button
    }()
    
    //common func to init our view
@@ -40,6 +51,14 @@ class SectionHeaderView: UIView {
          headerTitle.leadingAnchor.constraint(equalToSystemSpacingAfter: self.leadingAnchor, multiplier: 3)
       ])
    }
+   private func constrainexpandableSectionButton(){
+        addSubview(expandableSectionButton)
+        expandableSectionButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+           expandableSectionButton.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+           expandableSectionButton.trailingAnchor.constraint(equalToSystemSpacingAfter: self.trailingAnchor, multiplier: -1)
+        ])
+     }
    
 }
 

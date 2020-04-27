@@ -22,39 +22,43 @@ class InstructionsTableViewCell: UITableViewCell {
    //MARK: - UI Objects
    lazy var stepNumber: UILabel = {
       let label = UILabel()
+      label.font = .boldSystemFont(ofSize: 18)
+      label.textAlignment = .center
       return label
    }()
-   lazy var stepName: UILabel = {
+   lazy var stepTitle: UILabel = {
       let label = UILabel()
       label.numberOfLines = 0
+      label.backgroundColor = .yellow
       return label
    }()
    //MARK: - Regular Functions
    private func setUpView(){
       contentView.backgroundColor = #colorLiteral(red: 0.9489366412, green: 0.9490728974, blue: 0.9489069581, alpha: 1)
-      constrainIngredientButton()
-      constrainIngredientTitleLabel()
+      constrainStepTitle()
+      constrainStepNumber()
    }
    //MARK: - Constraints
-   private func constrainIngredientButton(){
+   private func constrainStepNumber(){
       contentView.addSubview(stepNumber)
       stepNumber.translatesAutoresizingMaskIntoConstraints = false
       NSLayoutConstraint.activate([
-         stepNumber.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: 0),
-         stepNumber.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-         stepNumber.heightAnchor.constraint(equalToConstant: 50),
-         stepNumber.widthAnchor.constraint(equalToConstant: 50)
+         stepNumber.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0),
+         stepNumber.trailingAnchor.constraint(equalTo: stepTitle.leadingAnchor, constant: 0),
+         stepNumber.heightAnchor.constraint(equalToConstant: 20),
+         stepNumber.leadingAnchor.constraint(equalTo: contentView.leadingAnchor)
+      
       ])
    }
    
-   private func constrainIngredientTitleLabel(){
-      contentView.addSubview(stepName)
-      stepName.translatesAutoresizingMaskIntoConstraints = false
+   private func constrainStepTitle(){
+      contentView.addSubview(stepTitle)
+      stepTitle.translatesAutoresizingMaskIntoConstraints = false
       NSLayoutConstraint.activate([
-         stepName.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: 0),
-         stepName.leadingAnchor.constraint(equalTo: stepNumber.trailingAnchor, constant: 0),
-         stepName.widthAnchor.constraint(equalToConstant: 300),
-         stepName.heightAnchor.constraint(equalToConstant: 60),
+         stepTitle.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0),
+         stepTitle.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -15),
+         stepTitle.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.85),
+         stepTitle.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0),
       ])
    }
    

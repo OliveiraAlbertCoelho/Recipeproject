@@ -30,6 +30,13 @@ final class BrowseVC: UIViewController {
       searchBar.barTintColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
       return searchBar
    }()
+   lazy var appTitleLabel: UILabel = {
+      let label = UILabel()
+      label.text = "recipe Title"
+      label.textAlignment = .center
+      label.font = UIFont(name: "SUGARCOOKIES", size: 20)
+      return label
+   }()
    lazy var recipeCV: UICollectionView = {
       let layout = UICollectionViewFlowLayout()
       layout.scrollDirection = .vertical
@@ -47,7 +54,7 @@ final class BrowseVC: UIViewController {
    }
    private func setUpViewDesign(){
       self.navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
-      navigationItem.title = "AzureOverall"
+      navigationItem.titleView = appTitleLabel
       view.backgroundColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
    }
    private func getRecipeData(searchInfo: String){

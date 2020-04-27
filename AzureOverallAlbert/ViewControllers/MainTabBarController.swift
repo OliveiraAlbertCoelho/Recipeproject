@@ -12,7 +12,7 @@ class MainTabBarController: UITabBarController {
 
 
     lazy var favoritesVC =  FavoritesVC()
-    lazy var browseVC =  BrowseVC()
+    lazy var browseVC =  UINavigationController(rootViewController: BrowseVC())
     
     override func viewDidLoad() {
         super.viewDidLoad()
