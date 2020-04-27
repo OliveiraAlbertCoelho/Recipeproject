@@ -55,8 +55,8 @@ class RecipeIngredientsCell: UITableViewCell {
       NSLayoutConstraint.activate([
          ingredientTitleLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: 0),
          ingredientTitleLabel.leadingAnchor.constraint(equalTo: addIngredientButton.trailingAnchor, constant: 0),
+         ingredientTitleLabel.widthAnchor.constraint(equalToConstant: 300),
          ingredientTitleLabel.heightAnchor.constraint(equalToConstant: 40),
-         ingredientTitleLabel.widthAnchor.constraint(equalToConstant: 100)
       ])
    }
    

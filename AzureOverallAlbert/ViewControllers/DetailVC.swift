@@ -18,10 +18,11 @@ final class DetailVC: UIViewController {
       setUpConstraints()
       setUpViewObjects()
       view.addGestureRecognizer(swipeRight)
-      
+      self.constrainTableView()
+
       
    }
-   let recipeId = "587000"
+   let recipeId = "324694"
    lazy var swipeRight: UISwipeGestureRecognizer = {
       let swipe = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture(gesture:)))
       swipe.direction = UISwipeGestureRecognizer.Direction.right
@@ -76,6 +77,7 @@ final class DetailVC: UIViewController {
       let layout = UITableView(frame: .zero, style: .grouped)
       layout.register(NutritionInfoCell.self, forCellReuseIdentifier: "nutriCell")
       layout.register(RecipeIngredientsCell.self, forCellReuseIdentifier: "recipIngri")
+      layout.register(InstructionsTableViewCell.self, forCellReuseIdentifier: "instructionCell")
       layout.separatorStyle = UITableViewCell.SeparatorStyle.none
       layout.backgroundColor = #colorLiteral(red: 0.9489366412, green: 0.9490728974, blue: 0.9489069581, alpha: 1)
       layout.delegate = self
@@ -145,15 +147,14 @@ final class DetailVC: UIViewController {
            }
    }
    private func setUpViewObjects(){
-              RecipeInfoFetcher.manager.fetchRecipeInfo(recipeId: recipeId) { (result) in
+      RecipeInfoFetcher.manager.fetchRecipeInfo(recipeId: recipe?.id.description ?? "") { (result) in
                   DispatchQueue.main.async {
                       switch result{
                       case .failure(let error):
                           print(error)
                       case .success(let recipeInfo):
                           self.recipeInfo = recipeInfo
-                          self.constrainTableView()
-                      }
+                    }
                   }
               }
      
@@ -284,8 +285,12 @@ extension DetailVC: UITableViewDelegate, UITableViewDataSource{
       switch section{
       case 0:
          return 1
-      default:
+      case 1:
          return recipeInfo?.extendedIngredients.count ?? 0
+      case 2:
+         return recipeInfo?.analyzedInstructions.first?.steps.count ?? 0
+      default:
+         return 0
       }
    }
    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -293,8 +298,12 @@ extension DetailVC: UITableViewDelegate, UITableViewDataSource{
       switch  section {
       case 0:
          view.headerTitle.text = "Nutrition"
-      default:
+      case 1:
          view.headerTitle.text = "Ingredients"
+      case 2:
+         view.headerTitle.text = "Preparation"
+      default:
+         view.headerTitle.text = ""
       }
       
       return view
@@ -306,7 +315,7 @@ extension DetailVC: UITableViewDelegate, UITableViewDataSource{
       return .leastNormalMagnitude
    }
    func numberOfSections(in tableView: UITableView) -> Int {
-      return 2
+      return 3
    }
    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
       switch indexPath.section{
@@ -316,15 +325,31 @@ extension DetailVC: UITableViewDelegate, UITableViewDataSource{
             cell.nutritionInfo = recipeinf.nutrition.nutrients
          }
          return cell
-      default:
+         
+      case 1:
          guard let cell = tableView.dequeueReusableCell(withIdentifier: "recipIngri", for: indexPath) as? RecipeIngredientsCell else {return UITableViewCell()}
          let data = recipeInfo?.extendedIngredients[indexPath.row]
          cell.ingredientTitleLabel.text = data?.name
          return cell
+         default:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "instructionCell", for: indexPath) as? InstructionsTableViewCell else {return UITableViewCell()}
+            let data = recipeInfo?.analyzedInstructions.first?.steps[indexPath.row]
+            cell.stepNumber.text = data?.number.description
+            cell.stepName.text = data?.step
+            return cell
+         }
       }
-   }
    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-      return 100
+      switch indexPath.section{
+      case 0:
+         return 100
+      case 1:
+         return 50
+      case 2:
+         return 60
+      default:
+         return 0
+      }
    }
    func scrollViewDidScroll(_ scrollView: UIScrollView) {
       let y = 300 - (scrollView.contentOffset.y + 300)

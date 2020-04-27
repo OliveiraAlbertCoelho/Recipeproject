@@ -20,6 +20,15 @@ struct RecipeInfo: Codable {
        return "https://spoonacular.com/recipeImages/\(id)-556x370.jpg"
    }
    let extendedIngredients: [Ingredients]
+   let analyzedInstructions: [AnalyzedInstructions]
+}
+struct AnalyzedInstructions: Codable{
+   let name: String
+   let steps: [Instructions]
+}
+struct Instructions: Codable{
+   let number: Int
+   let step: String
 }
 struct Ingredients: Codable{
    let id: Int

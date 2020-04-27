@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		50151615244517ED0056E933 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50151614244517ED0056E933 /* Secrets.swift */; };
 		503080132455F239005081D0 /* RecipeIngredientsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503080122455F239005081D0 /* RecipeIngredientsCell.swift */; };
+		5030801524564221005081D0 /* InstructionsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5030801424564221005081D0 /* InstructionsTableViewCell.swift */; };
 		50753F19244FCA18004CF49B /* ImageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50753F18244FCA18004CF49B /* ImageHelper.swift */; };
 		508644CF2433E2BD00002984 /* PersistenceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508644CE2433E2BD00002984 /* PersistenceHelper.swift */; };
 		508644D12433E30A00002984 /* RecipePersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508644D02433E30A00002984 /* RecipePersistence.swift */; };
@@ -45,6 +46,7 @@
 /* Begin PBXFileReference section */
 		50151614244517ED0056E933 /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		503080122455F239005081D0 /* RecipeIngredientsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeIngredientsCell.swift; sourceTree = "<group>"; };
+		5030801424564221005081D0 /* InstructionsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionsTableViewCell.swift; sourceTree = "<group>"; };
 		50753F18244FCA18004CF49B /* ImageHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageHelper.swift; sourceTree = "<group>"; };
 		508644CE2433E2BD00002984 /* PersistenceHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistenceHelper.swift; sourceTree = "<group>"; };
 		508644D02433E30A00002984 /* RecipePersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipePersistence.swift; sourceTree = "<group>"; };
@@ -90,6 +92,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		503080162456552A005081D0 /* HeaderViews */ = {
+			isa = PBXGroup;
+			children = (
+				5097C7F22455523F00842D35 /* SectionsHeaderView.swift */,
+			);
+			path = HeaderViews;
+			sourceTree = "<group>";
+		};
 		508644CC2433E28800002984 /* Persistence */ = {
 			isa = PBXGroup;
 			children = (
@@ -176,11 +186,12 @@
 		50ED88D724324D500092C94A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				503080162456552A005081D0 /* HeaderViews */,
 				50ED88D824324D860092C94A /* RecipeCollectionCell.swift */,
 				50F84A412454F2FB0009787A /* NutritionInfoCell.swift */,
 				50A1D16D245519560055FE38 /* NutritionCVC.swift */,
-				5097C7F22455523F00842D35 /* SectionsHeaderView.swift */,
 				503080122455F239005081D0 /* RecipeIngredientsCell.swift */,
+				5030801424564221005081D0 /* InstructionsTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -315,6 +326,7 @@
 				50A1D16E245519560055FE38 /* NutritionCVC.swift in Sources */,
 				503080132455F239005081D0 /* RecipeIngredientsCell.swift in Sources */,
 				5097C7F32455523F00842D35 /* SectionsHeaderView.swift in Sources */,
+				5030801524564221005081D0 /* InstructionsTableViewCell.swift in Sources */,
 				50ED88DC2432515A0092C94A /* NetworkManager.swift in Sources */,
 				50151615244517ED0056E933 /* Secrets.swift in Sources */,
 				508644CF2433E2BD00002984 /* PersistenceHelper.swift in Sources */,
