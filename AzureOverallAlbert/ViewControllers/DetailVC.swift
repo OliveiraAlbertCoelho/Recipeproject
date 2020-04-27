@@ -13,35 +13,10 @@ final class DetailVC: UIViewController {
    //MARK: - Lifecycle
    override func viewDidLoad() {
       super.viewDidLoad()
-      recipeInfoTableView.contentInset = UIEdgeInsets(top: 310, left: 0, bottom: 0, right: 0)
       setUpViewDesign()
       setUpConstraints()
       setUpViewObjects()
-      view.addGestureRecognizer(swipeRight)
-      self.constrainTableView()
-
-      
    }
-   let recipeId = "324694"
-   lazy var swipeRight: UISwipeGestureRecognizer = {
-      let swipe = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture(gesture:)))
-      swipe.direction = UISwipeGestureRecognizer.Direction.right
-      return swipe
-   }()
-   
-   @objc func respondToSwipeGesture(gesture: UIGestureRecognizer) {
-      let transition = CATransition()
-      transition.duration = 0.3
-      transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
-      transition.type = CATransitionType.push
-      transition.subtype = CATransitionSubtype.fromLeft
-      view.window!.layer.add(transition, forKey: nil)
-      dismiss(animated: false, completion: nil)
-   }
-   override func viewWillAppear(_ animated: Bool) {
-      super.viewWillAppear(true)
-   }
-   
    //MARK: - Variables
    var recipeInfo: RecipeInfo?{
       didSet{
@@ -49,9 +24,16 @@ final class DetailVC: UIViewController {
          setUpRecipeView()
       }
    }
+   let recipeId = "324694"
    var recipe: RecipeWrapper?
-   //MARK: - UI Objects
    var headerHeight: CGFloat = 35
+   //MARK: - UI Objects
+   lazy var swipeRight: UISwipeGestureRecognizer = {
+      let swipe = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture(gesture:)))
+      swipe.direction = UISwipeGestureRecognizer.Direction.right
+      return swipe
+   }()
+
    lazy var recipeImageView: UIImageView = {
       let image = UIImageView()
       image.clipsToBounds = true
@@ -131,38 +113,41 @@ final class DetailVC: UIViewController {
    }
    private func setUpRecipeView(){
       recipeName.text = recipeInfo?.title ?? "not found"
-           prepTimeLabel.text = "Prep Time: \(recipeInfo?.readyInMinutes.description ?? "")"
-           servingsLabel.text = "Servings: \(recipeInfo?.servings.description ?? "")"
-           if let recipeUrl = recipeInfo?.recipeUrl{
-               ImageHelper.shared.fetchImage(urlString: recipeUrl) { (result) in
-                   DispatchQueue.main.async {
-                       switch result{
-                       case .failure(let error):
-                           print(error)
-                       case .success(let data):
-                           self.recipeImageView.image = data
-                       }
-                   }
+      prepTimeLabel.text = "Prep Time: \(recipeInfo?.readyInMinutes.description ?? "")"
+      servingsLabel.text = "Servings: \(recipeInfo?.servings.description ?? "")"
+      if let recipeUrl = recipeInfo?.recipeUrl{
+         ImageHelper.shared.fetchImage(urlString: recipeUrl) { (result) in
+            DispatchQueue.main.async {
+               switch result{
+               case .failure(let error):
+                  print(error)
+               case .success(let data):
+                  self.recipeImageView.image = data
                }
-           }
+            }
+         }
+      }
    }
    private func setUpViewObjects(){
       RecipeInfoFetcher.manager.fetchRecipeInfo(recipeId: recipe?.id.description ?? "") { (result) in
-                  DispatchQueue.main.async {
-                      switch result{
-                      case .failure(let error):
-                          print(error)
-                      case .success(let recipeInfo):
-                          self.recipeInfo = recipeInfo
-                    }
-                  }
-              }
-     
+         DispatchQueue.main.async {
+            switch result{
+            case .failure(let error):
+               print(error)
+            case .success(let recipeInfo):
+               self.recipeInfo = recipeInfo
+            }
+         }
+      }
+      
    }
    private func setUpViewDesign(){
+      recipeInfoTableView.contentInset = UIEdgeInsets(top: 310, left: 0, bottom: 0, right: 0)
       view.backgroundColor = #colorLiteral(red: 0.9489366412, green: 0.9490728974, blue: 0.9489069581, alpha: 1)
+      view.addGestureRecognizer(swipeRight)
    }
    private func setUpConstraints(){
+      constrainTableView()
       constrainTopHeaderView()
       constrainBottomHeaderView()
       constrainPrepLabel()
@@ -171,11 +156,25 @@ final class DetailVC: UIViewController {
       constrainRecipeName()
       constrainRecipeImage()
       constrainBackButton()
+      
    }
+   
+   //MARK: - Objc functions
+   @objc func respondToSwipeGesture(gesture: UIGestureRecognizer) {
+      let transition = CATransition()
+      transition.duration = 0.3
+      transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+      transition.type = CATransitionType.push
+      transition.subtype = CATransitionSubtype.fromLeft
+      view.window!.layer.add(transition, forKey: nil)
+      dismiss(animated: false, completion: nil)
+   }
+   
+   
    //MARK: - Constraints
    private func constrainTableView(){
       view.addSubview(recipeInfoTableView)
-      view.sendSubviewToBack(recipeInfoTableView)
+      //      view.sendSubviewToBack(recipeInfoTableView)
       recipeInfoTableView.translatesAutoresizingMaskIntoConstraints = false
       NSLayoutConstraint.activate([
          recipeInfoTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0),
@@ -186,7 +185,7 @@ final class DetailVC: UIViewController {
    }
    private func constrainBackButton(){
       topHeaderView.addSubview(backButton)
-      view.bringSubviewToFront(backButton)
+      //      view.bringSubviewToFront(backButton)
       backButton.translatesAutoresizingMaskIntoConstraints = false
       NSLayoutConstraint.activate([
          backButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
@@ -202,7 +201,7 @@ final class DetailVC: UIViewController {
    }()
    private func constrainTopHeaderView(){
       view.addSubview(topHeaderView)
-      view.bringSubviewToFront(topHeaderView)
+      //      view.bringSubviewToFront(topHeaderView)
       topHeaderView.translatesAutoresizingMaskIntoConstraints = false
       NSLayoutConstraint.activate([
          topHeaderView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -331,14 +330,14 @@ extension DetailVC: UITableViewDelegate, UITableViewDataSource{
          let data = recipeInfo?.extendedIngredients[indexPath.row]
          cell.ingredientTitleLabel.text = data?.name
          return cell
-         default:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "instructionCell", for: indexPath) as? InstructionsTableViewCell else {return UITableViewCell()}
-            let data = recipeInfo?.analyzedInstructions.first?.steps[indexPath.row]
-            cell.stepNumber.text = data?.number.description
-            cell.stepName.text = data?.step
-            return cell
-         }
+      default:
+         guard let cell = tableView.dequeueReusableCell(withIdentifier: "instructionCell", for: indexPath) as? InstructionsTableViewCell else {return UITableViewCell()}
+         let data = recipeInfo?.analyzedInstructions.first?.steps[indexPath.row]
+         cell.stepNumber.text = data?.number.description
+         cell.stepName.text = data?.step
+         return cell
       }
+   }
    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
       switch indexPath.section{
       case 0:

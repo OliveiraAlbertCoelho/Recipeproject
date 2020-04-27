@@ -8,7 +8,7 @@
 
 import UIKit
 //import Kingfisher
-class FavoritesVC: UIViewController {
+final class FavoritesVC: UIViewController {
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -104,6 +104,3 @@ extension FavoritesVC: UICollectionViewDelegate, UICollectionViewDelegateFlowLay
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }}
-
-
-
