@@ -16,7 +16,7 @@ final class BrowseVC: UIViewController {
       setUpView()
       recipeCV.keyboardDismissMode = UIScrollView.KeyboardDismissMode.onDrag
    }
-   
+
    //MARK: - Variables
    var recipes = [RecipeWrapper](){
       didSet{
@@ -97,7 +97,6 @@ extension BrowseVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
       return recipes.count
    }
-   
    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
       guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "recipeCell", for: indexPath) as? RecipeCollectionCell else {return UICollectionViewCell()}
       let data = recipes[indexPath.row]
@@ -125,9 +124,16 @@ extension BrowseVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
       }
    }
    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+      let cells = collectionView.visibleCells as! [RecipeCollectionCell]
+      var cellImage: UIImage?
+      for i in cells{
+         if i.recipeName.text == recipes[indexPath.row].title{
+            cellImage = i.recipeImage.image
+         }
+      }
       let detailVC = DetailVC()
       detailVC.recipe = recipes[indexPath.row]
-     
+      detailVC.recipeImageView.image = cellImage
       navigationController?.pushViewController(detailVC, animated: true)
       
    }

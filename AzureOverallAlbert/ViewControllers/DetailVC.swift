@@ -16,11 +16,7 @@ final class DetailVC: UIViewController {
       setUpViewDesign()
       setUpConstraints()
       setUpViewObjects()
-      recipeInfoTableView.estimatedRowHeight = 80
-      self.navigationController?.navigationBar.isHidden = true
-      
    }
-   var isExpanded = false
    //MARK: - Variables
    var recipeInfo: RecipeInfo?{
       didSet{
@@ -28,6 +24,7 @@ final class DetailVC: UIViewController {
          setUpRecipeView()
       }
    }
+   var isExpanded = false
    let recipeId = "324694"
    var recipe: RecipeWrapper?
    var headerHeight: CGFloat = 35
@@ -123,18 +120,18 @@ final class DetailVC: UIViewController {
       recipeName.text = recipeInfo?.title ?? "not found"
       prepTimeLabel.text = "Prep Time: \(recipeInfo?.readyInMinutes.description ?? "")"
       servingsLabel.text = "Servings: \(recipeInfo?.servings.description ?? "")"
-      if let recipeUrl = recipeInfo?.recipeUrl{
-         ImageHelper.shared.fetchImage(urlString: recipeUrl) { (result) in
-            DispatchQueue.main.async {
-               switch result{
-               case .failure(let error):
-                  print(error)
-               case .success(let data):
-                  self.recipeImageView.image = data
-               }
-            }
-         }
-      }
+//      if let recipeUrl = recipeInfo?.recipeUrl{
+//         ImageHelper.shared.fetchImage(urlString: recipeUrl) { (result) in
+//            DispatchQueue.main.async {
+//               switch result{
+//               case .failure(let error):
+//                  print(error)
+//               case .success(let data):
+//                  self.recipeImageView.image = data
+//               }
+//            }
+//         }
+//      }
    }
    private func setUpViewObjects(){
       RecipeInfoFetcher.manager.fetchRecipeInfo(recipeId: recipe?.id.description ?? "") { (result) in
@@ -147,9 +144,10 @@ final class DetailVC: UIViewController {
             }
          }
       }
-      
    }
    private func setUpViewDesign(){
+      self.navigationController?.navigationBar.isHidden = true
+      recipeInfoTableView.estimatedRowHeight = 80
       recipeInfoTableView.contentInset = UIEdgeInsets(top: 310, left: 0, bottom: 0, right: 0)
       view.backgroundColor = #colorLiteral(red: 0.9489366412, green: 0.9490728974, blue: 0.9489069581, alpha: 1)
       view.addGestureRecognizer(swipeRight)
@@ -164,7 +162,6 @@ final class DetailVC: UIViewController {
       constrainRecipeName()
       constrainRecipeImage()
       constrainBackButton()
-      
    }
    
    //MARK: - Objc functions
@@ -283,8 +280,6 @@ final class DetailVC: UIViewController {
          prepTimeLabel.centerXAnchor.constraint(equalTo: bottomHeaderView.centerXAnchor, constant: 40),
       ])
    }
-   
-   
 }
 //MARK: - UITableViewDelegates
 extension DetailVC: UITableViewDelegate, UITableViewDataSource{
@@ -310,10 +305,8 @@ extension DetailVC: UITableViewDelegate, UITableViewDataSource{
          view.expandableSectionButton.isHidden = false
       case 1:
          view.headerTitle.text = "Ingredients"
-      case 2:
-         view.headerTitle.text = "Preparation"
       default:
-         view.headerTitle.text = ""
+         view.headerTitle.text = "Preparation"
       }
       return view
    }

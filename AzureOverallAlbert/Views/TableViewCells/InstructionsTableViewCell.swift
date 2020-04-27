@@ -29,7 +29,6 @@ class InstructionsTableViewCell: UITableViewCell {
    lazy var stepTitle: UILabel = {
       let label = UILabel()
       label.numberOfLines = 0
-      label.backgroundColor = .yellow
       return label
    }()
    //MARK: - Regular Functions
@@ -47,7 +46,7 @@ class InstructionsTableViewCell: UITableViewCell {
          stepNumber.trailingAnchor.constraint(equalTo: stepTitle.leadingAnchor, constant: 0),
          stepNumber.heightAnchor.constraint(equalToConstant: 20),
          stepNumber.leadingAnchor.constraint(equalTo: contentView.leadingAnchor)
-      
+         
       ])
    }
    
