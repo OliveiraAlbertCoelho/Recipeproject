@@ -35,6 +35,10 @@ struct Ingredients: Codable{
    let image: String
    let name: String
    let amount: Double
+   let unit: String
+   var ingredientAmount: String {
+      return "\(name.capitalized) \(amount) \(unit.capitalized)"
+   }
 }
 struct NutrientsWrapper: Codable {
     let nutrients: [Nutrients]

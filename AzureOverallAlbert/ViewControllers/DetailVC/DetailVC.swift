@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftUI
+import Lottie
 
 final class DetailVC: UIViewController {
    //MARK: - Lifecycle
@@ -16,12 +17,29 @@ final class DetailVC: UIViewController {
       setUpViewDesign()
       setUpConstraints()
       fetchRecipeInfo()
+      
    }
    //MARK: - Variables
    var recipeInfo: RecipeInfo?{
       didSet{
          recipeInfoTableView.reloadData()
          setUpRecipeView()
+      }
+   }
+   
+   var check = false
+   
+   
+   
+   @objc func favoritePressed(){
+      if check{
+         check = false
+         lottieView.play(fromProgress: lottieView.currentProgress, toProgress: 0, loopMode: nil, completion: nil)
+         
+      }else {
+         check = true
+         lottieView.play()
+         
       }
    }
    var isExpanded = false
@@ -33,6 +51,19 @@ final class DetailVC: UIViewController {
       let swipe = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture(gesture:)))
       swipe.direction = UISwipeGestureRecognizer.Direction.right
       return swipe
+   }()
+   lazy var lottieView: AnimationView = {
+      let lottieview = AnimationView()
+      lottieview.animation = Animation.named("heartAction")
+      lottieview.animationSpeed = 2
+      lottieview.backgroundColor = .yellow
+      return lottieview
+   }()
+   lazy var favoriteButton: UIButton = {
+      let button = UIButton()
+      button.addTarget(self, action: #selector(favoritePressed), for: .touchUpInside)
+      button.clipsToBounds = true
+      return button
    }()
    
    lazy var recipeImageView: UIImageView = {
@@ -51,11 +82,7 @@ final class DetailVC: UIViewController {
       label.textColor = .black
       return label
    }()
-   lazy var favoriteButton: UIButton = {
-      let button = UIButton()
-      button.setImage(UIImage(systemName: "heart"), for: .normal)
-      return button
-   }()
+   
    lazy var recipeInfoTableView: UITableView = {
       let layout = UITableView(frame: .zero, style: .grouped)
       layout.register(NutritionInfoCell.self, forCellReuseIdentifier: "nutritionCell")
@@ -98,7 +125,7 @@ final class DetailVC: UIViewController {
    }()
    lazy var backButton: UIButton = {
       let button = UIButton()
-      button.setImage(UIImage(systemName: "arrowshape.turn.up.left.fill"), for: .normal)
+      let image = UIImage(named: "leftArrow")
       button.tintColor = .black
       button.addTarget(self, action: #selector(goBackAction), for: .touchUpInside)
       button.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.25).cgColor

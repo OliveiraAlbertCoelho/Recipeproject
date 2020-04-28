@@ -167,7 +167,9 @@ extension BrowseVC: UITabBarControllerDelegate {
    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
       let tabBarIndex = tabBarController.selectedIndex
       if tabBarIndex == 0  && isVC{
-         recipeSearchBar.becomeFirstResponder()
+         let indexPath = IndexPath(row: 0, section: 0)
+         self.recipeCV.scrollToItem(at: indexPath, at: .top, animated: true)
+         //         recipeSearchBar.becomeFirstResponder()
       }
    }
    

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -11,6 +11,7 @@
 		503080132455F239005081D0 /* RecipeIngredientsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503080122455F239005081D0 /* RecipeIngredientsCell.swift */; };
 		5030801524564221005081D0 /* InstructionsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5030801424564221005081D0 /* InstructionsTableViewCell.swift */; };
 		50753F19244FCA18004CF49B /* ImageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50753F18244FCA18004CF49B /* ImageHelper.swift */; };
+		50782A3E2458BB5B00290B78 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 50782A3D2458BB5B00290B78 /* Lottie */; };
 		5085A2012457D10200588745 /* DetailVCConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5085A2002457D10200588745 /* DetailVCConstraints.swift */; };
 		508644CF2433E2BD00002984 /* PersistenceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508644CE2433E2BD00002984 /* PersistenceHelper.swift */; };
 		508644D12433E30A00002984 /* RecipePersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508644D02433E30A00002984 /* RecipePersistence.swift */; };
@@ -24,6 +25,7 @@
 		50D7B556243246E1007C4866 /* DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D7B555243246E1007C4866 /* DetailVC.swift */; };
 		50D7B558243246EA007C4866 /* FavoritesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D7B557243246EA007C4866 /* FavoritesVC.swift */; };
 		50D7B55B24324825007C4866 /* BrowseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D7B55A24324825007C4866 /* BrowseVC.swift */; };
+		50E94E4E2458A9D100C2F1DE /* heartAction.json in Resources */ = {isa = PBXBuildFile; fileRef = 50E94E4D2458A9D100C2F1DE /* heartAction.json */; };
 		50ED88D624324B6E0092C94A /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50ED88D524324B6E0092C94A /* MainTabBarController.swift */; };
 		50ED88D924324D860092C94A /* RecipeCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50ED88D824324D860092C94A /* RecipeCollectionCell.swift */; };
 		50ED88DC2432515A0092C94A /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50ED88DB2432515A0092C94A /* NetworkManager.swift */; };
@@ -66,6 +68,7 @@
 		50D7B555243246E1007C4866 /* DetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVC.swift; sourceTree = "<group>"; };
 		50D7B557243246EA007C4866 /* FavoritesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesVC.swift; sourceTree = "<group>"; };
 		50D7B55A24324825007C4866 /* BrowseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseVC.swift; sourceTree = "<group>"; };
+		50E94E4D2458A9D100C2F1DE /* heartAction.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = heartAction.json; sourceTree = "<group>"; };
 		50ED88D524324B6E0092C94A /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		50ED88D824324D860092C94A /* RecipeCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeCollectionCell.swift; sourceTree = "<group>"; };
 		50ED88DB2432515A0092C94A /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
@@ -81,6 +84,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				50782A3E2458BB5B00290B78 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -172,6 +176,7 @@
 		50D7B52D24324271007C4866 /* AzureOverallAlbert */ = {
 			isa = PBXGroup;
 			children = (
+				50E94E4D2458A9D100C2F1DE /* heartAction.json */,
 				50ED88DF243258270092C94A /* Models */,
 				50ED88DA243251480092C94A /* Helpers */,
 				50ED88D724324D500092C94A /* Views */,
@@ -257,6 +262,9 @@
 			dependencies = (
 			);
 			name = AzureOverallAlbert;
+			packageProductDependencies = (
+				50782A3D2458BB5B00290B78 /* Lottie */,
+			);
 			productName = AzureOverallAlbert;
 			productReference = 50D7B52B24324271007C4866 /* AzureOverallAlbert.app */;
 			productType = "com.apple.product-type.application";
@@ -307,6 +315,9 @@
 				Base,
 			);
 			mainGroup = 50D7B52224324271007C4866;
+			packageReferences = (
+				50782A3C2458BB5B00290B78 /* XCRemoteSwiftPackageReference "lottie-ios" */,
+			);
 			productRefGroup = 50D7B52C24324271007C4866 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -323,6 +334,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				50D7B53B24324272007C4866 /* LaunchScreen.storyboard in Resources */,
+				50E94E4E2458A9D100C2F1DE /* heartAction.json in Resources */,
 				50D7B53824324272007C4866 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -621,6 +633,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		50782A3C2458BB5B00290B78 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.1.8;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		50782A3D2458BB5B00290B78 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 50782A3C2458BB5B00290B78 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 50D7B52324324271007C4866 /* Project object */;
 }

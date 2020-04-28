@@ -19,7 +19,7 @@ struct RecipeWrapper: Codable {
     let image: String
     var recipeUrl: String {
         return "https://spoonacular.com/recipeImages/\(id)-556x370.jpg"
-    }
+   }
     var itemsInCart: Int?
     var persistedImage: Data?
 }
