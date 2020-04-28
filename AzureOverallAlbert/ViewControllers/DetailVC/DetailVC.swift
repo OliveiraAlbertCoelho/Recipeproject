@@ -227,6 +227,7 @@ extension DetailVC: UITableViewDelegate, UITableViewDataSource{
       case 1:
          return 50
       case 2:
+        
          return UITableView.automaticDimension
       default:
          return 0
