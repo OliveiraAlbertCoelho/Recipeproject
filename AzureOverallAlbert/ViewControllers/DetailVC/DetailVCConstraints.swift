@@ -12,7 +12,6 @@ extension DetailVC{
    //MARK: - Constraints
     func constrainTableView(){
       view.addSubview(recipeInfoTableView)
-      //      view.sendSubviewToBack(recipeInfoTableView)
       recipeInfoTableView.translatesAutoresizingMaskIntoConstraints = false
       NSLayoutConstraint.activate([
          recipeInfoTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0),
@@ -23,20 +22,18 @@ extension DetailVC{
    }
     func constrainBackButton(){
       topHeaderView.addSubview(backButton)
-      //      view.bringSubviewToFront(backButton)
       backButton.translatesAutoresizingMaskIntoConstraints = false
       NSLayoutConstraint.activate([
          backButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-         backButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
-         backButton.heightAnchor.constraint(equalToConstant: 50),
-         backButton.widthAnchor.constraint(equalToConstant: 50)
+         backButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 40),
+         backButton.heightAnchor.constraint(equalToConstant: 30),
+         backButton.widthAnchor.constraint(equalToConstant: 30)
          
       ])
    }
    
     func constrainTopHeaderView(){
       view.addSubview(topHeaderView)
-      //      view.bringSubviewToFront(topHeaderView)
       topHeaderView.translatesAutoresizingMaskIntoConstraints = false
       NSLayoutConstraint.activate([
          topHeaderView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -110,5 +107,29 @@ extension DetailVC{
          prepTimeLabel.centerXAnchor.constraint(equalTo: bottomHeaderView.centerXAnchor, constant: 40),
       ])
    }
+    func constrainLottieView(){
+        view.addSubview(lottieView)
+        view.bringSubviewToFront(lottieView)
+        lottieView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+              lottieView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
+              lottieView.topAnchor.constraint(equalTo: view.topAnchor, constant: 40),
+              lottieView.heightAnchor.constraint(equalToConstant: 60),
+              lottieView.widthAnchor.constraint(equalToConstant: 60)
+           ])
+        
+     }
+      func constrainButtonFavorite(){
+        lottieView.addSubview(favoriteButton)
+         lottieView.bringSubviewToFront(favoriteButton)
+        favoriteButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+           favoriteButton.trailingAnchor.constraint(equalTo: lottieView.trailingAnchor, constant: 0),
+           favoriteButton.topAnchor.constraint(equalTo: lottieView.topAnchor, constant: 0),
+           favoriteButton.bottomAnchor.constraint(equalTo: lottieView.bottomAnchor),
+           favoriteButton.leadingAnchor.constraint(equalTo: lottieView.leadingAnchor),
+        
+        ])
+     }
 }
 

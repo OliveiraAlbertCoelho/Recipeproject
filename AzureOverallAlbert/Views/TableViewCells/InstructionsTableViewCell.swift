@@ -29,7 +29,7 @@ class InstructionsTableViewCell: UITableViewCell {
    lazy var stepTitle: UILabel = {
       let label = UILabel()
       label.numberOfLines = 0
-      label.textAlignment = .center
+      label.textAlignment = .left
       return label
    }()
    //MARK: - Regular Functions

@@ -101,4 +101,5 @@ extension FavoritesVC: UICollectionViewDelegate, UICollectionViewDelegateFlowLay
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
-    }}
+    }
+}

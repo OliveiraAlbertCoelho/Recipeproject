@@ -133,6 +133,10 @@ final class DetailVC: UIViewController {
       button.layer.shadowOpacity = 1.0
       button.layer.shadowRadius = 10.0
       button.layer.masksToBounds = false
+      button.backgroundColor = .red
+      let tintedImage = image?.withRenderingMode(.alwaysTemplate)
+      button.setImage(tintedImage, for: .normal)
+      button.tintColor = .white
       return button
    }()
    lazy var recipeHeaderHeight: NSLayoutConstraint = {
@@ -179,6 +183,8 @@ final class DetailVC: UIViewController {
       constrainRecipeName()
       constrainRecipeImage()
       constrainBackButton()
+      constrainLottieView()
+      constrainButtonFavorite()
    }
    
    //MARK: - Objc functions
@@ -236,7 +242,7 @@ extension DetailVC: UITableViewDelegate, UITableViewDataSource{
       case 1:
          guard let cell = tableView.dequeueReusableCell(withIdentifier: "ingredientcell", for: indexPath) as? RecipeIngredientsCell else {return UITableViewCell()}
          let data = recipeInfo?.extendedIngredients[indexPath.row]
-         cell.ingredientTitleLabel.text = data?.name
+         cell.ingredientTitleLabel.text = data?.ingredientAmount
          return cell
       default:
          guard let cell = tableView.dequeueReusableCell(withIdentifier: "instructionCell", for: indexPath) as? InstructionsTableViewCell else {return UITableViewCell()}
@@ -254,7 +260,7 @@ extension DetailVC: UITableViewDelegate, UITableViewDataSource{
       case 1:
          return 50
       case 2:
-        
+         
          return UITableView.automaticDimension
       default:
          return 0
