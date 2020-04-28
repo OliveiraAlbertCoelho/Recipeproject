@@ -11,6 +11,7 @@
 		503080132455F239005081D0 /* RecipeIngredientsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503080122455F239005081D0 /* RecipeIngredientsCell.swift */; };
 		5030801524564221005081D0 /* InstructionsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5030801424564221005081D0 /* InstructionsTableViewCell.swift */; };
 		50753F19244FCA18004CF49B /* ImageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50753F18244FCA18004CF49B /* ImageHelper.swift */; };
+		5085A2012457D10200588745 /* DetailVCConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5085A2002457D10200588745 /* DetailVCConstraints.swift */; };
 		508644CF2433E2BD00002984 /* PersistenceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508644CE2433E2BD00002984 /* PersistenceHelper.swift */; };
 		508644D12433E30A00002984 /* RecipePersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508644D02433E30A00002984 /* RecipePersistence.swift */; };
 		5097C7F32455523F00842D35 /* SectionsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5097C7F22455523F00842D35 /* SectionsHeaderView.swift */; };
@@ -48,6 +49,7 @@
 		503080122455F239005081D0 /* RecipeIngredientsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeIngredientsCell.swift; sourceTree = "<group>"; };
 		5030801424564221005081D0 /* InstructionsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionsTableViewCell.swift; sourceTree = "<group>"; };
 		50753F18244FCA18004CF49B /* ImageHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageHelper.swift; sourceTree = "<group>"; };
+		5085A2002457D10200588745 /* DetailVCConstraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVCConstraints.swift; sourceTree = "<group>"; };
 		508644CE2433E2BD00002984 /* PersistenceHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistenceHelper.swift; sourceTree = "<group>"; };
 		508644D02433E30A00002984 /* RecipePersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipePersistence.swift; sourceTree = "<group>"; };
 		5097C7F22455523F00842D35 /* SectionsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionsHeaderView.swift; sourceTree = "<group>"; };
@@ -119,6 +121,15 @@
 			path = HeaderViews;
 			sourceTree = "<group>";
 		};
+		5085A1FF2457D0DF00588745 /* DetailVC */ = {
+			isa = PBXGroup;
+			children = (
+				50D7B555243246E1007C4866 /* DetailVC.swift */,
+				5085A2002457D10200588745 /* DetailVCConstraints.swift */,
+			);
+			path = DetailVC;
+			sourceTree = "<group>";
+		};
 		508644CC2433E28800002984 /* Persistence */ = {
 			isa = PBXGroup;
 			children = (
@@ -186,7 +197,7 @@
 		50D7B554243246C4007C4866 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				50D7B555243246E1007C4866 /* DetailVC.swift */,
+				5085A1FF2457D0DF00588745 /* DetailVC */,
 				50D7B557243246EA007C4866 /* FavoritesVC.swift */,
 				50D7B55A24324825007C4866 /* BrowseVC.swift */,
 				50ED88D524324B6E0092C94A /* MainTabBarController.swift */,
@@ -330,6 +341,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5085A2012457D10200588745 /* DetailVCConstraints.swift in Sources */,
 				50D7B556243246E1007C4866 /* DetailVC.swift in Sources */,
 				508644D12433E30A00002984 /* RecipePersistence.swift in Sources */,
 				50ED88E1243258390092C94A /* Recipes.swift in Sources */,

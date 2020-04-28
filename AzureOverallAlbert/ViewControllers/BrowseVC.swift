@@ -15,8 +15,10 @@ final class BrowseVC: UIViewController {
       getRecipeData(searchInfo: "pizza")
       setUpView()
       recipeCV.keyboardDismissMode = UIScrollView.KeyboardDismissMode.onDrag
+      self.tabBarController?.delegate = self
    }
-
+   
+   
    //MARK: - Variables
    var recipes = [RecipeWrapper](){
       didSet{
@@ -91,6 +93,7 @@ final class BrowseVC: UIViewController {
          recipeCV.bottomAnchor.constraint(equalToSystemSpacingBelow: view.safeAreaLayoutGuide.bottomAnchor, multiplier: 0)
       ])
    }
+   
 }
 //MARK: - UICollectionView
 extension BrowseVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
@@ -143,8 +146,8 @@ extension BrowseVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
       return 0
    }
-   
 }
+
 //MARK: - UISearchBarDelegate
 extension BrowseVC: UISearchBarDelegate{
    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String){
@@ -153,6 +156,16 @@ extension BrowseVC: UISearchBarDelegate{
    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
       searchBar.resignFirstResponder()
    }
+}
+//MARK: - UITabBarControllerDelegate
+extension BrowseVC: UITabBarControllerDelegate {
+   func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+      let tabBarIndex = tabBarController.selectedIndex
+      if tabBarIndex == 0 {
+         recipeSearchBar.becomeFirstResponder()
+      }
+   }
+   
 }
 #if DEBUG
 extension BrowseVC: UIViewControllerRepresentable {

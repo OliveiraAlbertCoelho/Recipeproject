@@ -15,7 +15,7 @@ final class DetailVC: UIViewController {
       super.viewDidLoad()
       setUpViewDesign()
       setUpConstraints()
-      setUpViewObjects()
+      fetchRecipeInfo()
    }
    //MARK: - Variables
    var recipeInfo: RecipeInfo?{
@@ -58,8 +58,8 @@ final class DetailVC: UIViewController {
    }()
    lazy var recipeInfoTableView: UITableView = {
       let layout = UITableView(frame: .zero, style: .grouped)
-      layout.register(NutritionInfoCell.self, forCellReuseIdentifier: "nutriCell")
-      layout.register(RecipeIngredientsCell.self, forCellReuseIdentifier: "recipIngri")
+      layout.register(NutritionInfoCell.self, forCellReuseIdentifier: "nutritionCell")
+      layout.register(RecipeIngredientsCell.self, forCellReuseIdentifier: "ingredientcell")
       layout.register(InstructionsTableViewCell.self, forCellReuseIdentifier: "instructionCell")
       layout.separatorStyle = UITableViewCell.SeparatorStyle.none
       layout.backgroundColor = #colorLiteral(red: 0.9489366412, green: 0.9490728974, blue: 0.9489069581, alpha: 1)
@@ -107,11 +107,12 @@ final class DetailVC: UIViewController {
       button.layer.masksToBounds = false
       return button
    }()
+   lazy var recipeHeaderHeight: NSLayoutConstraint = {
+      self.topHeaderView.heightAnchor.constraint(equalToConstant: 310)
+   }()
    
    //MARK: - Regular Functions
-   @objc private func goBackAction(){
-      self.navigationController?.popViewController(animated: true)
-   }
+   
    @objc private func expandSection() {
       isExpanded = !isExpanded
       isExpanded ?  recipeInfoTableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .fade) : recipeInfoTableView.deleteRows(at: [IndexPath(row: 0, section: 0)], with: .fade)
@@ -120,20 +121,8 @@ final class DetailVC: UIViewController {
       recipeName.text = recipeInfo?.title ?? "not found"
       prepTimeLabel.text = "Prep Time: \(recipeInfo?.readyInMinutes.description ?? "")"
       servingsLabel.text = "Servings: \(recipeInfo?.servings.description ?? "")"
-//      if let recipeUrl = recipeInfo?.recipeUrl{
-//         ImageHelper.shared.fetchImage(urlString: recipeUrl) { (result) in
-//            DispatchQueue.main.async {
-//               switch result{
-//               case .failure(let error):
-//                  print(error)
-//               case .success(let data):
-//                  self.recipeImageView.image = data
-//               }
-//            }
-//         }
-//      }
    }
-   private func setUpViewObjects(){
+   private func fetchRecipeInfo(){
       RecipeInfoFetcher.manager.fetchRecipeInfo(recipeId: recipe?.id.description ?? "") { (result) in
          DispatchQueue.main.async {
             switch result{
@@ -174,111 +163,8 @@ final class DetailVC: UIViewController {
       view.window!.layer.add(transition, forKey: nil)
       navigationController?.popViewController(animated: false)
    }
-   
-   
-   //MARK: - Constraints
-   private func constrainTableView(){
-      view.addSubview(recipeInfoTableView)
-      //      view.sendSubviewToBack(recipeInfoTableView)
-      recipeInfoTableView.translatesAutoresizingMaskIntoConstraints = false
-      NSLayoutConstraint.activate([
-         recipeInfoTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0),
-         recipeInfoTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
-         recipeInfoTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
-         recipeInfoTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-      ])
-   }
-   private func constrainBackButton(){
-      topHeaderView.addSubview(backButton)
-      //      view.bringSubviewToFront(backButton)
-      backButton.translatesAutoresizingMaskIntoConstraints = false
-      NSLayoutConstraint.activate([
-         backButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-         backButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
-         backButton.heightAnchor.constraint(equalToConstant: 50),
-         backButton.widthAnchor.constraint(equalToConstant: 50)
-         
-      ])
-   }
-   
-   lazy var recipeHeaderHeight: NSLayoutConstraint = {
-      self.topHeaderView.heightAnchor.constraint(equalToConstant: 310)
-   }()
-   private func constrainTopHeaderView(){
-      view.addSubview(topHeaderView)
-      //      view.bringSubviewToFront(topHeaderView)
-      topHeaderView.translatesAutoresizingMaskIntoConstraints = false
-      NSLayoutConstraint.activate([
-         topHeaderView.topAnchor.constraint(equalTo: view.topAnchor),
-         topHeaderView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
-         topHeaderView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
-         recipeHeaderHeight
-      ])
-   }
-   
-   private func constrainRecipeImage(){
-      topHeaderView.addSubview(recipeImageView)
-      recipeImageView.translatesAutoresizingMaskIntoConstraints = false
-      NSLayoutConstraint.activate([
-         recipeImageView.topAnchor.constraint(equalTo: topHeaderView.topAnchor, constant: 0),
-         recipeImageView.bottomAnchor.constraint(equalTo: bottomHeaderView.topAnchor),
-         recipeImageView.leadingAnchor.constraint(equalTo: topHeaderView.leadingAnchor, constant: 0),
-         recipeImageView.trailingAnchor.constraint(equalTo: topHeaderView.trailingAnchor, constant: 0),
-         
-      ])
-   }
-   private func constrainBottomHeaderView(){
-      topHeaderView.addSubview(bottomHeaderView)
-      bottomHeaderView.translatesAutoresizingMaskIntoConstraints = false
-      NSLayoutConstraint.activate([
-         bottomHeaderView.heightAnchor.constraint(equalToConstant: 70),
-         bottomHeaderView.leadingAnchor.constraint(equalTo: topHeaderView.leadingAnchor, constant: 0),
-         bottomHeaderView.trailingAnchor.constraint(equalTo: topHeaderView.trailingAnchor, constant: 0),
-         bottomHeaderView.bottomAnchor.constraint(equalTo: topHeaderView.bottomAnchor, constant: 0)
-         
-      ])
-   }
-   
-   private func constrainRecipeName(){
-      bottomHeaderView.addSubview(recipeName)
-      recipeName.translatesAutoresizingMaskIntoConstraints = false
-      NSLayoutConstraint.activate([
-         recipeName.bottomAnchor.constraint(equalTo: lineSeparator.topAnchor, constant: -3),
-         recipeName.centerXAnchor.constraint(equalTo: topHeaderView.centerXAnchor, constant: 0),
-         recipeName.heightAnchor.constraint(equalToConstant: 40),
-         recipeName.widthAnchor.constraint(equalTo: bottomHeaderView.widthAnchor, multiplier: 0.5)
-         
-      ])
-   }
-   private func constrainBottomLine(){
-      bottomHeaderView.addSubview(lineSeparator)
-      lineSeparator.translatesAutoresizingMaskIntoConstraints = false
-      NSLayoutConstraint.activate([
-         lineSeparator.bottomAnchor.constraint(equalTo: servingsLabel.topAnchor, constant: -2),
-         lineSeparator.widthAnchor.constraint(equalTo: bottomHeaderView.widthAnchor, multiplier: 0.5),
-         lineSeparator.heightAnchor.constraint(equalToConstant: 1),
-         lineSeparator.centerXAnchor.constraint(equalTo: bottomHeaderView.centerXAnchor, constant: 0),
-      ])
-   }
-   private func constrainServingSizeLabel(){
-      bottomHeaderView.addSubview(servingsLabel)
-      servingsLabel.translatesAutoresizingMaskIntoConstraints = false
-      NSLayoutConstraint.activate([
-         servingsLabel.bottomAnchor.constraint(equalTo: bottomHeaderView.bottomAnchor, constant: -8),
-         servingsLabel.widthAnchor.constraint(equalTo: bottomHeaderView.widthAnchor, multiplier: 0.3),
-         servingsLabel.heightAnchor.constraint(equalToConstant: 15),
-         servingsLabel.centerXAnchor.constraint(equalTo: bottomHeaderView.centerXAnchor, constant: -40),
-      ])
-   }
-   private func constrainPrepLabel(){
-      bottomHeaderView.addSubview(prepTimeLabel)
-      prepTimeLabel.translatesAutoresizingMaskIntoConstraints = false
-      NSLayoutConstraint.activate([
-         prepTimeLabel.bottomAnchor.constraint(equalTo: bottomHeaderView.bottomAnchor, constant: -8),
-         prepTimeLabel.widthAnchor.constraint(equalTo: bottomHeaderView.widthAnchor, multiplier: 0.3),
-         prepTimeLabel.heightAnchor.constraint(equalToConstant: 15),
-         prepTimeLabel.centerXAnchor.constraint(equalTo: bottomHeaderView.centerXAnchor, constant: 40),
-      ])
+   @objc private func goBackAction(){
+      self.navigationController?.popViewController(animated: true)
    }
 }
 //MARK: - UITableViewDelegates
@@ -310,18 +196,17 @@ extension DetailVC: UITableViewDelegate, UITableViewDataSource{
       }
       return view
    }
-   
    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
       switch indexPath.section{
       case 0:
-         guard let cell = tableView.dequeueReusableCell(withIdentifier: "nutriCell", for: indexPath) as? NutritionInfoCell else { return UITableViewCell() }
+         guard let cell = tableView.dequeueReusableCell(withIdentifier: "nutritionCell", for: indexPath) as? NutritionInfoCell else { return UITableViewCell() }
          if let recipeinf = recipeInfo{
             cell.nutritionInfo = recipeinf.nutrition.nutrients
          }
          return cell
          
       case 1:
-         guard let cell = tableView.dequeueReusableCell(withIdentifier: "recipIngri", for: indexPath) as? RecipeIngredientsCell else {return UITableViewCell()}
+         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ingredientcell", for: indexPath) as? RecipeIngredientsCell else {return UITableViewCell()}
          let data = recipeInfo?.extendedIngredients[indexPath.row]
          cell.ingredientTitleLabel.text = data?.name
          return cell

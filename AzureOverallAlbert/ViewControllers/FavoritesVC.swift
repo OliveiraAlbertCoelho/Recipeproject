@@ -25,8 +25,6 @@ final class FavoritesVC: UIViewController {
             favoritesCV.reloadData()
         }
     }
-    
-    
     //MARK: - UI Objects
     lazy var favoritesCV: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -94,8 +92,8 @@ extension FavoritesVC: UICollectionViewDelegate, UICollectionViewDelegateFlowLay
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let detailVC = DetailVC()
         detailVC.recipe = recipes[indexPath.row]
-    detailVC.modalPresentationStyle = .fullScreen 
-        self.present(detailVC, animated: true, completion: nil)
+        detailVC.modalPresentationStyle = .fullScreen
+     navigationController?.pushViewController(detailVC, animated: true)
 
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
