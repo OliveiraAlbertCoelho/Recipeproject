@@ -32,6 +32,7 @@ class RecipeCollectionCell: UICollectionViewCell {
       let image = UIImageView()
       image.contentMode = .scaleAspectFill
       image.alpha = 0.8
+      image.clipsToBounds = true
       return image
    }()
    lazy var recipeName: UILabel = {
@@ -78,7 +79,7 @@ class RecipeCollectionCell: UICollectionViewCell {
    }
    
    private func setUpViewConstraints(){
-      constrainImageView()
+      constrainParallaxContainerView()
       constrainRecipeImage()
       constrainTimePrepLabel()
       constrainNumServingsLabel()
@@ -99,7 +100,7 @@ class RecipeCollectionCell: UICollectionViewCell {
       self.recipeImage.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor)
    }()
    
-   private func constrainImageView(){
+   private func constrainParallaxContainerView(){
       contentView.addSubview(parallaxContainerView)
       parallaxContainerView.translatesAutoresizingMaskIntoConstraints = false
       NSLayoutConstraint.activate([

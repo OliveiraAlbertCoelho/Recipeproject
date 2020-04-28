@@ -17,8 +17,13 @@ final class BrowseVC: UIViewController {
       recipeCV.keyboardDismissMode = UIScrollView.KeyboardDismissMode.onDrag
       self.tabBarController?.delegate = self
    }
-   
-   
+   override func viewDidAppear(_ animated: Bool) {
+      isVC = true
+   }
+   override func viewWillDisappear(_ animated: Bool) {
+      isVC = false
+   }
+   private var isVC = false
    //MARK: - Variables
    var recipes = [RecipeWrapper](){
       didSet{
@@ -122,7 +127,7 @@ extension BrowseVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
    func scrollViewDidScroll(_ scrollView: UIScrollView) {
       let cells = recipeCV.visibleCells as! [RecipeCollectionCell]
       let bonds = recipeCV.bounds
-      for cell in cells {
+      cells.forEach { (cell) in
          cell.updateParallaxOffset(CollectionViewBonds: bonds)
       }
    }
@@ -161,7 +166,7 @@ extension BrowseVC: UISearchBarDelegate{
 extension BrowseVC: UITabBarControllerDelegate {
    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
       let tabBarIndex = tabBarController.selectedIndex
-      if tabBarIndex == 0 {
+      if tabBarIndex == 0  && isVC{
          recipeSearchBar.becomeFirstResponder()
       }
    }
