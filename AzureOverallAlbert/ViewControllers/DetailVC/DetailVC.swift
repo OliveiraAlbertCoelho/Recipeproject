@@ -56,13 +56,17 @@ final class DetailVC: UIViewController {
       let lottieview = AnimationView()
       lottieview.animation = Animation.named("heartAction")
       lottieview.animationSpeed = 2
-      lottieview.backgroundColor = .yellow
       return lottieview
    }()
    lazy var favoriteButton: UIButton = {
       let button = UIButton()
       button.addTarget(self, action: #selector(favoritePressed), for: .touchUpInside)
       button.clipsToBounds = true
+      button.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.25).cgColor
+      button.layer.shadowOffset = CGSize(width: 0, height: 3)
+      button.layer.shadowOpacity = 1.0
+      button.layer.shadowRadius = 10.0
+      button.layer.masksToBounds = false
       return button
    }()
    
@@ -133,7 +137,6 @@ final class DetailVC: UIViewController {
       button.layer.shadowOpacity = 1.0
       button.layer.shadowRadius = 10.0
       button.layer.masksToBounds = false
-      button.backgroundColor = .red
       let tintedImage = image?.withRenderingMode(.alwaysTemplate)
       button.setImage(tintedImage, for: .normal)
       button.tintColor = .white

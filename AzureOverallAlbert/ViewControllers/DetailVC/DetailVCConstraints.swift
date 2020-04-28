@@ -113,11 +113,10 @@ extension DetailVC{
         lottieView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
               lottieView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
-              lottieView.topAnchor.constraint(equalTo: view.topAnchor, constant: 40),
+              lottieView.topAnchor.constraint(equalTo: view.topAnchor, constant: 28),
               lottieView.heightAnchor.constraint(equalToConstant: 60),
               lottieView.widthAnchor.constraint(equalToConstant: 60)
            ])
-        
      }
       func constrainButtonFavorite(){
         lottieView.addSubview(favoriteButton)
