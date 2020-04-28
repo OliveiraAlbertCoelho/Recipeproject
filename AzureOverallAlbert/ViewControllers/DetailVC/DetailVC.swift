@@ -61,6 +61,7 @@ final class DetailVC: UIViewController {
       layout.register(NutritionInfoCell.self, forCellReuseIdentifier: "nutritionCell")
       layout.register(RecipeIngredientsCell.self, forCellReuseIdentifier: "ingredientcell")
       layout.register(InstructionsTableViewCell.self, forCellReuseIdentifier: "instructionCell")
+      
       layout.separatorStyle = UITableViewCell.SeparatorStyle.none
       layout.backgroundColor = #colorLiteral(red: 0.9489366412, green: 0.9490728974, blue: 0.9489069581, alpha: 1)
       layout.delegate = self
@@ -68,7 +69,7 @@ final class DetailVC: UIViewController {
       return layout
    }()
    lazy var topHeaderView: UIView = {
-      let header = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height / 3))
+      let header = UIView()
       header.backgroundColor = #colorLiteral(red: 0.9489366412, green: 0.9490728974, blue: 0.9489069581, alpha: 1)
       return header
    }()
@@ -245,6 +246,7 @@ extension DetailVC: UITableViewDelegate, UITableViewDataSource{
    func numberOfSections(in tableView: UITableView) -> Int {
       return 3
    }
+   
 }
 
 
