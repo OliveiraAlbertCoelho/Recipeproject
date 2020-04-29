@@ -20,7 +20,7 @@ final class FavoritesVC: UIViewController {
     }
    
     //MARK: - Variables
-    var recipes = [RecipeWrapper](){
+    var recipes = [RecipeInfo](){
         didSet{
             favoritesCV.reloadData()
         }
@@ -91,7 +91,7 @@ extension FavoritesVC: UICollectionViewDelegate, UICollectionViewDelegateFlowLay
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let detailVC = DetailVC()
-        detailVC.recipe = recipes[indexPath.row]
+        detailVC.recipeInfo = recipes[indexPath.row]
         detailVC.modalPresentationStyle = .fullScreen
      navigationController?.pushViewController(detailVC, animated: true)
 

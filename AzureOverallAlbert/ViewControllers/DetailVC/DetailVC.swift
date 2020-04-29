@@ -175,6 +175,13 @@ final class DetailVC: UIViewController {
    @objc func favoritePressed(){
       check = !check
       check ?  lottieView.play() : lottieView.play(fromProgress: lottieView.currentProgress, toProgress: 0, loopMode: nil, completion: nil)
+      do {
+         let image = recipeImageView.image?.jpegData(compressionQuality: 80)
+         recipeInfo?.persistedImage = image
+         try RecipePersistence.manager.saveRecipe(info: recipeInfo!)}
+      catch {
+         print(error)
+      }
    }
    @objc func respondToSwipeGesture(gesture: UIGestureRecognizer) {
       let transition = CATransition()
@@ -209,14 +216,13 @@ extension DetailVC: UITableViewDelegate, UITableViewDataSource{
       let view = SectionHeaderView()
       switch  section {
       case 0:
-         view.headerTitle.text = "Nutrition"
-         view.delegate = self
-         view.expandableSectionButton.isHidden = false
+         view.headerType = .headerSec0
       case 1:
-         view.headerTitle.text = "Ingredients"
+         view.headerType = .headerSec1
       default:
          view.headerTitle.text = "Preparation"
       }
+        view.delegate = self
       return view
    }
    
@@ -279,9 +285,10 @@ extension DetailVC: ButtonProtocol{
       isExpanded = !isExpanded
       isExpanded ?  recipeInfoTableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .fade) : recipeInfoTableView.deleteRows(at: [IndexPath(row: 0, section: 0)], with: .fade)
       }else {
-         print("yo")
+         
       }
-   }}
+   }
+}
 
 
 #if DEBUG

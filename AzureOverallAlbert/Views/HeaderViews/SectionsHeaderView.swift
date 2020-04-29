@@ -13,21 +13,30 @@ class SectionHeaderView: UIView {
       super.init(frame: frame)
       setupView()
       constrainInsideLabel()
-      constrainexpandableSectionButton()
    }
    required init?(coder aDecoder: NSCoder) {
       super.init(coder: aDecoder)
-      setupView()
-      constrainInsideLabel()
-      constrainexpandableSectionButton()
    }
+   var headerType: ButtonType?{
+      didSet{
+         switch self.headerType {
+         case .headerSec0:
+            constrainExpandableSectionButton()
+            headerTitle.text = "Nutrition"
+         default:
+            headerTitle.text = "Ingredients"
+            constrainselectAllButton()
+         }
+      }}
+   
    var buttonState = true{
       didSet{
-      var type = String()
-      type = buttonState ?  "plus" :  "minus"
-            expandableSectionButton.setImage(UIImage(systemName: type), for: .normal)
-         }
+         var type = String()
+         type = buttonState ?  "plus" :  "minus"
+         expandableSectionButton.setImage(UIImage(systemName: type), for: .normal)
       }
+   }
+   
    lazy var headerTitle: UILabel = {
       let label = UILabel()
       label.text = "fdsfds"
@@ -40,16 +49,26 @@ class SectionHeaderView: UIView {
       button.tintColor = .blue
       button.setImage(UIImage(systemName: "plus"), for: .normal)
       button.addTarget(self, action: #selector(expandableAction), for: .touchUpInside)
-      button.isHidden = true
       return button
    }()
-      private func setupView() {
+   lazy var selectAllButton : UIButton = {
+      let button = UIButton()
+      button.tintColor = .blue
+      button.setTitle("Select All", for: .normal)
+      button.setTitleColor(#colorLiteral(red: 0.2196078449, green: 0.007843137719, blue: 0.8549019694, alpha: 1), for: .normal)
+      button.addTarget(self, action: #selector(selectAllAction), for: .touchUpInside)
+      return button
+   }()
+   private func setupView() {
       backgroundColor = .clear
    }
    weak var delegate: ButtonProtocol?
    @objc func expandableAction (){
       delegate?.pressAction(tag: expandableSectionButton.tag, type: .headerSec0)
       buttonState = !buttonState
+   }
+   @objc func selectAllAction(){
+      delegate?.pressAction(tag: expandableSectionButton.tag, type: .headerSec1)
    }
    private func constrainInsideLabel(){
       addSubview(headerTitle)
@@ -59,14 +78,21 @@ class SectionHeaderView: UIView {
          headerTitle.leadingAnchor.constraint(equalToSystemSpacingAfter: self.leadingAnchor, multiplier: 3)
       ])
    }
-   private func constrainexpandableSectionButton(){
-        addSubview(expandableSectionButton)
-        expandableSectionButton.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-           expandableSectionButton.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-           expandableSectionButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -30)
-        ])
-     }
-   
+   private func constrainExpandableSectionButton(){
+      addSubview(expandableSectionButton)
+      expandableSectionButton.translatesAutoresizingMaskIntoConstraints = false
+      NSLayoutConstraint.activate([
+         expandableSectionButton.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+         expandableSectionButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -30)
+      ])
+   }
+   private func constrainselectAllButton(){
+      addSubview(selectAllButton)
+      selectAllButton.translatesAutoresizingMaskIntoConstraints = false
+      NSLayoutConstraint.activate([
+         selectAllButton.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+         selectAllButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -30)
+      ])
+   }
 }
 
