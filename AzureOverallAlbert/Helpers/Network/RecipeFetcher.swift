@@ -15,6 +15,7 @@ class RecipeFetcher {
         NetworkManager.manager.fetchData(urlString: urlString) { (result) in
             switch result{
             case .failure(let error):
+               print(urlString)
                 completionHandler(.failure(error))
             case .success(let data):
                 do{

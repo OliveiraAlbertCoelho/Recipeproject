@@ -32,15 +32,9 @@ final class DetailVC: UIViewController {
    
    
    @objc func favoritePressed(){
-      if check{
-         check = false
-         lottieView.play(fromProgress: lottieView.currentProgress, toProgress: 0, loopMode: nil, completion: nil)
-         
-      }else {
-         check = true
-         lottieView.play()
-         
-      }
+       check = !check
+      check ?  lottieView.play() : lottieView.play(fromProgress: lottieView.currentProgress, toProgress: 0, loopMode: nil, completion: nil)
+        
    }
    var isExpanded = false
    let recipeId = "324694"
@@ -56,6 +50,7 @@ final class DetailVC: UIViewController {
       let lottieview = AnimationView()
       lottieview.animation = Animation.named("heartAction")
       lottieview.animationSpeed = 2
+    
       return lottieview
    }()
    lazy var favoriteButton: UIButton = {
@@ -203,6 +198,7 @@ final class DetailVC: UIViewController {
    @objc private func goBackAction(){
       self.navigationController?.popViewController(animated: true)
    }
+  
 }
 //MARK: - UITableViewDelegates
 extension DetailVC: UITableViewDelegate, UITableViewDataSource{
@@ -245,6 +241,7 @@ extension DetailVC: UITableViewDelegate, UITableViewDataSource{
       case 1:
          guard let cell = tableView.dequeueReusableCell(withIdentifier: "ingredientcell", for: indexPath) as? RecipeIngredientsCell else {return UITableViewCell()}
          let data = recipeInfo?.extendedIngredients[indexPath.row]
+         cell.addIngredientButton.tag =  indexPath.row
          cell.ingredientTitleLabel.text = data?.ingredientAmount
          return cell
       default:
@@ -263,7 +260,6 @@ extension DetailVC: UITableViewDelegate, UITableViewDataSource{
       case 1:
          return 50
       case 2:
-         
          return UITableView.automaticDimension
       default:
          return 0

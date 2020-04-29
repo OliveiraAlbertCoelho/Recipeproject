@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MainTabBarController: UITabBarController {
+class MainTabBarController: UITabBarController{
    
    
    lazy var favoritesVC = UINavigationController(rootViewController: FavoritesVC())
@@ -22,8 +22,10 @@ class MainTabBarController: UITabBarController {
       setUpTabBar()
    }
    private func setUpTabBar(){
+      
       browseVC.tabBarItem = UITabBarItem(title: "Recipes", image: UIImage(systemName: "magnifyingglass.circle"), tag: 0)
       favoritesVC.tabBarItem = UITabBarItem(title: "Favorites", image: UIImage(systemName: "heart"), tag: 1)
       self.viewControllers = [browseVC,favoritesVC]
    }
+   
 }

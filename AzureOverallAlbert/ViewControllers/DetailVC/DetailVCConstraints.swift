@@ -108,19 +108,17 @@ extension DetailVC{
       ])
    }
     func constrainLottieView(){
-        view.addSubview(lottieView)
-        view.bringSubviewToFront(lottieView)
+        bottomHeaderView.addSubview(lottieView)
         lottieView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-              lottieView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
-              lottieView.topAnchor.constraint(equalTo: view.topAnchor, constant: 28),
+              lottieView.leadingAnchor.constraint(equalTo: recipeName.trailingAnchor, constant: 30),
+              lottieView.topAnchor.constraint(equalTo: recipeName.topAnchor, constant: 0),
               lottieView.heightAnchor.constraint(equalToConstant: 60),
               lottieView.widthAnchor.constraint(equalToConstant: 60)
            ])
      }
       func constrainButtonFavorite(){
         lottieView.addSubview(favoriteButton)
-         lottieView.bringSubviewToFront(favoriteButton)
         favoriteButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
            favoriteButton.trailingAnchor.constraint(equalTo: lottieView.trailingAnchor, constant: 0),

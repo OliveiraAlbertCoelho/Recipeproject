@@ -166,14 +166,18 @@ extension BrowseVC: UISearchBarDelegate{
 extension BrowseVC: UITabBarControllerDelegate {
    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
       let tabBarIndex = tabBarController.selectedIndex
-      if tabBarIndex == 0  && isVC{
+      if tabBarIndex == 0 &&  isVC{
          let indexPath = IndexPath(row: 0, section: 0)
          self.recipeCV.scrollToItem(at: indexPath, at: .top, animated: true)
-         //         recipeSearchBar.becomeFirstResponder()
       }
    }
-   
 }
+extension UIViewController{
+   var isOnScreen: Bool{
+      return self.isViewLoaded && view.window != nil
+   }
+}
+
 #if DEBUG
 extension BrowseVC: UIViewControllerRepresentable {
    func makeUIViewController(context: Context) -> BrowseVC {
