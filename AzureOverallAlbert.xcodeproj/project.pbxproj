@@ -10,6 +10,7 @@
 		50151615244517ED0056E933 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50151614244517ED0056E933 /* Secrets.swift */; };
 		503080132455F239005081D0 /* RecipeIngredientsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503080122455F239005081D0 /* RecipeIngredientsCell.swift */; };
 		5030801524564221005081D0 /* InstructionsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5030801424564221005081D0 /* InstructionsTableViewCell.swift */; };
+		5062B6102459E8F300FA663E /* ButtonProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5062B60F2459E8F300FA663E /* ButtonProtocol.swift */; };
 		50753F19244FCA18004CF49B /* ImageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50753F18244FCA18004CF49B /* ImageHelper.swift */; };
 		50782A3E2458BB5B00290B78 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 50782A3D2458BB5B00290B78 /* Lottie */; };
 		5085A2012457D10200588745 /* DetailVCConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5085A2002457D10200588745 /* DetailVCConstraints.swift */; };
@@ -50,6 +51,7 @@
 		50151614244517ED0056E933 /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		503080122455F239005081D0 /* RecipeIngredientsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeIngredientsCell.swift; sourceTree = "<group>"; };
 		5030801424564221005081D0 /* InstructionsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionsTableViewCell.swift; sourceTree = "<group>"; };
+		5062B60F2459E8F300FA663E /* ButtonProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonProtocol.swift; sourceTree = "<group>"; };
 		50753F18244FCA18004CF49B /* ImageHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageHelper.swift; sourceTree = "<group>"; };
 		5085A2002457D10200588745 /* DetailVCConstraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVCConstraints.swift; sourceTree = "<group>"; };
 		508644CE2433E2BD00002984 /* PersistenceHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistenceHelper.swift; sourceTree = "<group>"; };
@@ -176,7 +178,6 @@
 		50D7B52D24324271007C4866 /* AzureOverallAlbert */ = {
 			isa = PBXGroup;
 			children = (
-				50E94E4D2458A9D100C2F1DE /* heartAction.json */,
 				50ED88DF243258270092C94A /* Models */,
 				50ED88DA243251480092C94A /* Helpers */,
 				50ED88D724324D500092C94A /* Views */,
@@ -213,6 +214,7 @@
 		50D7B559243246FF007C4866 /* Supporting */ = {
 			isa = PBXGroup;
 			children = (
+				50E94E4D2458A9D100C2F1DE /* heartAction.json */,
 				50D7B53724324272007C4866 /* Assets.xcassets */,
 			);
 			path = Supporting;
@@ -233,6 +235,7 @@
 			children = (
 				508644CD2433E29300002984 /* Network */,
 				508644CC2433E28800002984 /* Persistence */,
+				5062B60F2459E8F300FA663E /* ButtonProtocol.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -354,6 +357,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5085A2012457D10200588745 /* DetailVCConstraints.swift in Sources */,
+				5062B6102459E8F300FA663E /* ButtonProtocol.swift in Sources */,
 				50D7B556243246E1007C4866 /* DetailVC.swift in Sources */,
 				508644D12433E30A00002984 /* RecipePersistence.swift in Sources */,
 				50ED88E1243258390092C94A /* Recipes.swift in Sources */,

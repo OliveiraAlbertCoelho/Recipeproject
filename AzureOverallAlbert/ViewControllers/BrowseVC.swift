@@ -17,13 +17,7 @@ final class BrowseVC: UIViewController {
       recipeCV.keyboardDismissMode = UIScrollView.KeyboardDismissMode.onDrag
       self.tabBarController?.delegate = self
    }
-   override func viewDidAppear(_ animated: Bool) {
-      isVC = true
-   }
-   override func viewWillDisappear(_ animated: Bool) {
-      isVC = false
-   }
-   private var isVC = false
+   var previousController: UIViewController?
    //MARK: - Variables
    var recipes = [RecipeWrapper](){
       didSet{
@@ -165,18 +159,13 @@ extension BrowseVC: UISearchBarDelegate{
 //MARK: - UITabBarControllerDelegate
 extension BrowseVC: UITabBarControllerDelegate {
    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
-      let tabBarIndex = tabBarController.selectedIndex
-      if tabBarIndex == 0 &&  isVC{
-         let indexPath = IndexPath(row: 0, section: 0)
-         self.recipeCV.scrollToItem(at: indexPath, at: .top, animated: true)
+      if previousController == viewController {
+         recipeCV.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top
+            , animated: true)
       }
-   }
-}
-extension UIViewController{
-   var isOnScreen: Bool{
-      return self.isViewLoaded && view.window != nil
-   }
-}
+      previousController = viewController
+   }}
+
 
 #if DEBUG
 extension BrowseVC: UIViewControllerRepresentable {

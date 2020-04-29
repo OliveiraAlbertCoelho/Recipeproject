@@ -17,7 +17,6 @@ final class DetailVC: UIViewController {
       setUpViewDesign()
       setUpConstraints()
       fetchRecipeInfo()
-      
    }
    //MARK: - Variables
    var recipeInfo: RecipeInfo?{
@@ -28,14 +27,6 @@ final class DetailVC: UIViewController {
    }
    
    var check = false
-   
-   
-   
-   @objc func favoritePressed(){
-       check = !check
-      check ?  lottieView.play() : lottieView.play(fromProgress: lottieView.currentProgress, toProgress: 0, loopMode: nil, completion: nil)
-        
-   }
    var isExpanded = false
    let recipeId = "324694"
    var recipe: RecipeWrapper?
@@ -50,7 +41,6 @@ final class DetailVC: UIViewController {
       let lottieview = AnimationView()
       lottieview.animation = Animation.named("heartAction")
       lottieview.animationSpeed = 2
-    
       return lottieview
    }()
    lazy var favoriteButton: UIButton = {
@@ -143,10 +133,10 @@ final class DetailVC: UIViewController {
    
    //MARK: - Regular Functions
    
-   @objc private func expandSection() {
-      isExpanded = !isExpanded
-      isExpanded ?  recipeInfoTableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .fade) : recipeInfoTableView.deleteRows(at: [IndexPath(row: 0, section: 0)], with: .fade)
-   }
+//   @objc private func expandSection() {
+//      isExpanded = !isExpanded
+//      isExpanded ?  recipeInfoTableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .fade) : recipeInfoTableView.deleteRows(at: [IndexPath(row: 0, section: 0)], with: .fade)
+//   }
    private func setUpRecipeView(){
       recipeName.text = recipeInfo?.title ?? "not found"
       prepTimeLabel.text = "Prep Time: \(recipeInfo?.readyInMinutes.description ?? "")"
@@ -186,6 +176,10 @@ final class DetailVC: UIViewController {
    }
    
    //MARK: - Objc functions
+   @objc func favoritePressed(){
+      check = !check
+      check ?  lottieView.play() : lottieView.play(fromProgress: lottieView.currentProgress, toProgress: 0, loopMode: nil, completion: nil)
+   }
    @objc func respondToSwipeGesture(gesture: UIGestureRecognizer) {
       let transition = CATransition()
       transition.duration = 0.3
@@ -198,7 +192,7 @@ final class DetailVC: UIViewController {
    @objc private func goBackAction(){
       self.navigationController?.popViewController(animated: true)
    }
-  
+   
 }
 //MARK: - UITableViewDelegates
 extension DetailVC: UITableViewDelegate, UITableViewDataSource{
@@ -220,8 +214,9 @@ extension DetailVC: UITableViewDelegate, UITableViewDataSource{
       switch  section {
       case 0:
          view.headerTitle.text = "Nutrition"
-         view.expandableSectionButton.addTarget(self, action: #selector(expandSection), for: .touchUpInside)
+         view.delegate = self
          view.expandableSectionButton.isHidden = false
+
       case 1:
          view.headerTitle.text = "Ingredients"
       default:
@@ -229,6 +224,7 @@ extension DetailVC: UITableViewDelegate, UITableViewDataSource{
       }
       return view
    }
+   
    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
       switch indexPath.section{
       case 0:
@@ -265,6 +261,7 @@ extension DetailVC: UITableViewDelegate, UITableViewDataSource{
          return 0
       }
    }
+   
    func scrollViewDidScroll(_ scrollView: UIScrollView) {
       let y = 300 - (scrollView.contentOffset.y + 300)
       let height = min(max(y, 170), 400)
@@ -281,6 +278,12 @@ extension DetailVC: UITableViewDelegate, UITableViewDataSource{
    }
    
 }
+extension DetailVC: ButtonProtocol{
+   func pressAction(tag: Int) {
+    isExpanded = !isExpanded
+        isExpanded ?  recipeInfoTableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .fade) : recipeInfoTableView.deleteRows(at: [IndexPath(row: 0, section: 0)], with: .fade)
+   }
+}
 
 
 #if DEBUG
@@ -292,7 +295,6 @@ extension DetailVC: UIViewControllerRepresentable {
    func updateUIViewController(_ uiViewController: DetailVC, context: Context) {
    }
 }
-
 struct DetailVCPreviews: PreviewProvider {
    static var previews: some View {
       DetailVC()

@@ -33,6 +33,7 @@ class SectionHeaderView: UIView {
       let button = UIButton()
       button.setImage(UIImage(systemName: "plus"), for: .normal)
       button.tintColor = .blue
+      button.addTarget(self, action: #selector(expandableAction), for: .touchUpInside)
       button.isHidden = true
       return button
    }()
@@ -41,7 +42,10 @@ class SectionHeaderView: UIView {
    private func setupView() {
       backgroundColor = .clear
    }
-   
+   weak var delegate: ButtonProtocol?
+   @objc func expandableAction (){
+      delegate?.pressAction(tag: expandableSectionButton.tag)
+   }
    private func constrainInsideLabel(){
       addSubview(headerTitle)
       headerTitle.translatesAutoresizingMaskIntoConstraints = false

@@ -23,8 +23,9 @@ class RecipeIngredientsCell: UITableViewCell {
    //MARK: - UI Objects
    lazy var addIngredientButton: UIButton = {
       let button = UIButton()
-      button.setImage(UIImage(systemName: "heart"), for: .normal)
+      button.setImage(UIImage(systemName: "cart"), for: .normal)
       button.tintColor = .black
+
       return button
    }()
    

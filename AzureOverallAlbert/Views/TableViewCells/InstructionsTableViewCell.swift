@@ -30,6 +30,7 @@ class InstructionsTableViewCell: UITableViewCell {
       let label = UILabel()
       label.numberOfLines = 0
       label.textAlignment = .left
+      label.font = .systemFont(ofSize: 18)
       return label
    }()
    //MARK: - Regular Functions
@@ -43,7 +44,7 @@ class InstructionsTableViewCell: UITableViewCell {
       contentView.addSubview(stepNumber)
       stepNumber.translatesAutoresizingMaskIntoConstraints = false
       NSLayoutConstraint.activate([
-         stepNumber.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0),
+         stepNumber.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 2),
          stepNumber.trailingAnchor.constraint(equalTo: stepTitle.leadingAnchor, constant: 0),
          stepNumber.heightAnchor.constraint(equalToConstant: 19),
          stepNumber.leadingAnchor.constraint(equalTo: contentView.leadingAnchor)
