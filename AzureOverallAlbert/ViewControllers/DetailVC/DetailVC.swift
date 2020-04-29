@@ -41,6 +41,7 @@ final class DetailVC: UIViewController {
       let lottieview = AnimationView()
       lottieview.animation = Animation.named("heartAction")
       lottieview.animationSpeed = 2
+      //      lottieview.currentProgress = 1
       return lottieview
    }()
    lazy var favoriteButton: UIButton = {
@@ -134,6 +135,10 @@ final class DetailVC: UIViewController {
    //MARK: - Regular Functions
    
    private func setUpRecipeView(){
+      if  RecipePersistence.manager.checkIfSave(id: recipe!.id){
+         lottieView.currentProgress = 1.0
+         check = true
+      }
       recipeName.text = recipeInfo?.title ?? "not found"
       prepTimeLabel.text = "Prep Time: \(recipeInfo?.readyInMinutes.description ?? "")"
       servingsLabel.text = "Servings: \(recipeInfo?.servings.description ?? "")"
@@ -173,8 +178,8 @@ final class DetailVC: UIViewController {
    
    //MARK: - Objc functions
    @objc func favoritePressed(){
+      check ?  lottieView.play(fromProgress: lottieView.currentProgress, toProgress: 0, loopMode: nil, completion: nil) : lottieView.play()
       check = !check
-      check ?  lottieView.play() : lottieView.play(fromProgress: lottieView.currentProgress, toProgress: 0, loopMode: nil, completion: nil)
       do {
          let image = recipeImageView.image?.jpegData(compressionQuality: 80)
          recipeInfo?.persistedImage = image
@@ -222,7 +227,7 @@ extension DetailVC: UITableViewDelegate, UITableViewDataSource{
       default:
          view.headerTitle.text = "Preparation"
       }
-        view.delegate = self
+      view.delegate = self
       return view
    }
    
@@ -282,8 +287,8 @@ extension DetailVC: UITableViewDelegate, UITableViewDataSource{
 extension DetailVC: ButtonProtocol{
    func pressAction(tag: Int, type: ButtonType) {
       if type == .headerSec0{
-      isExpanded = !isExpanded
-      isExpanded ?  recipeInfoTableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .fade) : recipeInfoTableView.deleteRows(at: [IndexPath(row: 0, section: 0)], with: .fade)
+         isExpanded = !isExpanded
+         isExpanded ?  recipeInfoTableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .fade) : recipeInfoTableView.deleteRows(at: [IndexPath(row: 0, section: 0)], with: .fade)
       }else {
          
       }

@@ -16,16 +16,13 @@ struct RecipePersistence{
     func getRecipes() throws -> [RecipeInfo]{
         return try persistenceHelper.getObjects()
     }
-    //Return one recipe with the unique id
-    func getRecipe(id: Int) throws -> RecipeInfo?{
-        return try RecipePersistence.manager.getRecipes().filter{return $0.id == id}.first
-    }
     func saveRecipe(info: RecipeInfo) throws{
       if checkIfSave(id: info.id){
          try deleteRecipe(id: info.id)
       }else {
         try persistenceHelper.save(newElement: info)
-      }}
+      }
+   }
     //Takes in recipe id and finds the index to delete
     func deleteRecipe(id: Int) throws{
         var recipes = [RecipeInfo]()
@@ -39,18 +36,7 @@ struct RecipePersistence{
         }
         try persistenceHelper.delete(num: recipeIndex)
     }
-    //Takes in recipe id and finds the index to edit
-    func editRecipe(id: Int, newElement: RecipeInfo) throws{
-        var recipes = [RecipeInfo]()
-        recipes = try RecipePersistence.manager.getRecipes()
-        var recipeIndex = Int()
-        for (k,v) in recipes.enumerated(){
-            if v.id == id{
-                recipeIndex = k
-            }
-        }
-        try persistenceHelper.edit(id: recipeIndex, newElement: newElement)
-    }
+
     //Check if value id is in persisted list
     func checkIfSave(id: Int) -> Bool{
         var recipes = [RecipeInfo]()
@@ -62,3 +48,18 @@ struct RecipePersistence{
         return recipes.contains{$0.id == id}
     }
 }
+//func editRecipe(id: Int, newElement: RecipeInfo) throws{
+//       var recipes = [RecipeInfo]()
+//       recipes = try RecipePersistence.manager.getRecipes()
+//       var recipeIndex = Int()
+//       for (k,v) in recipes.enumerated(){
+//           if v.id == id{
+//               recipeIndex = k
+//           }
+//       }
+//       try persistenceHelper.edit(id: recipeIndex, newElement: newElement)
+//   }
+//Return one recipe with the unique id
+//   func getRecipe(id: Int) throws -> RecipeInfo?{
+//       return try RecipePersistence.manager.getRecipes().filter{return $0.id == id}.first
+//   }
