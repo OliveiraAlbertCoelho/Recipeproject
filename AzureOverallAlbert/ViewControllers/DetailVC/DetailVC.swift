@@ -133,10 +133,6 @@ final class DetailVC: UIViewController {
    
    //MARK: - Regular Functions
    
-//   @objc private func expandSection() {
-//      isExpanded = !isExpanded
-//      isExpanded ?  recipeInfoTableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .fade) : recipeInfoTableView.deleteRows(at: [IndexPath(row: 0, section: 0)], with: .fade)
-//   }
    private func setUpRecipeView(){
       recipeName.text = recipeInfo?.title ?? "not found"
       prepTimeLabel.text = "Prep Time: \(recipeInfo?.readyInMinutes.description ?? "")"
@@ -216,7 +212,6 @@ extension DetailVC: UITableViewDelegate, UITableViewDataSource{
          view.headerTitle.text = "Nutrition"
          view.delegate = self
          view.expandableSectionButton.isHidden = false
-
       case 1:
          view.headerTitle.text = "Ingredients"
       default:
@@ -233,11 +228,11 @@ extension DetailVC: UITableViewDelegate, UITableViewDataSource{
             cell.nutritionInfo = recipeinf.nutrition.nutrients
          }
          return cell
-         
       case 1:
          guard let cell = tableView.dequeueReusableCell(withIdentifier: "ingredientcell", for: indexPath) as? RecipeIngredientsCell else {return UITableViewCell()}
          let data = recipeInfo?.extendedIngredients[indexPath.row]
          cell.addIngredientButton.tag =  indexPath.row
+         cell.delegate = self
          cell.ingredientTitleLabel.text = data?.ingredientAmount
          return cell
       default:
@@ -279,11 +274,14 @@ extension DetailVC: UITableViewDelegate, UITableViewDataSource{
    
 }
 extension DetailVC: ButtonProtocol{
-   func pressAction(tag: Int) {
-    isExpanded = !isExpanded
-        isExpanded ?  recipeInfoTableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .fade) : recipeInfoTableView.deleteRows(at: [IndexPath(row: 0, section: 0)], with: .fade)
-   }
-}
+   func pressAction(tag: Int, type: ButtonType) {
+      if type == .headerSec0{
+      isExpanded = !isExpanded
+      isExpanded ?  recipeInfoTableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .fade) : recipeInfoTableView.deleteRows(at: [IndexPath(row: 0, section: 0)], with: .fade)
+      }else {
+         print("yo")
+      }
+   }}
 
 
 #if DEBUG

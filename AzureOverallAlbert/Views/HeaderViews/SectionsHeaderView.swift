@@ -21,7 +21,13 @@ class SectionHeaderView: UIView {
       constrainInsideLabel()
       constrainexpandableSectionButton()
    }
-   
+   var buttonState = true{
+      didSet{
+      var type = String()
+      type = buttonState ?  "plus" :  "minus"
+            expandableSectionButton.setImage(UIImage(systemName: type), for: .normal)
+         }
+      }
    lazy var headerTitle: UILabel = {
       let label = UILabel()
       label.text = "fdsfds"
@@ -31,20 +37,19 @@ class SectionHeaderView: UIView {
    }()
    lazy var expandableSectionButton : UIButton = {
       let button = UIButton()
-      button.setImage(UIImage(systemName: "plus"), for: .normal)
       button.tintColor = .blue
+      button.setImage(UIImage(systemName: "plus"), for: .normal)
       button.addTarget(self, action: #selector(expandableAction), for: .touchUpInside)
       button.isHidden = true
       return button
    }()
-   
-   //common func to init our view
-   private func setupView() {
+      private func setupView() {
       backgroundColor = .clear
    }
    weak var delegate: ButtonProtocol?
    @objc func expandableAction (){
-      delegate?.pressAction(tag: expandableSectionButton.tag)
+      delegate?.pressAction(tag: expandableSectionButton.tag, type: .headerSec0)
+      buttonState = !buttonState
    }
    private func constrainInsideLabel(){
       addSubview(headerTitle)

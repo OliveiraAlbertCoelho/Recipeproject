@@ -16,16 +16,23 @@ class RecipeIngredientsCell: UITableViewCell {
       super.init(style: style, reuseIdentifier: reuseIdentifier)
       setUpView()
    }
-   
+   var buttonState = true{
+      didSet{
+      var type = String()
+      type = buttonState ?  "cart" :  "cart.badge.plus"
+            addIngredientButton.setImage(UIImage(systemName: type), for: .normal)
+         }
+      }
    required init(coder aDecoder: NSCoder) {
       fatalError("init(coder:) has not been implemented")
    }
+   weak var delegate: ButtonProtocol?
    //MARK: - UI Objects
    lazy var addIngredientButton: UIButton = {
       let button = UIButton()
       button.setImage(UIImage(systemName: "cart"), for: .normal)
       button.tintColor = .black
-
+      button.addTarget(self, action: #selector(addToCartAction), for: .touchUpInside)
       return button
    }()
    
@@ -39,6 +46,10 @@ class RecipeIngredientsCell: UITableViewCell {
       contentView.backgroundColor = #colorLiteral(red: 0.9489366412, green: 0.9490728974, blue: 0.9489069581, alpha: 1)
       constrainIngredientButton()
       constrainIngredientTitleLabel()
+   }
+   @objc func addToCartAction(){
+      delegate?.pressAction(tag: addIngredientButton.tag, type: .cell)
+      buttonState = !buttonState
    }
    //MARK: - Constraints
    private func constrainIngredientButton(){
