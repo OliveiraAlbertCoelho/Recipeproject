@@ -321,6 +321,9 @@ extension DetailVC: UITableViewDelegate, UITableViewDataSource{
 }
 extension DetailVC: ButtonProtocol{
    func pressAction(tag: Int, type: ButtonType) {
+      if type == .cell{
+         
+      }
    }
 }
 

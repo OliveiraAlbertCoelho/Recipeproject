@@ -18,7 +18,6 @@ final class BrowseVC: UIViewController {
       self.tabBarController?.delegate = self
    }
    var previousValue = CGFloat ()
-
    override func viewWillAppear(_ animated: Bool) {
       super.viewWillAppear(true)
       navigationController?.navigationBar.isHidden = false
@@ -60,7 +59,7 @@ final class BrowseVC: UIViewController {
    private func setUpView(){
       setUpViewDesign()
       constrainRecipeCV()
-            constrainRecipeSearchBar()
+      constrainRecipeSearchBar()
    }
    private func setUpViewDesign(){
       navigationItem.titleView = appTitleLabel
@@ -139,7 +138,7 @@ extension BrowseVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
       } else  {
          recipeSearchBar.isHidden = true
       }
-       previousValue = scrollView.contentOffset.y
+      previousValue = scrollView.contentOffset.y
    }
    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
       let cells = collectionView.visibleCells as! [RecipeCollectionCell]

@@ -18,10 +18,6 @@ class SectionHeaderView: UITableViewHeaderFooterView {
    required init?(coder aDecoder: NSCoder) {
       fatalError("init(coder:) has not been implemented")
    }
-   lazy var headerViewTap: UITapGestureRecognizer = {
-      let tapGesture = UITapGestureRecognizer()
-      return tapGesture
-   }()
    
    var headerType: ButtonType?{
       didSet{
@@ -37,6 +33,10 @@ class SectionHeaderView: UITableViewHeaderFooterView {
       }
    }
 
+   lazy var headerViewTap: UITapGestureRecognizer = {
+      let tapGesture = UITapGestureRecognizer()
+      return tapGesture
+   }()
    
    lazy var headerTitle: UILabel = {
       let label = UILabel()
