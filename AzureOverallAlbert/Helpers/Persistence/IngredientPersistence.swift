@@ -12,40 +12,39 @@ import Foundation
 
 
 struct IngredientPersistence{
-    static let manager = IngredientPersistence()
-    private let persistenceHelper = PersistenceHelper<Ingredients>(fileName: "ingredients.plist")
-    //Gets all recipes
-    func getIngredients() throws -> [Ingredients]{
-        return try persistenceHelper.getObjects()
-    }
-    func saveRecipe(info: Ingredients) throws{
+   static let manager = IngredientPersistence()
+   private let persistenceHelper = PersistenceHelper<Ingredients>(fileName: "ingredients.plist")
+   //Gets all recipes
+   func getIngredients() throws -> [Ingredients]{
+      return try persistenceHelper.getObjects()
+   }
+   func saveIngredient(info: Ingredients) throws{
       if checkIfSave(id: info.id){
-         try deleteRecipe(id: info.id)
+         try deleteIngredient(id: info.id)
       }else {
-        try persistenceHelper.save(newElement: info)
+         try persistenceHelper.save(newElement: info)
       }
    }
-    //Takes in recipe id and finds the index to delete
-    func deleteRecipe(id: Int) throws{
-        var recipes = [Ingredients]()
-        recipes = try IngredientPersistence.manager.getIngredients()
-        
-        var recipeIndex = Int()
-        for (k,v) in recipes.enumerated(){
-            if v.id == id{
-                recipeIndex = k
-            }
-        }
-        try persistenceHelper.delete(num: recipeIndex)
-    }
-    //Check if value id is in persisted list
-    func checkIfSave(id: Int) -> Bool{
-        var recipes = [Ingredients]()
-        do {
-            recipes = try IngredientPersistence.manager.getIngredients()
-        }catch{
-            print(error)
-        }
-        return recipes.contains{$0.id == id}
-    }
+   //Takes in recipe id and finds the index to delete
+   func deleteIngredient(id: Int) throws{
+      var ingredients = [Ingredients]()
+      ingredients = try IngredientPersistence.manager.getIngredients()
+      var ingredientIndex = Int()
+      for (k,v) in ingredients.enumerated(){
+         if v.id == id{
+            ingredientIndex = k
+         }
+      }
+      try persistenceHelper.delete(num: ingredientIndex)
+   }
+   //Check if value id is in persisted list
+   func checkIfSave(id: Int) -> Bool{
+      var ingredients = [Ingredients]()
+      do {
+         ingredients = try IngredientPersistence.manager.getIngredients()
+      }catch{
+         print(error)
+      }
+      return ingredients.contains{$0.id == id}
+   }
 }
