@@ -9,24 +9,36 @@
 import UIKit
 
 class SectionHeaderView: UIView {
-   override init(frame: CGRect) {
-      super.init(frame: frame)
-      constrainInsideLabel()
-   }
    required init?(coder aDecoder: NSCoder) {
       super.init(coder: aDecoder)
    }
+   override init(frame: CGRect) {
+      super.init(frame: frame)
+      constrainInsideLabel()
+
+
+   }
+   lazy var headerTap: UITapGestureRecognizer = {
+       let tapGesture = UITapGestureRecognizer(target: self, action: #selector(TapGestureRecognizer(gestureRecognizer:)))
+      return tapGesture
+   }()
    var headerType: ButtonType?{
       didSet{
          switch self.headerType {
          case .headerSec0:
             constrainExpandableSectionButton()
             headerTitle.text = "Nutrition"
+            self.addGestureRecognizer(headerTap)
          default:
             headerTitle.text = "Ingredients"
             constrainselectAllButton()
          }
-      }}
+      }
+   }
+   @objc func TapGestureRecognizer(gestureRecognizer: UIGestureRecognizer) {
+   buttonState = !buttonState
+
+   }
    
    var buttonState = true{
       didSet{
@@ -46,8 +58,8 @@ class SectionHeaderView: UIView {
    lazy var expandableSectionButton : UIButton = {
       let button = UIButton()
       button.tintColor = .orange
+      button.isEnabled = false
       button.setImage(UIImage(systemName: "plus"), for: .normal)
-      button.addTarget(self, action: #selector(expandableAction), for: .touchUpInside)
       return button
    }()
    lazy var selectAllButton : UIButton = {
@@ -57,12 +69,9 @@ class SectionHeaderView: UIView {
       button.addTarget(self, action: #selector(selectAllAction), for: .touchUpInside)
       return button
    }()
- 
+   
    weak var delegate: ButtonProtocol?
-   @objc func expandableAction (){
-      delegate?.pressAction(tag: expandableSectionButton.tag, type: .headerSec0)
-      buttonState = !buttonState
-   }
+   
    @objc func selectAllAction(){
       delegate?.pressAction(tag: expandableSectionButton.tag, type: .headerSec1)
    }

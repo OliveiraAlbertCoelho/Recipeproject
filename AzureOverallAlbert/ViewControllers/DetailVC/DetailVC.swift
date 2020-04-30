@@ -34,7 +34,7 @@ final class DetailVC: UIViewController {
    var isExpanded = false
    var recipeId = Int()
    var recipe: RecipeWrapper?
-   var headerHeight: CGFloat = 35
+   var headerHeight: CGFloat = 55
    //MARK: - UI Objects
    lazy var swipeRight: UISwipeGestureRecognizer = {
       let swipe = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture(gesture:)))
@@ -137,6 +137,7 @@ final class DetailVC: UIViewController {
    //MARK: - Regular Functions
    
    private func setFavoriteButtonState(){
+    
       if RecipePersistence.manager.checkIfSave(id: recipeId){
          lottieView.currentProgress = 1.0
          isFavorited = true
@@ -224,11 +225,19 @@ extension DetailVC: UITableViewDelegate, UITableViewDataSource{
       }
    }
    
+   @objc func change(){
+//            if type == .headerSec0{
+               isExpanded = !isExpanded
+               isExpanded ?  recipeInfoTableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .fade) : recipeInfoTableView.deleteRows(at: [IndexPath(row: 0, section: 0)], with: .fade)
+//            }else {
+//            }
+   }
    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
       let view = SectionHeaderView()
       switch  section {
       case 0:
          view.headerType = .headerSec0
+         view.headerTap.addTarget(self, action: #selector(change))
       case 1:
          view.headerType = .headerSec1
       default:
@@ -281,6 +290,7 @@ extension DetailVC: UITableViewDelegate, UITableViewDataSource{
       recipeHeaderHeight.constant = height
    }
    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+      
       return headerHeight
    }
    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
@@ -293,12 +303,7 @@ extension DetailVC: UITableViewDelegate, UITableViewDataSource{
 }
 extension DetailVC: ButtonProtocol{
    func pressAction(tag: Int, type: ButtonType) {
-      if type == .headerSec0{
-         isExpanded = !isExpanded
-         isExpanded ?  recipeInfoTableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .fade) : recipeInfoTableView.deleteRows(at: [IndexPath(row: 0, section: 0)], with: .fade)
-      }else {
-         
-      }
+
    }
 }
 
