@@ -13,7 +13,7 @@ class MainTabBarController: UITabBarController{
    
    lazy var favoritesVC = UINavigationController(rootViewController: FavoritesVC())
    lazy var browseVC =  UINavigationController(rootViewController: BrowseVC())
-   
+   lazy var cartVC = UINavigationController(rootViewController: CartVC())
    
    
    override func viewDidLoad() {
@@ -26,7 +26,8 @@ class MainTabBarController: UITabBarController{
       
       browseVC.tabBarItem = UITabBarItem(title: "Recipes", image: UIImage(systemName: "magnifyingglass.circle"), tag: 0)
       favoritesVC.tabBarItem = UITabBarItem(title: "Favorites", image: UIImage(systemName: "heart"), tag: 1)
-      self.viewControllers = [browseVC,favoritesVC]
+      cartVC.tabBarItem = UITabBarItem(title: "Cart", image: UIImage(systemName: "cart"), tag: 2)
+      self.viewControllers = [browseVC,cartVC, favoritesVC]
    }
    
 }

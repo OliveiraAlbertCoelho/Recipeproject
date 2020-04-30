@@ -14,9 +14,9 @@ final class DetailVC: UIViewController {
    //MARK: - Lifecycle
    override func viewDidLoad() {
       super.viewDidLoad()
+      fetchRecipeInfo()
       setUpViewDesign()
       setUpConstraints()
-      fetchRecipeInfo()
       setFavoriteButtonState()
       loadingAnimationView.play()
    }
@@ -27,10 +27,8 @@ final class DetailVC: UIViewController {
       super.viewWillDisappear(true)
       self.navigationController?.navigationBar.isHidden = true
       navigationItem.hidesBackButton = true
-
-
    }
-
+   
    //MARK: - Variables
    var recipeInfo: RecipeInfo?{
       didSet{
@@ -57,12 +55,12 @@ final class DetailVC: UIViewController {
       lottieview.animationSpeed = 2
       return lottieview
    }()
-      lazy var loadingAnimationView: AnimationView = {
-         let view = AnimationView()
-         view.animation = Animation.named("loading")
-         view.loopMode = .loop
-         return view
-      }()
+   lazy var loadingAnimationView: AnimationView = {
+      let view = AnimationView()
+      view.animation = Animation.named("loading")
+      view.loopMode = .loop
+      return view
+   }()
    
    lazy var favoriteButton: UIButton = {
       let button = UIButton()

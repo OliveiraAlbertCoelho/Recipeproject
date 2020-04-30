@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		50126AAD245B334A00AD55F4 /* CartVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50126AAC245B334A00AD55F4 /* CartVC.swift */; };
 		50151615244517ED0056E933 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50151614244517ED0056E933 /* Secrets.swift */; };
 		501CDF3F245A89640082BD79 /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 501CDF3E245A89640082BD79 /* loading.json */; };
 		503080132455F239005081D0 /* RecipeIngredientsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503080122455F239005081D0 /* RecipeIngredientsCell.swift */; };
@@ -49,6 +50,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		50126AAC245B334A00AD55F4 /* CartVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartVC.swift; sourceTree = "<group>"; };
 		50151614244517ED0056E933 /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		501CDF3E245A89640082BD79 /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
 		503080122455F239005081D0 /* RecipeIngredientsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeIngredientsCell.swift; sourceTree = "<group>"; };
@@ -216,6 +218,7 @@
 				5085A1FF2457D0DF00588745 /* DetailVC */,
 				50D7B557243246EA007C4866 /* FavoritesVC.swift */,
 				50D7B55A24324825007C4866 /* BrowseVC.swift */,
+				50126AAC245B334A00AD55F4 /* CartVC.swift */,
 				50ED88D524324B6E0092C94A /* MainTabBarController.swift */,
 			);
 			path = ViewControllers;
@@ -370,6 +373,7 @@
 			files = (
 				5085A2012457D10200588745 /* DetailVCConstraints.swift in Sources */,
 				5062B6102459E8F300FA663E /* ButtonProtocol.swift in Sources */,
+				50126AAD245B334A00AD55F4 /* CartVC.swift in Sources */,
 				50D7B556243246E1007C4866 /* DetailVC.swift in Sources */,
 				508644D12433E30A00002984 /* RecipePersistence.swift in Sources */,
 				50ED88E1243258390092C94A /* Recipes.swift in Sources */,

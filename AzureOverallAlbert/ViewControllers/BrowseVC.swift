@@ -17,6 +17,8 @@ final class BrowseVC: UIViewController {
       recipeCV.keyboardDismissMode = UIScrollView.KeyboardDismissMode.onDrag
       self.tabBarController?.delegate = self
    }
+   var previousValue = CGFloat ()
+
    override func viewWillAppear(_ animated: Bool) {
       super.viewWillAppear(true)
       navigationController?.navigationBar.isHidden = false
@@ -32,7 +34,7 @@ final class BrowseVC: UIViewController {
    lazy var recipeSearchBar: UISearchBar = {
       let searchBar = UISearchBar()
       searchBar.delegate = self
-      searchBar.barTintColor = #colorLiteral(red: 0.9332516789, green: 0.9333856702, blue: 0.9332222342, alpha: 1)
+      searchBar.backgroundColor = .clear
       return searchBar
    }()
    lazy var appTitleLabel: UILabel = {
@@ -57,8 +59,8 @@ final class BrowseVC: UIViewController {
    //MARK: - Regular Functions
    private func setUpView(){
       setUpViewDesign()
-      constrainRecipeSearchBar()
       constrainRecipeCV()
+            constrainRecipeSearchBar()
    }
    private func setUpViewDesign(){
       navigationItem.titleView = appTitleLabel
@@ -79,8 +81,9 @@ final class BrowseVC: UIViewController {
    
    //MARK: - Constraints
    private func constrainRecipeSearchBar(){
-      view.addSubview(recipeSearchBar)
+      recipeCV.addSubview(recipeSearchBar)
       recipeSearchBar.translatesAutoresizingMaskIntoConstraints = false
+      view.bringSubviewToFront(recipeSearchBar)
       NSLayoutConstraint.activate([
          recipeSearchBar.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 0),
          recipeSearchBar.trailingAnchor.constraint(equalToSystemSpacingAfter: view.trailingAnchor, multiplier: 0),
@@ -94,7 +97,7 @@ final class BrowseVC: UIViewController {
       NSLayoutConstraint.activate([
          recipeCV.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 0),
          recipeCV.trailingAnchor.constraint(equalToSystemSpacingAfter: view.trailingAnchor, multiplier: 0),
-         recipeCV.topAnchor.constraint(equalToSystemSpacingBelow: recipeSearchBar.bottomAnchor, multiplier: 0),
+         recipeCV.topAnchor.constraint(equalToSystemSpacingBelow: view.safeAreaLayoutGuide.topAnchor, multiplier: 0),
          recipeCV.bottomAnchor.constraint(equalToSystemSpacingBelow: view.safeAreaLayoutGuide.bottomAnchor, multiplier: 0)
       ])
    }
@@ -126,10 +129,17 @@ extension BrowseVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
    
    func scrollViewDidScroll(_ scrollView: UIScrollView) {
       let cells = recipeCV.visibleCells as! [RecipeCollectionCell]
-      let bonds = recipeCV.bounds
       cells.forEach { (cell) in
-         cell.updateParallaxOffset(CollectionViewBonds: bonds)
+         cell.updateParallaxOffset(CollectionViewBonds: recipeCV.bounds)
       }
+      if scrollView.contentOffset.y <= 0.0 {
+         recipeSearchBar.isHidden = false
+      }else if (scrollView.contentOffset.y <= previousValue) {
+         recipeSearchBar.isHidden = false
+      } else  {
+         recipeSearchBar.isHidden = true
+      }
+       previousValue = scrollView.contentOffset.y
    }
    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
       let cells = collectionView.visibleCells as! [RecipeCollectionCell]
