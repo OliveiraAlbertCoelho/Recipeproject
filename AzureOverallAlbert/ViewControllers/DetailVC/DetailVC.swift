@@ -48,6 +48,13 @@ final class DetailVC: UIViewController {
       lottieview.animationSpeed = 2
       return lottieview
    }()
+   lazy var loadingAnimationView: AnimationView = {
+      let view = AnimationView()
+      view.animation = Animation.named("heartAction")
+      view.animationSpeed = 2
+      return view
+   }()
+   
    lazy var favoriteButton: UIButton = {
       let button = UIButton()
       button.addTarget(self, action: #selector(favoritePressed), for: .touchUpInside)
@@ -141,7 +148,7 @@ final class DetailVC: UIViewController {
    private func setFavoriteButtonState(){
       
       if RecipePersistence.manager.checkIfSave(id: recipeId){
-         lottieView.currentProgress = 1.0
+         heartAnimationView.currentProgress = 1.0
          isFavorited = true
       }
    }
@@ -151,7 +158,7 @@ final class DetailVC: UIViewController {
       servingsLabel.text = "Servings: \(recipeInfo?.servings.description ?? "")"
    }
    private func changeFavoriteButtonView(){
-      isFavorited ?  lottieView.play(fromProgress: lottieView.currentProgress, toProgress: 0, loopMode: nil, completion: nil) : lottieView.play()
+      isFavorited ?  heartAnimationView.play(fromProgress: heartAnimationView.currentProgress, toProgress: 0, loopMode: nil, completion: nil) : heartAnimationView.play()
       isFavorited = !isFavorited
    }
    private func fetchRecipeInfo(){

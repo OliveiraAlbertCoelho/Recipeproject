@@ -12,7 +12,6 @@ class MainTabBarController: UITabBarController{
    
    
    lazy var favoritesVC = UINavigationController(rootViewController: FavoritesVC())
-   
    lazy var browseVC =  UINavigationController(rootViewController: BrowseVC())
    
    
@@ -20,11 +19,8 @@ class MainTabBarController: UITabBarController{
    override func viewDidLoad() {
       super.viewDidLoad()
       setUpTabBar()
-      self.tabBar.barTintColor = .orange
-      tabBar.isTranslucent = false
-      tabBar.tintColor = .black
-      tabBar.unselectedItemTintColor = .black
-
+      tabBar.tintColor = .orange
+      tabBar.unselectedItemTintColor = .orange
    }
    private func setUpTabBar(){
       

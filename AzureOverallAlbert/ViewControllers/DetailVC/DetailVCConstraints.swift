@@ -108,23 +108,23 @@ extension DetailVC{
       ])
    }
     func constrainLottieView(){
-        bottomHeaderView.addSubview(lottieView)
-        lottieView.translatesAutoresizingMaskIntoConstraints = false
+        bottomHeaderView.addSubview(heartAnimationView)
+        heartAnimationView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-              lottieView.leadingAnchor.constraint(equalTo: recipeName.trailingAnchor, constant: 30),
-              lottieView.topAnchor.constraint(equalTo: recipeName.topAnchor, constant: 0),
-              lottieView.heightAnchor.constraint(equalToConstant: 60),
-              lottieView.widthAnchor.constraint(equalToConstant: 60)
+              heartAnimationView.leadingAnchor.constraint(equalTo: recipeName.trailingAnchor, constant: 30),
+              heartAnimationView.topAnchor.constraint(equalTo: recipeName.topAnchor, constant: 0),
+              heartAnimationView.heightAnchor.constraint(equalToConstant: 60),
+              heartAnimationView.widthAnchor.constraint(equalToConstant: 60)
            ])
      }
       func constrainButtonFavorite(){
-        lottieView.addSubview(favoriteButton)
+        heartAnimationView.addSubview(favoriteButton)
         favoriteButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-           favoriteButton.trailingAnchor.constraint(equalTo: lottieView.trailingAnchor, constant: 0),
-           favoriteButton.topAnchor.constraint(equalTo: lottieView.topAnchor, constant: 0),
-           favoriteButton.bottomAnchor.constraint(equalTo: lottieView.bottomAnchor),
-           favoriteButton.leadingAnchor.constraint(equalTo: lottieView.leadingAnchor),
+           favoriteButton.trailingAnchor.constraint(equalTo: heartAnimationView.trailingAnchor, constant: 0),
+           favoriteButton.topAnchor.constraint(equalTo: heartAnimationView.topAnchor, constant: 0),
+           favoriteButton.bottomAnchor.constraint(equalTo: heartAnimationView.bottomAnchor),
+           favoriteButton.leadingAnchor.constraint(equalTo: heartAnimationView.leadingAnchor),
         
         ])
      }

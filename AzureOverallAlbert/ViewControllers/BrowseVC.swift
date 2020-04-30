@@ -16,7 +16,6 @@ final class BrowseVC: UIViewController {
       setUpView()
       recipeCV.keyboardDismissMode = UIScrollView.KeyboardDismissMode.onDrag
       self.tabBarController?.delegate = self
-      navigationController?.navigationBar.barTintColor = .orange
    }
    var previousController: UIViewController?
    //MARK: - Variables
@@ -47,6 +46,7 @@ final class BrowseVC: UIViewController {
       cv.register(RecipeCollectionCell.self, forCellWithReuseIdentifier: "recipeCell")
       cv.backgroundColor = .white
       cv.delegate = self
+      cv.isSpringLoaded = false
       cv.dataSource = self
       return cv
    }()

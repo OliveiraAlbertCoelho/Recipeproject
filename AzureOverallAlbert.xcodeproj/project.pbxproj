@@ -157,6 +157,14 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
+		50881697245A7C98004623D8 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				5062B60F2459E8F300FA663E /* ButtonProtocol.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
 		50D7B52224324271007C4866 = {
 			isa = PBXGroup;
 			children = (
@@ -233,9 +241,9 @@
 		50ED88DA243251480092C94A /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				50881697245A7C98004623D8 /* Protocols */,
 				508644CD2433E29300002984 /* Network */,
 				508644CC2433E28800002984 /* Persistence */,
-				5062B60F2459E8F300FA663E /* ButtonProtocol.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
