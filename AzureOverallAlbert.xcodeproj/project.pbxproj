@@ -16,6 +16,7 @@
 		5085A2012457D10200588745 /* DetailVCConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5085A2002457D10200588745 /* DetailVCConstraints.swift */; };
 		508644CF2433E2BD00002984 /* PersistenceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508644CE2433E2BD00002984 /* PersistenceHelper.swift */; };
 		508644D12433E30A00002984 /* RecipePersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508644D02433E30A00002984 /* RecipePersistence.swift */; };
+		50881699245A7FE2004623D8 /* loadingView.json in Resources */ = {isa = PBXBuildFile; fileRef = 50881698245A7FE2004623D8 /* loadingView.json */; };
 		5097C7F32455523F00842D35 /* SectionsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5097C7F22455523F00842D35 /* SectionsHeaderView.swift */; };
 		50A1D16E245519560055FE38 /* NutritionCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A1D16D245519560055FE38 /* NutritionCVC.swift */; };
 		50D7B52F24324271007C4866 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D7B52E24324271007C4866 /* AppDelegate.swift */; };
@@ -56,6 +57,7 @@
 		5085A2002457D10200588745 /* DetailVCConstraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVCConstraints.swift; sourceTree = "<group>"; };
 		508644CE2433E2BD00002984 /* PersistenceHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistenceHelper.swift; sourceTree = "<group>"; };
 		508644D02433E30A00002984 /* RecipePersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipePersistence.swift; sourceTree = "<group>"; };
+		50881698245A7FE2004623D8 /* loadingView.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loadingView.json; sourceTree = "<group>"; };
 		5097C7F22455523F00842D35 /* SectionsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionsHeaderView.swift; sourceTree = "<group>"; };
 		50A1D16D245519560055FE38 /* NutritionCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NutritionCVC.swift; sourceTree = "<group>"; };
 		50D7B52B24324271007C4866 /* AzureOverallAlbert.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AzureOverallAlbert.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -222,6 +224,7 @@
 		50D7B559243246FF007C4866 /* Supporting */ = {
 			isa = PBXGroup;
 			children = (
+				50881698245A7FE2004623D8 /* loadingView.json */,
 				50E94E4D2458A9D100C2F1DE /* heartAction.json */,
 				50D7B53724324272007C4866 /* Assets.xcassets */,
 			);
@@ -344,6 +347,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				50881699245A7FE2004623D8 /* loadingView.json in Resources */,
 				50D7B53B24324272007C4866 /* LaunchScreen.storyboard in Resources */,
 				50E94E4E2458A9D100C2F1DE /* heartAction.json in Resources */,
 				50D7B53824324272007C4866 /* Assets.xcassets in Resources */,
