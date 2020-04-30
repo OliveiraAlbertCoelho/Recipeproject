@@ -18,6 +18,7 @@ final class FavoritesVC: UIViewController {
       super.viewWillAppear(true)
       loadRecipes()
       navigationController?.navigationBar.isHidden = false
+
    }
    
    

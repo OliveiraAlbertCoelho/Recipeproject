@@ -18,10 +18,19 @@ final class DetailVC: UIViewController {
       setUpConstraints()
       fetchRecipeInfo()
       setFavoriteButtonState()
+      loadingAnimationView.play()
    }
    override func viewWillAppear(_ animated: Bool) {
       super.viewWillAppear(true)
    }
+   override func viewWillDisappear(_ animated: Bool) {
+      super.viewWillDisappear(true)
+      self.navigationController?.navigationBar.isHidden = true
+      navigationItem.hidesBackButton = true
+
+
+   }
+
    //MARK: - Variables
    var recipeInfo: RecipeInfo?{
       didSet{
@@ -50,8 +59,7 @@ final class DetailVC: UIViewController {
    }()
       lazy var loadingAnimationView: AnimationView = {
          let view = AnimationView()
-         view.animation = Animation.named("loadingView")
-         view.animationSpeed = 2
+         view.animation = Animation.named("loading")
          view.loopMode = .loop
          return view
       }()
@@ -171,6 +179,7 @@ final class DetailVC: UIViewController {
             case .success(let recipeInfo):
                self.recipeInfo = recipeInfo
                self.loadingAnimationView.stop()
+               self.loadingAnimationView.isHidden = true
             }
          }
       }
@@ -193,7 +202,7 @@ final class DetailVC: UIViewController {
       constrainBackButton()
       constrainLottieView()
       constrainButtonFavorite()
-      loadingAnimationView()
+      constrainLoadingAnimationView()
    }
    
    //MARK: - Objc functions

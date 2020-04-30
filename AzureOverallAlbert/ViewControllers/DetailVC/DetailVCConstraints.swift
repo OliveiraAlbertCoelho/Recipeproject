@@ -35,7 +35,7 @@ extension DetailVC{
       view.addSubview(loadingAnimationView)
       loadingAnimationView.translatesAutoresizingMaskIntoConstraints = false
       NSLayoutConstraint.activate([
-         loadingAnimationView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+         loadingAnimationView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 100),
          loadingAnimationView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
          loadingAnimationView.heightAnchor.constraint(equalToConstant: 50),
          loadingAnimationView.widthAnchor.constraint(equalToConstant: 50),

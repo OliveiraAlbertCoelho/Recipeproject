@@ -12,10 +12,15 @@ final class BrowseVC: UIViewController {
    //MARK: - Lifecycle
    override func viewDidLoad() {
       super.viewDidLoad()
-      getRecipeData(searchInfo: "pizza")
+      getRecipeData(searchInfo: "burger")
       setUpView()
       recipeCV.keyboardDismissMode = UIScrollView.KeyboardDismissMode.onDrag
       self.tabBarController?.delegate = self
+   }
+   override func viewWillAppear(_ animated: Bool) {
+      super.viewWillAppear(true)
+      navigationController?.navigationBar.isHidden = false
+
    }
    var previousController: UIViewController?
    //MARK: - Variables
