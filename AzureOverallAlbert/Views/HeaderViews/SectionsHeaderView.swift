@@ -55,17 +55,16 @@ class SectionHeaderView: UITableViewHeaderFooterView {
    lazy var selectAllButton : UIButton = {
       let button = UIButton()
       button.setTitle("Select All", for: .normal)
-      button.setTitleColor(#colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1), for: .normal)
+      button.setTitleColor(.orange, for: .normal)
       button.addTarget(self, action: #selector(selectAllAction), for: .touchUpInside)
       return button
    }()
-   
    weak var delegate: ButtonProtocol?
    
    @objc func selectAllAction(){
       delegate?.pressAction(tag: expandableSectionButton.tag, type: .headerSec1)
    }
-   private func constrainInsideLabel(){
+   private func constrainTitleLabel(){
       addSubview(headerTitle)
       headerTitle.translatesAutoresizingMaskIntoConstraints = false
       NSLayoutConstraint.activate([
@@ -81,7 +80,7 @@ class SectionHeaderView: UITableViewHeaderFooterView {
          expandableSectionButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -30)
       ])
    }
-   private func constrainselectAllButton(){
+   private func constrainSelectAllItemsButton(){
       addSubview(selectAllButton)
       selectAllButton.translatesAutoresizingMaskIntoConstraints = false
       NSLayoutConstraint.activate([
@@ -90,4 +89,5 @@ class SectionHeaderView: UITableViewHeaderFooterView {
       ])
    }
 }
+
 
