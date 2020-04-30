@@ -17,6 +17,10 @@ final class DetailVC: UIViewController {
       setUpViewDesign()
       setUpConstraints()
       fetchRecipeInfo()
+      setFavoriteButtonState()
+   }
+   override func viewWillAppear(_ animated: Bool) {
+      super.viewWillAppear(true)
    }
    //MARK: - Variables
    var recipeInfo: RecipeInfo?{
@@ -26,9 +30,9 @@ final class DetailVC: UIViewController {
       }
    }
    
-   var check = false
+   var isFavorited = false
    var isExpanded = false
-   let recipeId = "324694"
+   var recipeId = Int()
    var recipe: RecipeWrapper?
    var headerHeight: CGFloat = 35
    //MARK: - UI Objects
@@ -41,7 +45,6 @@ final class DetailVC: UIViewController {
       let lottieview = AnimationView()
       lottieview.animation = Animation.named("heartAction")
       lottieview.animationSpeed = 2
-      //      lottieview.currentProgress = 1
       return lottieview
    }()
    lazy var favoriteButton: UIButton = {
@@ -78,16 +81,15 @@ final class DetailVC: UIViewController {
       layout.register(NutritionInfoCell.self, forCellReuseIdentifier: "nutritionCell")
       layout.register(RecipeIngredientsCell.self, forCellReuseIdentifier: "ingredientcell")
       layout.register(InstructionsTableViewCell.self, forCellReuseIdentifier: "instructionCell")
-      
       layout.separatorStyle = UITableViewCell.SeparatorStyle.none
-      layout.backgroundColor = #colorLiteral(red: 0.9489366412, green: 0.9490728974, blue: 0.9489069581, alpha: 1)
       layout.delegate = self
+      layout.backgroundColor = .white
       layout.dataSource = self
       return layout
    }()
    lazy var topHeaderView: UIView = {
       let header = UIView()
-      header.backgroundColor = #colorLiteral(red: 0.9489366412, green: 0.9490728974, blue: 0.9489069581, alpha: 1)
+      header.backgroundColor = .white
       return header
    }()
    lazy var servingsLabel: UILabel = {
@@ -134,14 +136,20 @@ final class DetailVC: UIViewController {
    
    //MARK: - Regular Functions
    
-   private func setUpRecipeView(){
-      if  RecipePersistence.manager.checkIfSave(id: recipe!.id){
+   private func setFavoriteButtonState(){
+      if RecipePersistence.manager.checkIfSave(id: recipeId){
          lottieView.currentProgress = 1.0
-         check = true
+         isFavorited = true
       }
+   }
+   private func setUpRecipeView(){
       recipeName.text = recipeInfo?.title ?? "not found"
       prepTimeLabel.text = "Prep Time: \(recipeInfo?.readyInMinutes.description ?? "")"
       servingsLabel.text = "Servings: \(recipeInfo?.servings.description ?? "")"
+   }
+   private func changeFavoriteButtonView(){
+      isFavorited ?  lottieView.play(fromProgress: lottieView.currentProgress, toProgress: 0, loopMode: nil, completion: nil) : lottieView.play()
+      isFavorited = !isFavorited
    }
    private func fetchRecipeInfo(){
       RecipeInfoFetcher.manager.fetchRecipeInfo(recipeId: recipe?.id.description ?? "") { (result) in
@@ -159,7 +167,6 @@ final class DetailVC: UIViewController {
       self.navigationController?.navigationBar.isHidden = true
       recipeInfoTableView.estimatedRowHeight = 80
       recipeInfoTableView.contentInset = UIEdgeInsets(top: 310, left: 0, bottom: 0, right: 0)
-      view.backgroundColor = #colorLiteral(red: 0.9489366412, green: 0.9490728974, blue: 0.9489069581, alpha: 1)
       view.addGestureRecognizer(swipeRight)
    }
    private func setUpConstraints(){
@@ -177,9 +184,9 @@ final class DetailVC: UIViewController {
    }
    
    //MARK: - Objc functions
+   
    @objc func favoritePressed(){
-      check ?  lottieView.play(fromProgress: lottieView.currentProgress, toProgress: 0, loopMode: nil, completion: nil) : lottieView.play()
-      check = !check
+      changeFavoriteButtonView()
       do {
          let image = recipeImageView.image?.jpegData(compressionQuality: 80)
          recipeInfo?.persistedImage = image

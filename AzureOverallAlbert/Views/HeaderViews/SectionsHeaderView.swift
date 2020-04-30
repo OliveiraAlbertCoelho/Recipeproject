@@ -11,7 +11,6 @@ import UIKit
 class SectionHeaderView: UIView {
    override init(frame: CGRect) {
       super.init(frame: frame)
-      setupView()
       constrainInsideLabel()
    }
    required init?(coder aDecoder: NSCoder) {
@@ -46,22 +45,19 @@ class SectionHeaderView: UIView {
    }()
    lazy var expandableSectionButton : UIButton = {
       let button = UIButton()
-      button.tintColor = .blue
+      button.tintColor = .orange
       button.setImage(UIImage(systemName: "plus"), for: .normal)
       button.addTarget(self, action: #selector(expandableAction), for: .touchUpInside)
       return button
    }()
    lazy var selectAllButton : UIButton = {
       let button = UIButton()
-      button.tintColor = .blue
       button.setTitle("Select All", for: .normal)
-      button.setTitleColor(#colorLiteral(red: 0.2196078449, green: 0.007843137719, blue: 0.8549019694, alpha: 1), for: .normal)
+      button.setTitleColor(#colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1), for: .normal)
       button.addTarget(self, action: #selector(selectAllAction), for: .touchUpInside)
       return button
    }()
-   private func setupView() {
-      backgroundColor = .clear
-   }
+ 
    weak var delegate: ButtonProtocol?
    @objc func expandableAction (){
       delegate?.pressAction(tag: expandableSectionButton.tag, type: .headerSec0)

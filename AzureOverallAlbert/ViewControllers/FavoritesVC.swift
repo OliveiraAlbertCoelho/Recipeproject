@@ -13,11 +13,16 @@ final class FavoritesVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpView()
+      view.backgroundColor = #colorLiteral(red: 0.8344202638, green: 0.8393380046, blue: 0.8478055596, alpha: 1)
+      navigationItem.title = "Favorites"
+      navigationController?.navigationBar.barTintColor = .orange
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         loadRecipes()
+      navigationController?.navigationBar.isHidden = false
     }
+   
    
     //MARK: - Variables
     var recipes = [RecipeInfo](){
@@ -47,8 +52,6 @@ final class FavoritesVC: UIViewController {
     }
     
     private func setUpView(){
-        view.backgroundColor = #colorLiteral(red: 0.8, green: 0.6718267202, blue: 0.3871548772, alpha: 0.4229719606)
-        self.navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.8, green: 0.6718267202, blue: 0.3871548772, alpha: 0.4229719606)
         constrainFavoritesCV()
     }
     //MARK: - Constraints
@@ -91,13 +94,18 @@ extension FavoritesVC: UICollectionViewDelegate, UICollectionViewDelegateFlowLay
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let detailVC = DetailVC()
-        detailVC.recipeInfo = recipes[indexPath.row]
-        detailVC.modalPresentationStyle = .fullScreen
+      let data = recipes[indexPath.row]
+      detailVC.recipeInfo = data
+      detailVC.recipeId = data.id
+      if let recipeImage = data.persistedImage{
+      detailVC.recipeImageView.image = UIImage(data: recipeImage)
+      }
      navigationController?.pushViewController(detailVC, animated: true)
 
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: favoritesCV.bounds.width, height: 250)
+      print(favoritesCV.bounds.width)
+      return CGSize(width: favoritesCV.bounds.width, height: 250)
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0

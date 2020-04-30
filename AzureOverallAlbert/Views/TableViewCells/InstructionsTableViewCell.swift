@@ -23,6 +23,7 @@ class InstructionsTableViewCell: UITableViewCell {
    lazy var stepNumber: UILabel = {
       let label = UILabel()
       label.font = .boldSystemFont(ofSize: 18)
+      label.textColor = .orange
       label.textAlignment = .center
       return label
    }()
@@ -35,7 +36,6 @@ class InstructionsTableViewCell: UITableViewCell {
    }()
    //MARK: - Regular Functions
    private func setUpView(){
-      contentView.backgroundColor = #colorLiteral(red: 0.9489366412, green: 0.9490728974, blue: 0.9489069581, alpha: 1)
       constrainStepTitle()
       constrainStepNumber()
    }

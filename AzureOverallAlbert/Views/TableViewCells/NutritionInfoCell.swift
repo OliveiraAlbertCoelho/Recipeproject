@@ -35,9 +35,9 @@ class NutritionInfoCell: UITableViewCell {
       layout.minimumLineSpacing = 10
       let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
       cv.register(NutritionCVC.self, forCellWithReuseIdentifier: "nutritionCVC")
-      cv.backgroundColor = #colorLiteral(red: 0.9489366412, green: 0.9490728974, blue: 0.9489069581, alpha: 1)
       cv.delegate = self
       cv.dataSource = self
+      cv.backgroundColor = .white
       cv.showsHorizontalScrollIndicator = false
       cv.clipsToBounds = true
       return cv

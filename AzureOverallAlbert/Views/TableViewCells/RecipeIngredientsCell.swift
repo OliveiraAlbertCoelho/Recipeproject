@@ -15,11 +15,12 @@ class RecipeIngredientsCell: UITableViewCell {
    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
       super.init(style: style, reuseIdentifier: reuseIdentifier)
       setUpView()
+      contentView.backgroundColor = .white
    }
    var buttonState = true{
       didSet{
       var type = String()
-      type = buttonState ?  "cart" :  "cart.badge.plus"
+      type = buttonState ?  "cart" :  "cart.fill"
             addIngredientButton.setImage(UIImage(systemName: type), for: .normal)
          }
       }
@@ -31,7 +32,7 @@ class RecipeIngredientsCell: UITableViewCell {
    lazy var addIngredientButton: UIButton = {
       let button = UIButton()
       button.setImage(UIImage(systemName: "cart"), for: .normal)
-      button.tintColor = .black
+      button.tintColor = .orange
       button.addTarget(self, action: #selector(addToCartAction), for: .touchUpInside)
       return button
    }()
@@ -43,7 +44,6 @@ class RecipeIngredientsCell: UITableViewCell {
    }()
    //MARK: - Regular Functions
    private func setUpView(){
-      contentView.backgroundColor = #colorLiteral(red: 0.9489366412, green: 0.9490728974, blue: 0.9489069581, alpha: 1)
       constrainIngredientButton()
       constrainIngredientTitleLabel()
    }

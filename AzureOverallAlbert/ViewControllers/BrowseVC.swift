@@ -28,12 +28,12 @@ final class BrowseVC: UIViewController {
    lazy var recipeSearchBar: UISearchBar = {
       let searchBar = UISearchBar()
       searchBar.delegate = self
-      searchBar.barTintColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
+      searchBar.barTintColor = #colorLiteral(red: 0.9332516789, green: 0.9333856702, blue: 0.9332222342, alpha: 1)
       return searchBar
    }()
    lazy var appTitleLabel: UILabel = {
       let label = UILabel()
-      label.text = "recipe Title"
+      label.text = "AzureOverall"
       label.textAlignment = .center
       label.font = UIFont(name: "SUGARCOOKIES", size: 20)
       return label
@@ -43,6 +43,7 @@ final class BrowseVC: UIViewController {
       layout.scrollDirection = .vertical
       let cv = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
       cv.register(RecipeCollectionCell.self, forCellWithReuseIdentifier: "recipeCell")
+      cv.backgroundColor = .white
       cv.delegate = self
       cv.dataSource = self
       return cv
@@ -54,9 +55,8 @@ final class BrowseVC: UIViewController {
       constrainRecipeCV()
    }
    private func setUpViewDesign(){
-      self.navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
       navigationItem.titleView = appTitleLabel
-      view.backgroundColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
+      view.backgroundColor = #colorLiteral(red: 0.8344202638, green: 0.8393380046, blue: 0.8478055596, alpha: 1)
    }
    private func getRecipeData(searchInfo: String){
       RecipeFetcher.manager.fetchRecipes(searchInfo: searchInfo) { (result) in
@@ -133,8 +133,10 @@ extension BrowseVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
             cellImage = i.recipeImage.image
          }
       }
+      let data = recipes[indexPath.row]
       let detailVC = DetailVC()
-      detailVC.recipe = recipes[indexPath.row]
+      detailVC.recipeId = data.id
+      detailVC.recipe = data
       detailVC.recipeImageView.image = cellImage
       navigationController?.pushViewController(detailVC, animated: true)
       
