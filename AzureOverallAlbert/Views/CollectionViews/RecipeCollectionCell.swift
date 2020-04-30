@@ -25,6 +25,9 @@ class RecipeCollectionCell: UICollectionViewCell {
          parallaxCenterYAnchor.constant = parallaxOffset
       }
    }
+   override func prepareForReuse() {
+      recipeImage.image = nil
+   }
    
    
    //MARK: - UI Objects
@@ -84,6 +87,7 @@ class RecipeCollectionCell: UICollectionViewCell {
       constrainTimePrepLabel()
       constrainNumServingsLabel()
       constrainRecipeName()
+      contentView.backgroundColor = .black
    }
    private func addLabelShadow() -> UILabel{
       let label = UILabel()

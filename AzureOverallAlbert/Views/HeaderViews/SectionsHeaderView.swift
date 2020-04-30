@@ -8,51 +8,41 @@
 
 import UIKit
 
-class SectionHeaderView: UIView {
+class SectionHeaderView: UITableViewHeaderFooterView {
+   
+   
+   override init(reuseIdentifier: String?) {
+      super.init(reuseIdentifier: reuseIdentifier)
+      constrainTitleLabel()
+   }
    required init?(coder aDecoder: NSCoder) {
-      super.init(coder: aDecoder)
+      fatalError("init(coder:) has not been implemented")
    }
-   override init(frame: CGRect) {
-      super.init(frame: frame)
-      constrainInsideLabel()
-
-
-   }
-   lazy var headerTap: UITapGestureRecognizer = {
-       let tapGesture = UITapGestureRecognizer(target: self, action: #selector(TapGestureRecognizer(gestureRecognizer:)))
+   lazy var headerViewTap: UITapGestureRecognizer = {
+      let tapGesture = UITapGestureRecognizer()
       return tapGesture
    }()
+   
    var headerType: ButtonType?{
       didSet{
          switch self.headerType {
          case .headerSec0:
             constrainExpandableSectionButton()
             headerTitle.text = "Nutrition"
-            self.addGestureRecognizer(headerTap)
+            self.addGestureRecognizer(headerViewTap)
          default:
             headerTitle.text = "Ingredients"
-            constrainselectAllButton()
+            constrainSelectAllItemsButton()
          }
       }
    }
-   @objc func TapGestureRecognizer(gestureRecognizer: UIGestureRecognizer) {
-   buttonState = !buttonState
 
-   }
-   
-   var buttonState = true{
-      didSet{
-         var type = String()
-         type = buttonState ?  "plus" :  "minus"
-         expandableSectionButton.setImage(UIImage(systemName: type), for: .normal)
-      }
-   }
    
    lazy var headerTitle: UILabel = {
       let label = UILabel()
-      label.text = "fdsfds"
-      label.textColor = .black
+      label.textColor = .orange
       label.textAlignment = .center
+      label.font = .boldSystemFont(ofSize: 18)
       return label
    }()
    lazy var expandableSectionButton : UIButton = {

@@ -20,6 +20,11 @@ class MainTabBarController: UITabBarController{
    override func viewDidLoad() {
       super.viewDidLoad()
       setUpTabBar()
+      self.tabBar.barTintColor = .orange
+      tabBar.isTranslucent = false
+      tabBar.tintColor = .black
+      tabBar.unselectedItemTintColor = .black
+
    }
    private func setUpTabBar(){
       

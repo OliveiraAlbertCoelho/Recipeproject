@@ -16,6 +16,7 @@ final class BrowseVC: UIViewController {
       setUpView()
       recipeCV.keyboardDismissMode = UIScrollView.KeyboardDismissMode.onDrag
       self.tabBarController?.delegate = self
+      navigationController?.navigationBar.barTintColor = .orange
    }
    var previousController: UIViewController?
    //MARK: - Variables
@@ -34,6 +35,7 @@ final class BrowseVC: UIViewController {
    lazy var appTitleLabel: UILabel = {
       let label = UILabel()
       label.text = "AzureOverall"
+      label.font = .boldSystemFont(ofSize: 20)
       label.textAlignment = .center
       label.font = UIFont(name: "SUGARCOOKIES", size: 20)
       return label

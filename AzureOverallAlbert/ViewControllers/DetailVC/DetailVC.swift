@@ -27,6 +27,7 @@ final class DetailVC: UIViewController {
       didSet{
          recipeInfoTableView.reloadData()
          setUpRecipeView()
+         favoriteButton.isEnabled = true
       }
    }
    
@@ -37,7 +38,7 @@ final class DetailVC: UIViewController {
    var headerHeight: CGFloat = 55
    //MARK: - UI Objects
    lazy var swipeRight: UISwipeGestureRecognizer = {
-      let swipe = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture(gesture:)))
+      let swipe = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture))
       swipe.direction = UISwipeGestureRecognizer.Direction.right
       return swipe
    }()
@@ -56,6 +57,7 @@ final class DetailVC: UIViewController {
       button.layer.shadowOpacity = 1.0
       button.layer.shadowRadius = 10.0
       button.layer.masksToBounds = false
+      button.isEnabled = false
       return button
    }()
    
@@ -137,7 +139,7 @@ final class DetailVC: UIViewController {
    //MARK: - Regular Functions
    
    private func setFavoriteButtonState(){
-    
+      
       if RecipePersistence.manager.checkIfSave(id: recipeId){
          lottieView.currentProgress = 1.0
          isFavorited = true
@@ -145,7 +147,7 @@ final class DetailVC: UIViewController {
    }
    private func setUpRecipeView(){
       recipeName.text = recipeInfo?.title ?? "not found"
-      prepTimeLabel.text = "Prep Time: \(recipeInfo?.readyInMinutes.description ?? "")"
+      prepTimeLabel.text = "PrepTime: \(recipeInfo?.readyInMinutes.description ?? "")mins"
       servingsLabel.text = "Servings: \(recipeInfo?.servings.description ?? "")"
    }
    private func changeFavoriteButtonView(){
@@ -185,7 +187,13 @@ final class DetailVC: UIViewController {
    }
    
    //MARK: - Objc functions
-   
+   @objc func nutritionViewTap(){
+      isExpanded = !isExpanded
+      let headerView =  recipeInfoTableView.headerView(forSection: 0) as? SectionHeaderView
+      let type = isExpanded ? "minus"  :  "plus"
+      headerView?.expandableSectionButton.setImage(UIImage(systemName: type), for: .normal)
+      isExpanded ?  recipeInfoTableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .fade) : recipeInfoTableView.deleteRows(at: [IndexPath(row: 0, section: 0)], with: .fade)
+   }
    @objc func favoritePressed(){
       changeFavoriteButtonView()
       do {
@@ -196,7 +204,7 @@ final class DetailVC: UIViewController {
          print(error)
       }
    }
-   @objc func respondToSwipeGesture(gesture: UIGestureRecognizer) {
+   @objc func respondToSwipeGesture() {
       let transition = CATransition()
       transition.duration = 0.3
       transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
@@ -225,19 +233,13 @@ extension DetailVC: UITableViewDelegate, UITableViewDataSource{
       }
    }
    
-   @objc func change(){
-//            if type == .headerSec0{
-               isExpanded = !isExpanded
-               isExpanded ?  recipeInfoTableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .fade) : recipeInfoTableView.deleteRows(at: [IndexPath(row: 0, section: 0)], with: .fade)
-//            }else {
-//            }
-   }
+   
    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
       let view = SectionHeaderView()
       switch  section {
       case 0:
          view.headerType = .headerSec0
-         view.headerTap.addTarget(self, action: #selector(change))
+         view.headerViewTap.addTarget(self, action: #selector(nutritionViewTap))
       case 1:
          view.headerType = .headerSec1
       default:
@@ -290,7 +292,6 @@ extension DetailVC: UITableViewDelegate, UITableViewDataSource{
       recipeHeaderHeight.constant = height
    }
    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-      
       return headerHeight
    }
    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
@@ -303,7 +304,6 @@ extension DetailVC: UITableViewDelegate, UITableViewDataSource{
 }
 extension DetailVC: ButtonProtocol{
    func pressAction(tag: Int, type: ButtonType) {
-
    }
 }
 
