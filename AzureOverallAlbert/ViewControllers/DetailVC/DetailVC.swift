@@ -42,18 +42,19 @@ final class DetailVC: UIViewController {
       swipe.direction = UISwipeGestureRecognizer.Direction.right
       return swipe
    }()
-   lazy var lottieView: AnimationView = {
+   lazy var heartAnimationView: AnimationView = {
       let lottieview = AnimationView()
       lottieview.animation = Animation.named("heartAction")
       lottieview.animationSpeed = 2
       return lottieview
    }()
-   lazy var loadingAnimationView: AnimationView = {
-      let view = AnimationView()
-      view.animation = Animation.named("heartAction")
-      view.animationSpeed = 2
-      return view
-   }()
+      lazy var loadingAnimationView: AnimationView = {
+         let view = AnimationView()
+         view.animation = Animation.named("loadingView")
+         view.animationSpeed = 2
+         view.loopMode = .loop
+         return view
+      }()
    
    lazy var favoriteButton: UIButton = {
       let button = UIButton()
@@ -169,6 +170,7 @@ final class DetailVC: UIViewController {
                print(error)
             case .success(let recipeInfo):
                self.recipeInfo = recipeInfo
+               self.loadingAnimationView.stop()
             }
          }
       }
@@ -191,6 +193,7 @@ final class DetailVC: UIViewController {
       constrainBackButton()
       constrainLottieView()
       constrainButtonFavorite()
+      loadingAnimationView()
    }
    
    //MARK: - Objc functions

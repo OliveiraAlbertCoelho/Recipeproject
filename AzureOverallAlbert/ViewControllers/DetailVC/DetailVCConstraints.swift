@@ -31,6 +31,16 @@ extension DetailVC{
          
       ])
    }
+   func constrainLoadingAnimationView(){
+      view.addSubview(loadingAnimationView)
+      loadingAnimationView.translatesAutoresizingMaskIntoConstraints = false
+      NSLayoutConstraint.activate([
+         loadingAnimationView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+         loadingAnimationView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+         loadingAnimationView.heightAnchor.constraint(equalToConstant: 50),
+         loadingAnimationView.widthAnchor.constraint(equalToConstant: 50),
+      ])
+   }
    
     func constrainTopHeaderView(){
       view.addSubview(topHeaderView)
