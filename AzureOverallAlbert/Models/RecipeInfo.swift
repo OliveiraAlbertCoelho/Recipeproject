@@ -37,6 +37,8 @@ struct Ingredients: Codable{
    let name: String
    let amount: Double
    let unit: String
+   var ingredientImageUrl: String {
+          return "https://spoonacular.com/cdn/ingredients_500x500/\(image)"}
    var ingredientAmount: String {
       return "\(amount.getMeasureFromDouble(value: amount)) \(unit) of \(name.capitalized)"
    }

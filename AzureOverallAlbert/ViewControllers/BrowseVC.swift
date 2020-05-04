@@ -131,13 +131,11 @@ extension BrowseVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
       cells.forEach { (cell) in
          cell.updateParallaxOffset(CollectionViewBonds: recipeCV.bounds)
       }
-      if scrollView.contentOffset.y <= 0.0 {
+      switch scrollView.contentOffset.y{
+      case let x  where  x <=  0.0 || x <= previousValue:
          recipeSearchBar.isHidden = false
-      }else if (scrollView.contentOffset.y <= previousValue) {
-         recipeSearchBar.isHidden = false
-      } else  {
-         recipeSearchBar.isHidden = true
-      }
+      default:
+         recipeSearchBar.isHidden = true}
       previousValue = scrollView.contentOffset.y
    }
    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

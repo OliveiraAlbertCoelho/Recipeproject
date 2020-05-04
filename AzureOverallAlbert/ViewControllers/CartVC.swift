@@ -19,7 +19,6 @@ class CartVC: UIViewController {
    override func viewWillAppear(_ animated: Bool) {
       super.viewWillAppear(true)
       getIngredients()
-      
    }
    //MARK: - Variables
    var ingredients = [Ingredients](){
@@ -30,7 +29,7 @@ class CartVC: UIViewController {
    //MARK: - UI Objects
    lazy var cartTableView: UITableView = {
       let layout = UITableView(frame: .zero, style: .plain)
-      layout.register(RecipeIngredientsCell.self, forCellReuseIdentifier: "ingredientCell")
+      layout.register(IngredientCartCell.self, forCellReuseIdentifier: "ingredientCell")
       layout.delegate = self
       layout.dataSource = self
       return layout
@@ -43,6 +42,7 @@ class CartVC: UIViewController {
          print(error)
       }
    }
+
    //MARK: - Constraints
    private func constraintCartTableView(){
       view.addSubview(cartTableView)
@@ -61,9 +61,21 @@ extension CartVC: UITableViewDelegate, UITableViewDataSource{
       return ingredients.count
    }
    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-      guard let cell = tableView.dequeueReusableCell(withIdentifier: "ingredientCell", for: indexPath)as? RecipeIngredientsCell else {return UITableViewCell()}
+      guard let cell = tableView.dequeueReusableCell(withIdentifier: "ingredientCell", for: indexPath)as? IngredientCartCell else {return UITableViewCell()}
       let data = ingredients[indexPath.row]
-      cell.ingredientTitleLabel.text = data.name
+      ImageHelper.shared.fetchImage(urlString: data.ingredientImageUrl) { (result) in
+         DispatchQueue.main.async {
+         switch result{
+         case .failure(let error):
+            print(error)
+         case .success(let image):
+      cell.ingredientPicture.image = image
+         }
+         }}
+      cell.ingredientTitleLabel.text = data.ingredientAmount
       return cell
+   }
+   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+      return 60
    }
 }
