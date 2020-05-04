@@ -36,6 +36,7 @@ class RecipeCollectionCell: UICollectionViewCell {
       image.contentMode = .scaleAspectFill
       image.alpha = 0.8
       image.clipsToBounds = true
+      
       return image
    }()
    lazy var recipeName: UILabel = {

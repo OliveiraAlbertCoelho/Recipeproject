@@ -30,7 +30,7 @@ class InstructionsTableViewCell: UITableViewCell {
    lazy var stepTitle: UILabel = {
       let label = UILabel()
       label.numberOfLines = 0
-      label.textAlignment = .left
+      label.textAlignment = .justified
       label.font = .systemFont(ofSize: 18)
       return label
    }()
@@ -51,7 +51,6 @@ class InstructionsTableViewCell: UITableViewCell {
          
       ])
    }
-   
    private func constrainStepTitle(){
       contentView.addSubview(stepTitle)
       stepTitle.translatesAutoresizingMaskIntoConstraints = false
@@ -59,9 +58,7 @@ class InstructionsTableViewCell: UITableViewCell {
          stepTitle.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0),
          stepTitle.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -15),
          stepTitle.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.85),
-         stepTitle.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0),
+         stepTitle.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
       ])
    }
-   
-   
 }

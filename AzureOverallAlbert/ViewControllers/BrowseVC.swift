@@ -157,7 +157,7 @@ extension BrowseVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
       
    }
    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-      return CGSize(width: recipeCV.bounds.width, height: 250)
+      return CGSize(width: recipeCV.bounds.width, height: 280)
    }
    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
       return 0

@@ -16,6 +16,11 @@ class CartVC: UIViewController {
       view.backgroundColor = .white
       constraintCartTableView()
    }
+   override func viewWillAppear(_ animated: Bool) {
+      super.viewWillAppear(true)
+      getIngredients()
+      
+   }
    //MARK: - Variables
    var ingredients = [Ingredients](){
       didSet{
@@ -34,7 +39,6 @@ class CartVC: UIViewController {
    private func getIngredients(){
       do{
          ingredients = try IngredientPersistence.manager.getIngredients()
-         
       }catch{
          print(error)
       }
@@ -51,14 +55,15 @@ class CartVC: UIViewController {
       ])
    }
 }
+
 extension CartVC: UITableViewDelegate, UITableViewDataSource{
    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
       return ingredients.count
    }
-   
    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-      <#code#>
+      guard let cell = tableView.dequeueReusableCell(withIdentifier: "ingredientCell", for: indexPath)as? RecipeIngredientsCell else {return UITableViewCell()}
+      let data = ingredients[indexPath.row]
+      cell.ingredientTitleLabel.text = data.name
+      return cell
    }
-   
-   
 }

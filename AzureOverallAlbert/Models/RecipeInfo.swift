@@ -38,8 +38,9 @@ struct Ingredients: Codable{
    let amount: Double
    let unit: String
    var ingredientAmount: String {
-      return "\(name.capitalized) \(amount) \(unit.capitalized)"
+      return "\(amount.getMeasureFromDouble(value: amount)) \(unit) of \(name.capitalized)"
    }
+
 }
 struct NutrientsWrapper: Codable {
    let nutrients: [Nutrients]
@@ -49,3 +50,30 @@ struct Nutrients: Codable {
    let amount: Double
    let unit: String
 }
+extension Double {
+    func getMeasureFromDouble( value: Double) -> String {
+         var doubleRemainder = value
+         var roundedDownStr = Int(doubleRemainder.rounded(.down)).description
+         doubleRemainder.formTruncatingRemainder(dividingBy: 1.0)
+         var measure = String()
+         switch doubleRemainder {
+         case 0.75:
+            measure = "3/4"
+         case 0.5:
+            measure = "1/2"
+         case 0.3333333333333333:
+            measure = "1/3"
+         case 0.16:
+            measure = "1/6"
+         case 0.12, 0.13:
+            measure = "1/8"
+         case 0.25:
+            measure = "1/4"
+         default:
+            measure = ""
+         }
+      if roundedDownStr == "0"{
+         roundedDownStr = ""
+      }
+         return "\(roundedDownStr) \(measure)"
+   }}

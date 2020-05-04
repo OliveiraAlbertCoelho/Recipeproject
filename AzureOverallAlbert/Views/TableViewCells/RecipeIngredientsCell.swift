@@ -36,12 +36,13 @@ class RecipeIngredientsCell: UITableViewCell {
       button.addTarget(self, action: #selector(addToCartAction), for: .touchUpInside)
       return button
    }()
-   
    lazy var ingredientTitleLabel: UILabel = {
       let label = UILabel()
       label.textColor = .black
+      label.numberOfLines = 0
       return label
    }()
+
    //MARK: - Regular Functions
    private func setUpView(){
       constrainIngredientButton()
@@ -73,6 +74,7 @@ class RecipeIngredientsCell: UITableViewCell {
          ingredientTitleLabel.heightAnchor.constraint(equalToConstant: 40),
       ])
    }
+
    
    
 }

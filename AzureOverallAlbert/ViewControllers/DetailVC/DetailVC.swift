@@ -99,8 +99,9 @@ final class DetailVC: UIViewController {
       layout.register(InstructionsTableViewCell.self, forCellReuseIdentifier: "instructionCell")
       layout.separatorStyle = UITableViewCell.SeparatorStyle.none
       layout.delegate = self
-      layout.backgroundColor = .white
       layout.dataSource = self
+      layout.backgroundColor = .white
+      layout.contentInset = UIEdgeInsets(top: 310, left: 0, bottom: 0, right: 0)
       return layout
    }()
    lazy var topHeaderView: UIView = {
@@ -184,8 +185,8 @@ final class DetailVC: UIViewController {
    }
    private func setUpViewDesign(){
       self.navigationController?.navigationBar.isHidden = true
-      recipeInfoTableView.estimatedRowHeight = 80
-      recipeInfoTableView.contentInset = UIEdgeInsets(top: 310, left: 0, bottom: 0, right: 0)
+      recipeInfoTableView.estimatedRowHeight = UITableView.automaticDimension
+    
       view.addGestureRecognizer(swipeRight)
    }
    private func setUpConstraints(){
@@ -250,7 +251,6 @@ extension DetailVC: UITableViewDelegate, UITableViewDataSource{
       }
    }
    
-   
    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
       let view = SectionHeaderView()
       switch  section {
@@ -279,7 +279,7 @@ extension DetailVC: UITableViewDelegate, UITableViewDataSource{
          let data = recipeInfo?.extendedIngredients[indexPath.row]
          cell.addIngredientButton.tag =  indexPath.row
          cell.delegate = self
-         cell.ingredientTitleLabel.text = data?.ingredientAmount
+         cell.ingredientTitleLabel.text = data?.ingredientAmount ?? ""
          return cell
       default:
          guard let cell = tableView.dequeueReusableCell(withIdentifier: "instructionCell", for: indexPath) as? InstructionsTableViewCell else {return UITableViewCell()}
@@ -302,7 +302,6 @@ extension DetailVC: UITableViewDelegate, UITableViewDataSource{
          return 0
       }
    }
-   
    func scrollViewDidScroll(_ scrollView: UIScrollView) {
       let y = 300 - (scrollView.contentOffset.y + 300)
       let height = min(max(y, 170), 400)
@@ -317,8 +316,10 @@ extension DetailVC: UITableViewDelegate, UITableViewDataSource{
    func numberOfSections(in tableView: UITableView) -> Int {
       return 3
    }
-   
 }
+
+
+
 extension DetailVC: ButtonProtocol{
    func pressAction(tag: Int, type: ButtonType) {
       if type == .cell{
