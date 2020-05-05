@@ -20,7 +20,7 @@ struct IngredientPersistence{
       return try persistenceHelper.getObjects()
    }
    func saveIngredient(info: Ingredients) throws{
-      if checkIfSave(id: info.id){
+      if checkIfSave(id: info.id, recipeId: info.recipeID?.description ?? ""){
          try deleteIngredient(id: info.id)
       }else {
          try persistenceHelper.save(newElement: info)
@@ -39,13 +39,13 @@ struct IngredientPersistence{
       try persistenceHelper.delete(num: ingredientIndex)
    }
    //Check if value id is in persisted list
-   func checkIfSave(id: Int) -> Bool{
+   func checkIfSave(id: Int, recipeId: String ) -> Bool{
       var ingredients = [Ingredients]()
       do {
          ingredients = try IngredientPersistence.manager.getIngredients()
       }catch{
          print(error)
       }
-      return ingredients.contains{$0.id == id}
+      return ingredients.contains{$0.id == id && $0.recipeID == recipeId}
    }
 }

@@ -154,12 +154,12 @@ final class DetailVC: UIViewController {
    //MARK: - Regular Functions
    
    private func setFavoriteButtonState(){
-      
       if RecipePersistence.manager.checkIfSave(id: recipeId){
          heartAnimationView.currentProgress = 1.0
          isFavorited = true
       }
    }
+
    private func setUpRecipeView(){
       recipeName.text = recipeInfo?.title ?? "not found"
       prepTimeLabel.text = "PrepTime: \(recipeInfo?.readyInMinutes.description ?? "")mins"
@@ -279,6 +279,7 @@ extension DetailVC: UITableViewDelegate, UITableViewDataSource{
          let data = recipeInfo?.extendedIngredients[indexPath.row]
          cell.addIngredientButton.tag =  indexPath.row
          cell.delegate = self
+         cell.buttonState =  IngredientPersistence.manager.checkIfSave(id: data?.id ?? 0, recipeId: recipeInfo?.id.description ?? "") ? false : true
          cell.ingredientTitleLabel.text = data?.ingredientAmount ?? ""
          return cell
       default:

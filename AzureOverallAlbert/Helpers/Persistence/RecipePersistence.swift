@@ -38,14 +38,14 @@ struct RecipePersistence{
     }
 
     //Check if value id is in persisted list
-    func checkIfSave(id: Int) -> Bool{
+   func checkIfSave(id: Int) -> Bool{
         var recipes = [RecipeInfo]()
         do {
             recipes = try RecipePersistence.manager.getRecipes()
         }catch{
             print(error)
         }
-        return recipes.contains{$0.id == id}
+      return recipes.contains{$0.id == id }
     }
 }
 //func editRecipe(id: Int, newElement: RecipeInfo) throws{

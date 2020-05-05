@@ -49,11 +49,10 @@ final class BrowseVC: UIViewController {
       layout.scrollDirection = .vertical
       let cv = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
       cv.register(RecipeCollectionCell.self, forCellWithReuseIdentifier: "recipeCell")
-      cv.backgroundColor = .red
+      cv.backgroundColor = .white
       cv.delegate = self
       cv.isSpringLoaded = false
       cv.dataSource = self
-      
       return cv
    }()
    //MARK: - Regular Functions
@@ -88,7 +87,7 @@ final class BrowseVC: UIViewController {
          recipeSearchBar.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
          recipeSearchBar.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
          recipeSearchBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0),
-         recipeSearchBar.heightAnchor.constraint(equalToConstant: 10)
+         recipeSearchBar.heightAnchor.constraint(equalToConstant: 50)
       ])
    }
    private func constrainRecipeCV(){
@@ -98,7 +97,7 @@ final class BrowseVC: UIViewController {
          recipeCV.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
          recipeCV.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
          recipeCV.topAnchor.constraint(equalTo: recipeSearchBar.bottomAnchor, constant: 0),
-         recipeSearchBar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0)
+         recipeCV.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0)
       ])
    }
    
@@ -132,12 +131,7 @@ extension BrowseVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
       cells.forEach { (cell) in
          cell.updateParallaxOffset(CollectionViewBonds: recipeCV.bounds)
       }
-//      switch scrollView.contentOffset.y{
-//      case let x  where  x <=  0.0 || x <= previousValue:
-//         recipeSearchBar.isHidden = false
-//      default:
-//         recipeSearchBar.isHidden = true}
-//      previousValue = scrollView.contentOffset.y
+
    }
    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
       let cells = collectionView.visibleCells as! [RecipeCollectionCell]
@@ -153,7 +147,6 @@ extension BrowseVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
       detailVC.recipe = data
       detailVC.recipeImageView.image = cellImage
       navigationController?.pushViewController(detailVC, animated: true)
-      
    }
    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
       return CGSize(width: recipeCV.bounds.width, height: 280)
@@ -201,3 +194,9 @@ struct VCPreviews: PreviewProvider {
 #endif
 
 
+//      switch scrollView.contentOffset.y{
+//      case let x  where  x <=  0.0 || x <= previousValue:
+//         recipeSearchBar.isHidden = false
+//      default:
+//         recipeSearchBar.isHidden = true}
+//      previousValue = scrollView.contentOffset.y
