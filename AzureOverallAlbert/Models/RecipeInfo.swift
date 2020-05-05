@@ -40,9 +40,19 @@ struct Ingredients: Codable{
    var fromRecipe: String?
    var recipeID: String?
    var ingredientImageUrl: String {
-          return "https://spoonacular.com/cdn/ingredients_500x500/\(image)"}
+      return "https://spoonacular.com/cdn/ingredients_500x500/\(image)"}
    var ingredientAmount: String {
       return "\(amount.getMeasureFromDouble(value: amount)) \(unit) of \(name.capitalized)"
+   }
+ static  func recipeNameForHeader(_ ingredients: [Ingredients])-> [String]{
+      var result = [String]()
+      for i in ingredients{
+         if let recipeName = i.fromRecipe{
+            if !result.contains(recipeName){
+               result.append(recipeName)}
+         }
+      }
+      return result
    }
    
 }
@@ -55,30 +65,30 @@ struct Nutrients: Codable {
    let unit: String
 }
 extension Double {
-    func getMeasureFromDouble( value: Double) -> String {
-         var doubleRemainder = value
-         var roundedDownStr = Int(doubleRemainder.rounded(.down)).description
-         doubleRemainder.formTruncatingRemainder(dividingBy: 1.0)
-         var measure = String()
-         switch doubleRemainder {
-         case 0.75:
-            measure = "3/4"
-         case 0.5:
-            measure = "1/2"
-         case 0.3333333333333333:
-            measure = "1/3"
-         case 0.16:
-            measure = "1/6"
-         case 0.12, 0.13:
-            measure = "1/8"
-         case 0.25:
-            measure = "1/4"
-         default:
-            measure = ""
-         }
+   func getMeasureFromDouble( value: Double) -> String {
+      var doubleRemainder = value
+      var roundedDownStr = Int(doubleRemainder.rounded(.down)).description
+      doubleRemainder.formTruncatingRemainder(dividingBy: 1.0)
+      var measure = String()
+      switch doubleRemainder {
+      case 0.75:
+         measure = "3/4"
+      case 0.5:
+         measure = "1/2"
+      case 0.3333333333333333:
+         measure = "1/3"
+      case 0.16:
+         measure = "1/6"
+      case 0.12, 0.13:
+         measure = "1/8"
+      case 0.25:
+         measure = "1/4"
+      default:
+         measure = ""
+      }
       if roundedDownStr == "0"{
          roundedDownStr = ""
       }
-         return "\(roundedDownStr) \(measure)"
+      return "\(roundedDownStr) \(measure)"
    }
 }

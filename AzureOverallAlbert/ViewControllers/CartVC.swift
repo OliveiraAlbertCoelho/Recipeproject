@@ -15,7 +15,7 @@ class CartVC: UIViewController {
       navigationItem.title = "Cart"
       view.backgroundColor = .white
       constraintCartTableView()
-     
+      
    }
    override func viewWillAppear(_ animated: Bool) {
       super.viewWillAppear(true)
@@ -25,16 +25,12 @@ class CartVC: UIViewController {
    //MARK: - Variables
    var ingredients = [Ingredients](){
       didSet{
-         headerTitle = ingredients.compactMap{$0.fromRecipe}
-
+         headerTitle = Ingredients.recipeNameForHeader(ingredients)
       }}
    
    var headerTitle =  [String](){
       didSet{
-         headerTitle = Array(Set(headerTitle))
-         print(headerTitle)
-                  cartTableView.reloadData()
-         
+         cartTableView.reloadData()
       }
    }
    
@@ -77,7 +73,7 @@ extension CartVC: UITableViewDelegate, UITableViewDataSource{
    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
       guard let cell = tableView.dequeueReusableCell(withIdentifier: "ingredientCell", for: indexPath)as? IngredientCartCell else {return UITableViewCell()}
       let filteredIngredient = ingredients.filter{$0.fromRecipe == headerTitle[indexPath.section]}
-       let ingredient = filteredIngredient[indexPath.row]
+      let ingredient = filteredIngredient[indexPath.row]
       ImageHelper.shared.fetchImage(urlString: ingredient.ingredientImageUrl) { (result) in
          DispatchQueue.main.async {
             switch result{
@@ -90,7 +86,7 @@ extension CartVC: UITableViewDelegate, UITableViewDataSource{
       
       cell.ingredientTitleLabel.text = ingredient.ingredientAmount
       return cell
-      }
+   }
    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
       return 60
    }
