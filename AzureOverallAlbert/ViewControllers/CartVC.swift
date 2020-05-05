@@ -38,6 +38,7 @@ class CartVC: UIViewController {
       let layout = UITableView(frame: .zero, style: .plain)
       layout.register(IngredientCartCell.self, forCellReuseIdentifier: "ingredientCell")
       layout.delegate = self
+      layout.allowsSelection = false
       layout.dataSource = self
       return layout
    }()

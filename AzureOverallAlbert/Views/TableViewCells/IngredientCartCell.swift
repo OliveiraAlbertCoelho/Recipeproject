@@ -29,7 +29,8 @@ class IngredientCartCell: UITableViewCell {
    }()
    lazy var checkButton: UIButton = {
       let button = UIButton()
-      button.setImage(UIImage(systemName: "minus"), for: .normal)
+      button.setImage(UIImage(systemName: "cart.badge.minus"), for: .normal)
+      button.tintColor = .orange
       button.addTarget(self, action: #selector(checkButtonAction), for: .touchUpInside)
       return button
    }()
@@ -68,9 +69,9 @@ class IngredientCartCell: UITableViewCell {
       contentView.addSubview(checkButton)
       checkButton.translatesAutoresizingMaskIntoConstraints = false
       NSLayoutConstraint.activate([
-         checkButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+         checkButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15),
          checkButton.topAnchor.constraint(equalTo: contentView.topAnchor),
-         checkButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),         checkButton.widthAnchor.constraint(equalToConstant: 30)
+         checkButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),         checkButton.widthAnchor.constraint(equalToConstant: 40)
       ])
    }
 }
