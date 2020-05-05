@@ -40,14 +40,14 @@ class IngredientCartCell: UITableViewCell {
       NSLayoutConstraint.activate([
          ingredientPicture.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
          ingredientPicture.topAnchor.constraint(equalTo: contentView.topAnchor),
-         ingredientPicture.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),         ingredientPicture.widthAnchor.constraint(equalToConstant: 100)
+         ingredientPicture.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),         ingredientPicture.widthAnchor.constraint(equalToConstant: 50)
       ])
    }
    private func constrainIngredientTitleLabel(){
       contentView.addSubview(ingredientTitleLabel)
       ingredientTitleLabel.translatesAutoresizingMaskIntoConstraints = false
       NSLayoutConstraint.activate([
-         ingredientTitleLabel.leadingAnchor.constraint(equalTo: ingredientPicture.trailingAnchor),
+         ingredientTitleLabel.leadingAnchor.constraint(equalTo: ingredientPicture.trailingAnchor, constant: 10),
          ingredientTitleLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
          ingredientTitleLabel.heightAnchor.constraint(equalToConstant: 50),        ingredientTitleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
       ])

@@ -37,12 +37,14 @@ struct Ingredients: Codable{
    let name: String
    let amount: Double
    let unit: String
+   var fromRecipe: String?
+   var recipeID: String?
    var ingredientImageUrl: String {
           return "https://spoonacular.com/cdn/ingredients_500x500/\(image)"}
    var ingredientAmount: String {
       return "\(amount.getMeasureFromDouble(value: amount)) \(unit) of \(name.capitalized)"
    }
-
+   
 }
 struct NutrientsWrapper: Codable {
    let nutrients: [Nutrients]
@@ -78,4 +80,5 @@ extension Double {
          roundedDownStr = ""
       }
          return "\(roundedDownStr) \(measure)"
-   }}
+   }
+}

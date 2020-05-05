@@ -323,8 +323,10 @@ extension DetailVC: UITableViewDelegate, UITableViewDataSource{
 extension DetailVC: ButtonProtocol{
    func pressAction(tag: Int, type: ButtonType) {
       if type == .cell{
-         if  let data = recipeInfo?.extendedIngredients[tag]{
+         if  var data = recipeInfo?.extendedIngredients[tag]{
             do{
+               data.recipeID = recipe?.id.description
+               data.fromRecipe = recipe?.title ?? ""
                try IngredientPersistence.manager.saveIngredient(info: data)}
             catch{
                print(error)

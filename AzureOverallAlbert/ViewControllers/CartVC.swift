@@ -42,7 +42,7 @@ class CartVC: UIViewController {
          print(error)
       }
    }
-
+   
    //MARK: - Constraints
    private func constraintCartTableView(){
       view.addSubview(cartTableView)
@@ -65,12 +65,12 @@ extension CartVC: UITableViewDelegate, UITableViewDataSource{
       let data = ingredients[indexPath.row]
       ImageHelper.shared.fetchImage(urlString: data.ingredientImageUrl) { (result) in
          DispatchQueue.main.async {
-         switch result{
-         case .failure(let error):
-            print(error)
-         case .success(let image):
-      cell.ingredientPicture.image = image
-         }
+            switch result{
+            case .failure(let error):
+               print(error)
+            case .success(let image):
+               cell.ingredientPicture.image = image
+            }
          }}
       cell.ingredientTitleLabel.text = data.ingredientAmount
       return cell
@@ -78,4 +78,5 @@ extension CartVC: UITableViewDelegate, UITableViewDataSource{
    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
       return 60
    }
+   
 }
