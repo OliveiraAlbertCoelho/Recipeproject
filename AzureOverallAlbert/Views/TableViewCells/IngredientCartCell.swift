@@ -35,8 +35,6 @@ class IngredientCartCell: UITableViewCell {
       return button
    }()
    weak var delegate: ButtonProtocol?
-
-   
    //MARK: - Regular functions
   @objc private func checkButtonAction(){
    delegate?.pressAction(tag: checkButton.tag, type: .cell)
