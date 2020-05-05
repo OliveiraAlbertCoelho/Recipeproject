@@ -15,17 +15,29 @@ class CartVC: UIViewController {
       navigationItem.title = "Cart"
       view.backgroundColor = .white
       constraintCartTableView()
+     
    }
    override func viewWillAppear(_ animated: Bool) {
       super.viewWillAppear(true)
       getIngredients()
+      
    }
    //MARK: - Variables
    var ingredients = [Ingredients](){
       didSet{
-         cartTableView.reloadData()
+         headerTitle = ingredients.compactMap{$0.fromRecipe}
+
+      }}
+   
+   var headerTitle =  [String](){
+      didSet{
+         headerTitle = Array(Set(headerTitle))
+         print(headerTitle)
+                  cartTableView.reloadData()
+         
       }
    }
+   
    //MARK: - UI Objects
    lazy var cartTableView: UITableView = {
       let layout = UITableView(frame: .zero, style: .plain)
@@ -58,12 +70,15 @@ class CartVC: UIViewController {
 
 extension CartVC: UITableViewDelegate, UITableViewDataSource{
    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-      return ingredients.count
+      let ingredientInSection = ingredients.filter { $0.fromRecipe == headerTitle[section]
+      }
+      return ingredientInSection.count
    }
    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
       guard let cell = tableView.dequeueReusableCell(withIdentifier: "ingredientCell", for: indexPath)as? IngredientCartCell else {return UITableViewCell()}
-      let data = ingredients[indexPath.row]
-      ImageHelper.shared.fetchImage(urlString: data.ingredientImageUrl) { (result) in
+      let filteredIngredient = ingredients.filter{$0.fromRecipe == headerTitle[indexPath.section]}
+       let ingredient = filteredIngredient[indexPath.row]
+      ImageHelper.shared.fetchImage(urlString: ingredient.ingredientImageUrl) { (result) in
          DispatchQueue.main.async {
             switch result{
             case .failure(let error):
@@ -72,11 +87,18 @@ extension CartVC: UITableViewDelegate, UITableViewDataSource{
                cell.ingredientPicture.image = image
             }
          }}
-      cell.ingredientTitleLabel.text = data.ingredientAmount
+      
+      cell.ingredientTitleLabel.text = ingredient.ingredientAmount
       return cell
-   }
+      }
    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
       return 60
+   }
+   func numberOfSections(in tableView: UITableView) -> Int {
+      return headerTitle.count
+   }
+   func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+      return headerTitle[section]
    }
    
 }

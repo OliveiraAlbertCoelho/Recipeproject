@@ -49,17 +49,18 @@ final class BrowseVC: UIViewController {
       layout.scrollDirection = .vertical
       let cv = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
       cv.register(RecipeCollectionCell.self, forCellWithReuseIdentifier: "recipeCell")
-      cv.backgroundColor = .white
+      cv.backgroundColor = .red
       cv.delegate = self
       cv.isSpringLoaded = false
       cv.dataSource = self
+      
       return cv
    }()
    //MARK: - Regular Functions
    private func setUpView(){
       setUpViewDesign()
-      constrainRecipeCV()
       constrainRecipeSearchBar()
+      constrainRecipeCV()
    }
    private func setUpViewDesign(){
       navigationItem.titleView = appTitleLabel
@@ -80,24 +81,24 @@ final class BrowseVC: UIViewController {
    
    //MARK: - Constraints
    private func constrainRecipeSearchBar(){
-      recipeCV.addSubview(recipeSearchBar)
+      view.addSubview(recipeSearchBar)
       recipeSearchBar.translatesAutoresizingMaskIntoConstraints = false
       view.bringSubviewToFront(recipeSearchBar)
       NSLayoutConstraint.activate([
-         recipeSearchBar.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 0),
-         recipeSearchBar.trailingAnchor.constraint(equalToSystemSpacingAfter: view.trailingAnchor, multiplier: 0),
-         recipeSearchBar.topAnchor.constraint(equalToSystemSpacingBelow: view.safeAreaLayoutGuide.topAnchor, multiplier: 0),
-         recipeSearchBar.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.05)
+         recipeSearchBar.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
+         recipeSearchBar.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
+         recipeSearchBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0),
+         recipeSearchBar.heightAnchor.constraint(equalToConstant: 10)
       ])
    }
    private func constrainRecipeCV(){
       view.addSubview(recipeCV)
       recipeCV.translatesAutoresizingMaskIntoConstraints = false
       NSLayoutConstraint.activate([
-         recipeCV.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 0),
-         recipeCV.trailingAnchor.constraint(equalToSystemSpacingAfter: view.trailingAnchor, multiplier: 0),
-         recipeCV.topAnchor.constraint(equalToSystemSpacingBelow: view.safeAreaLayoutGuide.topAnchor, multiplier: 0),
-         recipeCV.bottomAnchor.constraint(equalToSystemSpacingBelow: view.safeAreaLayoutGuide.bottomAnchor, multiplier: 0)
+         recipeCV.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
+         recipeCV.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
+         recipeCV.topAnchor.constraint(equalTo: recipeSearchBar.bottomAnchor, constant: 0),
+         recipeSearchBar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0)
       ])
    }
    
@@ -131,12 +132,12 @@ extension BrowseVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
       cells.forEach { (cell) in
          cell.updateParallaxOffset(CollectionViewBonds: recipeCV.bounds)
       }
-      switch scrollView.contentOffset.y{
-      case let x  where  x <=  0.0 || x <= previousValue:
-         recipeSearchBar.isHidden = false
-      default:
-         recipeSearchBar.isHidden = true}
-      previousValue = scrollView.contentOffset.y
+//      switch scrollView.contentOffset.y{
+//      case let x  where  x <=  0.0 || x <= previousValue:
+//         recipeSearchBar.isHidden = false
+//      default:
+//         recipeSearchBar.isHidden = true}
+//      previousValue = scrollView.contentOffset.y
    }
    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
       let cells = collectionView.visibleCells as! [RecipeCollectionCell]
