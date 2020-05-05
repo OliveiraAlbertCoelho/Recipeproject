@@ -27,10 +27,22 @@ class IngredientCartCell: UITableViewCell {
       label.numberOfLines = 0
    return label
    }()
-   //MARK: - Regular functions
+   lazy var checkButton: UIButton = {
+      let button = UIButton()
+      button.setImage(UIImage(systemName: "minus"), for: .normal)
+      button.addTarget(self, action: #selector(checkButtonAction), for: .touchUpInside)
+      return button
+   }()
+   weak var delegate: ButtonProtocol?
+
    
+   //MARK: - Regular functions
+  @objc private func checkButtonAction(){
+   delegate?.pressAction(tag: checkButton.tag, type: .cell)
+   }
    private func setUpView(){
       constrainIngredientPicture()
+      constrainCheckButton()
       constrainIngredientTitleLabel()
    }
    
@@ -49,7 +61,16 @@ class IngredientCartCell: UITableViewCell {
       NSLayoutConstraint.activate([
          ingredientTitleLabel.leadingAnchor.constraint(equalTo: ingredientPicture.trailingAnchor, constant: 10),
          ingredientTitleLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
-         ingredientTitleLabel.heightAnchor.constraint(equalToConstant: 50),        ingredientTitleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
+         ingredientTitleLabel.heightAnchor.constraint(equalToConstant: 50),        ingredientTitleLabel.trailingAnchor.constraint(equalTo: checkButton.leadingAnchor)
+      ])
+   }
+   private func constrainCheckButton(){
+      contentView.addSubview(checkButton)
+      checkButton.translatesAutoresizingMaskIntoConstraints = false
+      NSLayoutConstraint.activate([
+         checkButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+         checkButton.topAnchor.constraint(equalTo: contentView.topAnchor),
+         checkButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),         checkButton.widthAnchor.constraint(equalToConstant: 30)
       ])
    }
 }

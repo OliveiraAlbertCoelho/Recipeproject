@@ -33,7 +33,6 @@ class CartVC: UIViewController {
          cartTableView.reloadData()
       }
    }
-   
    //MARK: - UI Objects
    lazy var cartTableView: UITableView = {
       let layout = UITableView(frame: .zero, style: .plain)
@@ -83,7 +82,8 @@ extension CartVC: UITableViewDelegate, UITableViewDataSource{
                cell.ingredientPicture.image = image
             }
          }}
-      
+      cell.checkButton.tag = ingredient.id
+      cell.delegate = self
       cell.ingredientTitleLabel.text = ingredient.ingredientAmount
       return cell
    }
@@ -96,5 +96,13 @@ extension CartVC: UITableViewDelegate, UITableViewDataSource{
    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
       return headerTitle[section]
    }
-   
+}
+extension CartVC: ButtonProtocol{
+   func pressAction(tag: Int, type: ButtonType) {
+      do {try IngredientPersistence.manager.deleteIngredient(id: tag)}
+      catch{
+         print(error)
+      }
+      getIngredients()
+   }
 }

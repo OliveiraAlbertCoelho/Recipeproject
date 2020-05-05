@@ -22,6 +22,8 @@ final class DetailVC: UIViewController {
    }
    override func viewWillAppear(_ animated: Bool) {
       super.viewWillAppear(true)
+   recipeInfoTableView.reloadData()
+
    }
    override func viewWillDisappear(_ animated: Bool) {
       super.viewWillDisappear(true)
@@ -279,7 +281,7 @@ extension DetailVC: UITableViewDelegate, UITableViewDataSource{
          let data = recipeInfo?.extendedIngredients[indexPath.row]
          cell.addIngredientButton.tag =  indexPath.row
          cell.delegate = self
-         cell.buttonState =  IngredientPersistence.manager.checkIfSave(id: data?.id ?? 0, recipeId: recipeInfo?.id.description ?? "") ? false : true
+         cell.buttonState = IngredientPersistence.manager.checkIfSave(id: data?.id ?? 0, recipeId: recipeInfo?.id.description ?? "") ? false : true
          cell.ingredientTitleLabel.text = data?.ingredientAmount ?? ""
          return cell
       default:

@@ -62,7 +62,7 @@ class SectionHeaderView: UITableViewHeaderFooterView {
    weak var delegate: ButtonProtocol?
    
    @objc func selectAllAction(){
-      delegate?.pressAction(tag: expandableSectionButton.tag, type: .headerSec1)
+//      delegate?.pressAction(tag: expandableSectionButton.tag, type: .headerSec1)
    }
    private func constrainTitleLabel(){
       addSubview(headerTitle)
