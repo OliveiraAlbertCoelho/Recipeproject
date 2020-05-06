@@ -15,7 +15,7 @@ class DiscoverVC: UIViewController {
       setUpView()
    }
    //MARK: - Variables
-   var discoverTypes = ["Cuisine", "Diets", "Suggested"]
+   var discoverTypes = 
    //MARK: - UI Objects
    //MARK: - Objc Functions
    lazy var browseTableView: UITableView = {
@@ -51,6 +51,7 @@ extension DiscoverVC: UITableViewDelegate, UITableViewDataSource{
    }
    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
       guard let cell = tableView.dequeueReusableCell(withIdentifier: "recipes") as? RecipesTableViewCell else {return UITableViewCell()}
+      cell.types = ["a", "b", "c", "d"]
       return cell
    }
    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

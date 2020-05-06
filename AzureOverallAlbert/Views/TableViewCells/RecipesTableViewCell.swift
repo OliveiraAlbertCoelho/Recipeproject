@@ -18,6 +18,11 @@ class RecipesTableViewCell: UITableViewCell {
        fatalError("init(coder:) has not been implemented")
    }
    //MARK: - Variables
+   var types = [String](){
+      didSet{
+         discoverTypesCollectionView.reloadData()
+      }
+   }
    //MARK: - UI Objects
    lazy var discoverTypesCollectionView: UICollectionView = {
     let layout = UICollectionViewFlowLayout()
@@ -53,11 +58,13 @@ class RecipesTableViewCell: UITableViewCell {
 }
 extension RecipesTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-      return 10
+      return types.count
    }
    
    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
       guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "discoverCVC", for: indexPath) as? DiscoverTypesCollectionViewCell else {return UICollectionViewCell()}
+      let data = types[indexPath.row]
+      cell.titleLabel.text = data
       cell.backgroundColor = .blue
       return cell
    }
