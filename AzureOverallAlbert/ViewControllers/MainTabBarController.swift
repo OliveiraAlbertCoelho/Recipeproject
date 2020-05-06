@@ -12,7 +12,7 @@ class MainTabBarController: UITabBarController{
    
    
    lazy var favoritesVC = UINavigationController(rootViewController: FavoritesVC())
-   lazy var browseVC =  UINavigationController(rootViewController: BrowseVC())
+   lazy var discoverVC =  UINavigationController(rootViewController: DiscoverVC())
    lazy var cartVC = UINavigationController(rootViewController: CartVC())
    
    
@@ -24,10 +24,10 @@ class MainTabBarController: UITabBarController{
    }
    private func setUpTabBar(){
       
-      browseVC.tabBarItem = UITabBarItem(title: "Recipes", image: UIImage(systemName: "magnifyingglass.circle"), tag: 0)
+      discoverVC.tabBarItem = UITabBarItem(title: "Recipes", image: UIImage(systemName: "magnifyingglass.circle"), tag: 0)
       favoritesVC.tabBarItem = UITabBarItem(title: "Favorites", image: UIImage(systemName: "heart"), tag: 1)
       cartVC.tabBarItem = UITabBarItem(title: "Cart", image: UIImage(systemName: "cart"), tag: 2)
-      self.viewControllers = [browseVC,cartVC, favoritesVC]
+      self.viewControllers = [discoverVC,cartVC, favoritesVC]
    }
    
 }

@@ -9,10 +9,46 @@
 import UIKit
 
 class DiscoverVC: UIViewController {
-   
+      //MARK: - Lifecycle
    override func viewDidLoad() {
       super.viewDidLoad()
+   }
+   //MARK: - Variables
+   //MARK: - UI Objects
+   //MARK: - Objc Functions
+   lazy var browseTableView: UITableView = {
+      let layout = UITableView(frame: .zero, style: .plain)
+      layout.register(RecipesTableViewCell.self, forCellReuseIdentifier: "recipes")
+      layout.delegate = self
+      layout.dataSource = self
+      return layout
+   }()
+   //MARK: - Regular Functions
+   private func setUpView(){
+      view.backgroundColor = .white
+      constrainBrowseTableView()
+   }
+   //MARK: - Constraints
+   private func constrainBrowseTableView(){
+      view.addSubview(browseTableView)
+      browseTableView.translatesAutoresizingMaskIntoConstraints = false
+      NSLayoutConstraint.activate([
+         browseTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0),
+         browseTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0),
+         browseTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
+         browseTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
       
+      ])
+   }
+
+}
+extension DiscoverVC: UITableViewDelegate, UITableViewDataSource{
+   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+      return 3
    }
    
+   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+      guard let cell = tableView.dequeueReusableCell(withIdentifier: "recipes") as? RecipesTableViewCell else {return UITableViewCell()}
+      return cell
+   }
 }
