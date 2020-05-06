@@ -37,7 +37,7 @@ class IngredientCartCell: UITableViewCell {
    weak var delegate: ButtonProtocol?
    //MARK: - Regular functions
   @objc private func checkButtonAction(){
-   delegate?.pressAction(tag: checkButton.tag, type: .cell)
+   delegate?.pressAction(row: checkButton.tag, section: nil, type: .cell)
    }
    private func setUpView(){
       constrainIngredientPicture()

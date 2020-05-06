@@ -9,8 +9,9 @@
 import Foundation
 
 protocol ButtonProtocol: AnyObject {
-   func pressAction(tag: Int, type: ButtonType)
+   func pressAction(row: Int, section: Int?,  type: ButtonType)
    
+
 }
 enum ButtonType  {
    case headerSec1

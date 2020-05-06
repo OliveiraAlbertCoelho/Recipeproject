@@ -22,6 +22,8 @@ class DiscoverTypesCollectionViewCell: UICollectionViewCell {
    //MARK: - UI Objects
    lazy var titleLabel: UILabel = {
       let label = UILabel()
+      label.textAlignment = .center
+      label.font = .boldSystemFont(ofSize: 20)
       return label
    }()
    //MARK: - Objc Functions
@@ -35,10 +37,10 @@ class DiscoverTypesCollectionViewCell: UICollectionViewCell {
       contentView.addSubview(titleLabel)
       titleLabel.translatesAutoresizingMaskIntoConstraints = false
       NSLayoutConstraint.activate([
-         titleLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
          titleLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
          titleLabel.heightAnchor.constraint(equalToConstant: 40),
-         titleLabel.widthAnchor.constraint(equalToConstant: 40)
+         titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0),
+         titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0)
       ])
    }
    //MARK: - Constraints

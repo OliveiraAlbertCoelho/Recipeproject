@@ -8,6 +8,7 @@
 
 import Foundation
 struct DiscoverModel {
+   let titles: [String]
    let cuisines: [String]
    let diets: [String]
    let suggests: [String]
@@ -17,5 +18,6 @@ struct DiscoverModel {
       self.diets = ["Gluten Free","Ketogenic","Vegetarian", "Lacto-Vegetarian", "Ovo-Vegetarian", "Vegan", "Pescetarian", "Paleo", "Primal", "Whole30"]
       self.suggests = ["stuff"]
       self.discoverTypes = [cuisines, diets, suggests ]
+      self.titles = ["Cuisines", "Diets", "Suggestions"]
    }
 }

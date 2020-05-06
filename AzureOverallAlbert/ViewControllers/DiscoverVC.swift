@@ -14,8 +14,9 @@ class DiscoverVC: UIViewController {
       super.viewDidLoad()
       setUpView()
    }
+   var section = Int()
    //MARK: - Variables
-   var discoverTypes = 
+   var discoverTypes = DiscoverModel()
    //MARK: - UI Objects
    //MARK: - Objc Functions
    lazy var browseTableView: UITableView = {
@@ -25,9 +26,15 @@ class DiscoverVC: UIViewController {
       layout.dataSource = self
       return layout
    }()
+   lazy var discoverSearchBar: UISearchBar = {
+      let searchBar = UISearchBar()
+      return searchBar
+   }()
+   
    //MARK: - Regular Functions
    private func setUpView(){
       view.backgroundColor = .white
+      constrainDiscoverSearchBar()
       constrainBrowseTableView()
    }
    //MARK: - Constraints
@@ -35,10 +42,21 @@ class DiscoverVC: UIViewController {
       view.addSubview(browseTableView)
       browseTableView.translatesAutoresizingMaskIntoConstraints = false
       NSLayoutConstraint.activate([
-         browseTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0),
+         browseTableView.topAnchor.constraint(equalTo: discoverSearchBar.bottomAnchor, constant: 0),
          browseTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0),
          browseTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
          browseTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
+      
+      ])
+   }
+   private func constrainDiscoverSearchBar(){
+      view.addSubview(discoverSearchBar)
+      discoverSearchBar.translatesAutoresizingMaskIntoConstraints = false
+      NSLayoutConstraint.activate([
+         discoverSearchBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0),
+         discoverSearchBar.heightAnchor.constraint(equalToConstant: 50),
+         discoverSearchBar.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
+         discoverSearchBar.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
       
       ])
    }
@@ -47,20 +65,33 @@ class DiscoverVC: UIViewController {
 extension DiscoverVC: UITableViewDelegate, UITableViewDataSource{
    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
       return 1
-      
    }
    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
       guard let cell = tableView.dequeueReusableCell(withIdentifier: "recipes") as? RecipesTableViewCell else {return UITableViewCell()}
-      cell.types = ["a", "b", "c", "d"]
+      let data = discoverTypes.discoverTypes[indexPath.section]
+      cell.types = data
+      cell.delegate = self
+      cell.searchStringType = discoverTypes.titles[indexPath.section]
       return cell
    }
    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
       return 200
    }
    func numberOfSections(in tableView: UITableView) -> Int {
-      return discoverTypes.count
+      print(discoverTypes.discoverTypes.count)
+      return discoverTypes.discoverTypes.count
    }
    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-      return discoverTypes[section]
+      return discoverTypes.titles[section]
    }
+  
+}
+extension DiscoverVC: ButtonProtocol{
+   func pressAction(row: Int, section: Int?, type: ButtonType) {
+   }
+   
+  
+
+   
+   
 }

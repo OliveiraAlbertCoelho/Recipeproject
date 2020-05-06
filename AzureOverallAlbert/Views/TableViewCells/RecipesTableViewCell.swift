@@ -23,6 +23,8 @@ class RecipesTableViewCell: UITableViewCell {
          discoverTypesCollectionView.reloadData()
       }
    }
+   weak var delegate: ButtonProtocol?
+   var searchStringType = String()
    //MARK: - UI Objects
    lazy var discoverTypesCollectionView: UICollectionView = {
     let layout = UICollectionViewFlowLayout()
@@ -32,7 +34,7 @@ class RecipesTableViewCell: UITableViewCell {
       cv.register(DiscoverTypesCollectionViewCell.self, forCellWithReuseIdentifier: "discoverCVC")
       cv.delegate = self
       cv.dataSource = self
-      cv.backgroundColor = .red
+      cv.backgroundColor = .clear
       cv.showsHorizontalScrollIndicator = false
       cv.clipsToBounds = true
       return cv
@@ -40,7 +42,7 @@ class RecipesTableViewCell: UITableViewCell {
    //MARK: - Objc Functions
    //MARK: - Regular Functions
    private func setUpContentView(){
-      contentView.backgroundColor = .red
+      contentView.backgroundColor = .clear
       constrainDiscoverTypesCollectionView()
    }
    //MARK: - Constraints
@@ -65,10 +67,15 @@ extension RecipesTableViewCell: UICollectionViewDelegate, UICollectionViewDataSo
       guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "discoverCVC", for: indexPath) as? DiscoverTypesCollectionViewCell else {return UICollectionViewCell()}
       let data = types[indexPath.row]
       cell.titleLabel.text = data
-      cell.backgroundColor = .blue
       return cell
    }
+   
    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
       return CGSize(width: contentView.frame.width/2.5, height: contentView.frame.height)
    }
+   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+      delegate?.pressAction(row: indexPath.row, section: indexPath.section, type: .cell)
+      print(indexPath.row)
+   }
+   
 }

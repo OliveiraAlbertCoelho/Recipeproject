@@ -329,9 +329,11 @@ extension DetailVC: UITableViewDelegate, UITableViewDataSource{
 
 
 extension DetailVC: ButtonProtocol{
-   func pressAction(tag: Int, type: ButtonType) {
+ 
+   
+   func pressAction(row: Int, section: Int?, type: ButtonType) {
       if type == .cell{
-         if  var data = recipeInfo?.extendedIngredients[tag]{
+         if  var data = recipeInfo?.extendedIngredients[row]{
             do{
                data.recipeID = recipe?.id.description
                data.fromRecipe = recipe?.title ?? ""
