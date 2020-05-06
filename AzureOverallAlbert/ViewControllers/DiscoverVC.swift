@@ -13,6 +13,7 @@ class DiscoverVC: UIViewController {
    override func viewDidLoad() {
       super.viewDidLoad()
       setUpView()
+      navigationItem.title = "Discover"
    }
    var section = Int()
    //MARK: - Variables
@@ -71,27 +72,32 @@ extension DiscoverVC: UITableViewDelegate, UITableViewDataSource{
       let data = discoverTypes.discoverTypes[indexPath.section]
       cell.types = data
       cell.delegate = self
-      cell.searchStringType = discoverTypes.titles[indexPath.section]
+      cell.searchStringType = indexPath.section
       return cell
    }
    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
       return 200
    }
    func numberOfSections(in tableView: UITableView) -> Int {
-      print(discoverTypes.discoverTypes.count)
       return discoverTypes.discoverTypes.count
    }
    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
       return discoverTypes.titles[section]
    }
-  
 }
-extension DiscoverVC: ButtonProtocol{
-   func pressAction(row: Int, section: Int?, type: ButtonType) {
+extension DiscoverVC: DiscoverTypeProtocol{
+   func pressAction(row: Int, type: Int) {
+      let browseVc = BrowseVC()
+      switch type {
+      case 0:
+         browseVc.searchType = .cuisine
+      case 1:
+         browseVc.searchType = .diet
+      default:
+         browseVc.searchType = .suggestion
+      }
+      browseVc.searchStr = discoverTypes.discoverTypes[type][row]
+      navigationController?.pushViewController(browseVc, animated: true)
    }
-   
-  
-
-   
    
 }

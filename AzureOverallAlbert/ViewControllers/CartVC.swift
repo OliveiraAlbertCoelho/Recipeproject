@@ -99,7 +99,7 @@ extension CartVC: UITableViewDelegate, UITableViewDataSource{
    }
 }
 extension CartVC: ButtonProtocol{
-   func pressAction(row: Int, section: Int?, type: ButtonType) {
+   func pressAction(row: Int, type: ButtonType) {
         do {try IngredientPersistence.manager.deleteIngredient(id: row)}
           catch{
              print(error)

@@ -49,7 +49,7 @@ class RecipeIngredientsCell: UITableViewCell {
       constrainIngredientTitleLabel()
    }
    @objc func addToCartAction(){
-      delegate?.pressAction(row: addIngredientButton.tag, section: nil, type: .cell)
+      delegate?.pressAction(row: addIngredientButton.tag, type: .cell)
       buttonState = !buttonState
    }
    //MARK: - Constraints

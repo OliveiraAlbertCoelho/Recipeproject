@@ -23,8 +23,8 @@ class RecipesTableViewCell: UITableViewCell {
          discoverTypesCollectionView.reloadData()
       }
    }
-   weak var delegate: ButtonProtocol?
-   var searchStringType = String()
+   weak var delegate: DiscoverTypeProtocol?
+   var searchStringType = Int()
    //MARK: - UI Objects
    lazy var discoverTypesCollectionView: UICollectionView = {
     let layout = UICollectionViewFlowLayout()
@@ -71,11 +71,12 @@ extension RecipesTableViewCell: UICollectionViewDelegate, UICollectionViewDataSo
    }
    
    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-      return CGSize(width: contentView.frame.width/2.5, height: contentView.frame.height)
+      if types.count > 5{
+        return CGSize(width: contentView.frame.width/2.5, height: contentView.frame.height/3)
+      }
+       return CGSize(width: contentView.frame.width/2.5, height: contentView.frame.height)
    }
    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-      delegate?.pressAction(row: indexPath.row, section: indexPath.section, type: .cell)
-      print(indexPath.row)
+      delegate?.pressAction(row: indexPath.row, type: searchStringType)
    }
-   
 }
