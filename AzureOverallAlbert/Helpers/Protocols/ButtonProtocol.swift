@@ -9,8 +9,11 @@
 import Foundation
 
 protocol ButtonProtocol: AnyObject {
-   func pressAction(row: Int, section: Int?,  type: ButtonType)
+   func pressAction(row: Int, type: ButtonType)
    
+}
+protocol DiscoverTypeProtocol: AnyObject {
+      func pressAction(row: Int, type: Int)
 
 }
 enum ButtonType  {

@@ -10,14 +10,23 @@ import Foundation
 
 class RecipeFetcher {
    static let manager = RecipeFetcher()
-   func fetchRecipes(searchInfo: String, completionHandler: @escaping(Result<[RecipeWrapper], NetWorkError>)-> ()){
-      let randomRecipes = ["pizza", "burger", "cake", "pasta", "cake", "juice"]
-      var search = searchInfo.replacingOccurrences(of: " ", with: "-")
-      if searchInfo.isEmpty {
-         search = randomRecipes.randomElement() ?? "pizza"
+   func fetchRecipes(searchInfo: String, searchType: SearchType, completionHandler: @escaping(Result<[RecipeWrapper], NetWorkError>)-> ()){
+    var search = searchInfo.replacingOccurrences(of: " ", with: "-")
+      var urlString = "https://api.spoonacular.com/recipes/search?&query=\(search)&limitLicense=false&number=10&apiKey=\(Secrets.apiKey)"
+      switch searchType {
+      case .suggestion:
+         let randomRecipes = ["pizza", "burger", "cake", "pasta", "cake", "juice"]
+         if searchInfo.isEmpty {
+            search = randomRecipes.randomElement() ?? "pizza"
+         }
+      case .diet:
+        urlString = "https://api.spoonacular.com/recipes/search?&diet=\(search)&limitLicense=false&number=10&apiKey=\(Secrets.apiKey)"
+         
+      default:
+         urlString =    "https://api.spoonacular.com/recipes/search?&cuisine=\(search)&limitLicense=false&number=10&apiKey=\(Secrets.apiKey)"
       }
-      let urlString = "https://api.spoonacular.com/recipes/search?&query=\(search)&limitLicense=false&number=10&apiKey=\(Secrets.apiKey)"
       print(urlString)
+      
       NetworkManager.manager.fetchData(urlString: urlString) { (result) in
          switch result{
          case .failure(let error):
@@ -33,4 +42,9 @@ class RecipeFetcher {
          }
       }
    }
+}
+enum SearchType {
+   case diet
+   case cuisine
+   case suggestion
 }
