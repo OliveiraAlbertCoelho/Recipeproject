@@ -42,7 +42,20 @@ struct Ingredients: Codable{
    var ingredientImageUrl: String {
       return "https://spoonacular.com/cdn/ingredients_500x500/\(image)"}
    var ingredientAmount: String {
-      return "\(amount.getMeasureFromDouble(value: amount)) \(unit) of \(name.capitalized)"
+      if unit.isEmpty {
+         return "\(amount.getMeasureFromDouble(value: amount)) \(name.capitalized)"
+      }
+      return "\(amount.getMeasureFromDouble(value: amount)) \(unitFormat) of \(name.capitalized)"
+   }
+   var unitFormat: String {
+      switch unit {
+      case "teaspoons", "teaspoon" :
+         return "tspn"
+      case "tablespoon", "tablespoons" :
+         return "tbsp"
+      default:
+         return unit
+      }
    }
  static  func recipeNameForHeader(_ ingredients: [Ingredients])-> [String]{
       var result = [String]()
@@ -77,6 +90,8 @@ extension Double {
          measure = "1/2"
       case 0.3333333333333333:
          measure = "1/3"
+      case 0.6666666666666666:
+         measure = "2/3"
       case 0.16:
          measure = "1/6"
       case 0.12, 0.13:
@@ -87,7 +102,7 @@ extension Double {
          measure = ""
       }
       if roundedDownStr == "0"{
-         roundedDownStr = ""
+        return measure
       }
       return "\(roundedDownStr) \(measure)"
    }

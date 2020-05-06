@@ -22,6 +22,7 @@
 		508644D12433E30A00002984 /* RecipePersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508644D02433E30A00002984 /* RecipePersistence.swift */; };
 		5097C7F32455523F00842D35 /* SectionsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5097C7F22455523F00842D35 /* SectionsHeaderView.swift */; };
 		50A1D16E245519560055FE38 /* NutritionCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A1D16D245519560055FE38 /* NutritionCVC.swift */; };
+		50CB9B6D24631EED00C09D11 /* DiscoverVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CB9B6C24631EED00C09D11 /* DiscoverVC.swift */; };
 		50D7B52F24324271007C4866 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D7B52E24324271007C4866 /* AppDelegate.swift */; };
 		50D7B53124324271007C4866 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D7B53024324271007C4866 /* SceneDelegate.swift */; };
 		50D7B53824324272007C4866 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 50D7B53724324272007C4866 /* Assets.xcassets */; };
@@ -66,6 +67,7 @@
 		508644D02433E30A00002984 /* RecipePersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipePersistence.swift; sourceTree = "<group>"; };
 		5097C7F22455523F00842D35 /* SectionsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionsHeaderView.swift; sourceTree = "<group>"; };
 		50A1D16D245519560055FE38 /* NutritionCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NutritionCVC.swift; sourceTree = "<group>"; };
+		50CB9B6C24631EED00C09D11 /* DiscoverVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverVC.swift; sourceTree = "<group>"; };
 		50D7B52B24324271007C4866 /* AzureOverallAlbert.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AzureOverallAlbert.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		50D7B52E24324271007C4866 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		50D7B53024324271007C4866 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -226,6 +228,7 @@
 				50D7B55A24324825007C4866 /* BrowseVC.swift */,
 				50126AAC245B334A00AD55F4 /* CartVC.swift */,
 				50ED88D524324B6E0092C94A /* MainTabBarController.swift */,
+				50CB9B6C24631EED00C09D11 /* DiscoverVC.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -385,6 +388,7 @@
 				508644D12433E30A00002984 /* RecipePersistence.swift in Sources */,
 				50ED88E1243258390092C94A /* Recipes.swift in Sources */,
 				50F84A402454EABD0009787A /* RecipeInfoFetcher.swift in Sources */,
+				50CB9B6D24631EED00C09D11 /* DiscoverVC.swift in Sources */,
 				50ED88D924324D860092C94A /* RecipeCollectionCell.swift in Sources */,
 				50D7B558243246EA007C4866 /* FavoritesVC.swift in Sources */,
 				50F84A422454F2FB0009787A /* NutritionInfoCell.swift in Sources */,

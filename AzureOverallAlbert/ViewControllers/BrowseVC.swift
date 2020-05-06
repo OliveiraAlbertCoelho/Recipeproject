@@ -145,6 +145,7 @@ extension BrowseVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
       let detailVC = DetailVC()
       detailVC.recipeId = data.id
       detailVC.recipe = data
+      detailVC.detailType = .regular
       detailVC.recipeImageView.image = cellImage
       navigationController?.pushViewController(detailVC, animated: true)
    }
@@ -160,6 +161,7 @@ extension BrowseVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
 extension BrowseVC: UISearchBarDelegate{
    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String){
       getRecipeData(searchInfo: searchBar.text ?? "")
+      
    }
    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
       searchBar.resignFirstResponder()

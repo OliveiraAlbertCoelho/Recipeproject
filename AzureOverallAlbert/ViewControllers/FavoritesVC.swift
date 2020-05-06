@@ -98,6 +98,7 @@ extension FavoritesVC: UICollectionViewDelegate, UICollectionViewDelegateFlowLay
       let data = recipes[indexPath.row]
       detailVC.recipeInfo = data
       detailVC.recipeId = data.id
+      detailVC.detailType = .persisted
       if let recipeImage = data.persistedImage{
          detailVC.recipeImageView.image = UIImage(data: recipeImage)
       }

@@ -18,7 +18,7 @@ final class DetailVC: UIViewController {
       setUpViewDesign()
       setUpConstraints()
       setFavoriteButtonState()
-      loadingAnimationView.play()
+      startLoadingView()
    }
    override func viewWillAppear(_ animated: Bool) {
       super.viewWillAppear(true)
@@ -39,7 +39,8 @@ final class DetailVC: UIViewController {
          favoriteButton.isEnabled = true
       }
    }
-   
+  
+   var detailType: DetailType?
    var isFavorited = false
    var isExpanded = false
    var recipeId = Int()
@@ -161,7 +162,11 @@ final class DetailVC: UIViewController {
          isFavorited = true
       }
    }
-
+   private func startLoadingView(){
+        if detailType == .regular{
+           loadingAnimationView.play()
+        }
+     }
    private func setUpRecipeView(){
       recipeName.text = recipeInfo?.title ?? "not found"
       prepTimeLabel.text = "PrepTime: \(recipeInfo?.readyInMinutes.description ?? "")mins"
@@ -355,6 +360,9 @@ struct DetailVCPreviews: PreviewProvider {
    }
 }
 #endif
-
+enum DetailType {
+   case persisted
+   case regular
+}
 
 
