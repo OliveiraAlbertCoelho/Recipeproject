@@ -23,7 +23,6 @@ class DiscoverVC: UIViewController {
       layout.register(RecipesTableViewCell.self, forCellReuseIdentifier: "recipes")
       layout.delegate = self
       layout.dataSource = self
-      layout.backgroundColor = .white
       return layout
    }()
    //MARK: - Regular Functions
@@ -47,10 +46,20 @@ class DiscoverVC: UIViewController {
 }
 extension DiscoverVC: UITableViewDelegate, UITableViewDataSource{
    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-      return discoverTypes.count
+      return 1
+      
    }
    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
       guard let cell = tableView.dequeueReusableCell(withIdentifier: "recipes") as? RecipesTableViewCell else {return UITableViewCell()}
       return cell
+   }
+   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+      return 200
+   }
+   func numberOfSections(in tableView: UITableView) -> Int {
+      return discoverTypes.count
+   }
+   func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+      return discoverTypes[section]
    }
 }

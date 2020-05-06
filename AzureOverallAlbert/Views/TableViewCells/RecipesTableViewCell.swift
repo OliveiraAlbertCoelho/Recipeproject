@@ -23,10 +23,10 @@ class RecipesTableViewCell: UITableViewCell {
       layout.scrollDirection = .horizontal
       layout.minimumLineSpacing = 10
       let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
-      cv.register(NutritionCVC.self, forCellWithReuseIdentifier: "nutritionCVC")
+      cv.register(DiscoverTypesCollectionViewCell.self, forCellWithReuseIdentifier: "discoverCVC")
       cv.delegate = self
       cv.dataSource = self
-      cv.backgroundColor = .white
+      cv.backgroundColor = .red
       cv.showsHorizontalScrollIndicator = false
       cv.clipsToBounds = true
       return cv
@@ -34,20 +34,33 @@ class RecipesTableViewCell: UITableViewCell {
    //MARK: - Objc Functions
    //MARK: - Regular Functions
    private func setUpContentView(){
-      contentView.backgroundColor = .white
-      
+      contentView.backgroundColor = .red
+      constrainDiscoverTypesCollectionView()
    }
    //MARK: - Constraints
+   private func constrainDiscoverTypesCollectionView(){
+      contentView.addSubview(discoverTypesCollectionView)
+      discoverTypesCollectionView.translatesAutoresizingMaskIntoConstraints = false
+      NSLayoutConstraint.activate([
+         discoverTypesCollectionView.topAnchor.constraint(equalTo: contentView.topAnchor),
+         discoverTypesCollectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+         discoverTypesCollectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+         discoverTypesCollectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+      ])
+   }
       
 }
-extension RecipesTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource{
+extension RecipesTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-      <#code#>
+      return 10
    }
    
    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-      <#code#>
+      guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "discoverCVC", for: indexPath) as? DiscoverTypesCollectionViewCell else {return UICollectionViewCell()}
+      cell.backgroundColor = .blue
+      return cell
    }
-   
-   
+   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+      return CGSize(width: contentView.frame.width/2.5, height: contentView.frame.height)
+   }
 }
