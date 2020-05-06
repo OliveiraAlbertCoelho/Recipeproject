@@ -8,7 +8,14 @@
 
 import Foundation
 struct DiscoverModel {
-   let cuisines = ["African","American","American","British","Cajun", "Caribbean","Chinese",  "Eastern","European","European","French",   "German",  "Greek","Indian","Irish","Italian","Japanese","Jewish","Korean","Latin American","Mediterranean","Mexican","Middle Eastern","Nordic","Southern","Spanish","Thai","Vietnamese"]
-   let diets = ["Gluten Free","Ketogenic","Vegetarian", "Lacto-Vegetarian", "Ovo-Vegetarian", "Vegan", "Pescetarian", "Paleo", "Primal", "Whole30"]
-   let suggests = ["stuff"]
+   let cuisines: [String]
+   let diets: [String]
+   let suggests: [String]
+   let discoverTypes: [[String]]
+   init (){
+      self.cuisines = ["African","American","American","British","Cajun", "Caribbean","Chinese",  "Eastern","European","European","French",   "German",  "Greek","Indian","Irish","Italian","Japanese","Jewish","Korean","Latin American","Mediterranean","Mexican","Middle Eastern","Nordic","Southern","Spanish","Thai","Vietnamese"]
+      self.diets = ["Gluten Free","Ketogenic","Vegetarian", "Lacto-Vegetarian", "Ovo-Vegetarian", "Vegan", "Pescetarian", "Paleo", "Primal", "Whole30"]
+      self.suggests = ["stuff"]
+      self.discoverTypes = [cuisines, diets, suggests ]
+   }
 }
