@@ -12,8 +12,10 @@ class DiscoverVC: UIViewController {
       //MARK: - Lifecycle
    override func viewDidLoad() {
       super.viewDidLoad()
+      setUpView()
    }
    //MARK: - Variables
+   var discoverTypes = ["Cuisine", "Diets", "Suggested"]
    //MARK: - UI Objects
    //MARK: - Objc Functions
    lazy var browseTableView: UITableView = {
@@ -21,6 +23,7 @@ class DiscoverVC: UIViewController {
       layout.register(RecipesTableViewCell.self, forCellReuseIdentifier: "recipes")
       layout.delegate = self
       layout.dataSource = self
+      layout.backgroundColor = .white
       return layout
    }()
    //MARK: - Regular Functions
@@ -44,9 +47,8 @@ class DiscoverVC: UIViewController {
 }
 extension DiscoverVC: UITableViewDelegate, UITableViewDataSource{
    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-      return 3
+      return discoverTypes.count
    }
-   
    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
       guard let cell = tableView.dequeueReusableCell(withIdentifier: "recipes") as? RecipesTableViewCell else {return UITableViewCell()}
       return cell
