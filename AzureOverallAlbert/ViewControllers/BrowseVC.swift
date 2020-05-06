@@ -12,7 +12,7 @@ final class BrowseVC: UIViewController {
    //MARK: - Lifecycle
    override func viewDidLoad() {
       super.viewDidLoad()
-      getRecipeData(searchInfo: "")
+      getRecipeData(searchInfo: searchStr, searchType: searchType ?? SearchType.suggestion )
       setUpView()
       recipeCV.keyboardDismissMode = UIScrollView.KeyboardDismissMode.onDrag
       self.tabBarController?.delegate = self
@@ -29,6 +29,8 @@ final class BrowseVC: UIViewController {
          recipeCV.reloadData()
       }
    }
+   var searchStr = String()
+   var searchType: SearchType?
    //MARK: - UI Objects
    lazy var recipeSearchBar: UISearchBar = {
       let searchBar = UISearchBar()
@@ -65,8 +67,8 @@ final class BrowseVC: UIViewController {
       navigationItem.titleView = appTitleLabel
       view.backgroundColor = #colorLiteral(red: 0.8344202638, green: 0.8393380046, blue: 0.8478055596, alpha: 1)
    }
-   private func getRecipeData(searchInfo: String){
-      RecipeFetcher.manager.fetchRecipes(searchInfo: searchInfo) { (result) in
+   private func getRecipeData(searchInfo: String, searchType: SearchType){
+      RecipeFetcher.manager.fetchRecipes(searchInfo: searchInfo, searchType: searchType) { (result) in
          DispatchQueue.main.async {
             switch result{
             case .failure(let error):
@@ -160,7 +162,7 @@ extension BrowseVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
 //MARK: - UISearchBarDelegate
 extension BrowseVC: UISearchBarDelegate{
    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String){
-      getRecipeData(searchInfo: searchBar.text ?? "")
+      getRecipeData(searchInfo: searchBar.text ?? "", searchType: .suggestion)
       
    }
    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
