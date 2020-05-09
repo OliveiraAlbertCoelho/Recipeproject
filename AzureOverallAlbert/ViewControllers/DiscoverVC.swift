@@ -20,7 +20,7 @@ class DiscoverVC: UIViewController {
    //MARK: - UI Objects
    //MARK: - Objc Functions
    lazy var browseTableView: UITableView = {
-      let layout = UITableView(frame: .zero, style: .plain)
+      let layout = UITableView(frame: .zero, style: .grouped)
       layout.register(RecipesTableViewCell.self, forCellReuseIdentifier: "recipes")
       layout.delegate = self
       layout.dataSource = self
@@ -64,9 +64,7 @@ class DiscoverVC: UIViewController {
 }
 extension DiscoverVC: UITableViewDelegate, UITableViewDataSource{
    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-      if type {
-         return 0
-      }
+  
       return 1
    }
    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -81,16 +79,21 @@ extension DiscoverVC: UITableViewDelegate, UITableViewDataSource{
       return 200
    }
    func numberOfSections(in tableView: UITableView) -> Int {
-      if type {
-         return 0
-      }
       return discoverTypes.discoverTypes.count
    }
    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-     
       return discoverTypes.titles[section]
    }
-}
+
+   func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+      if let headerView = view as? UITableViewHeaderFooterView {
+                headerView.textLabel?.textColor = .orange
+         headerView.textLabel?.font = .boldSystemFont(ofSize: 20)
+         headerView.contentView.backgroundColor = .white
+            }
+      }
+   }
+
 extension DiscoverVC: DiscoverTypeProtocol{
    func pressAction(row: Int, section: Int) {
       let browseVc = BrowseVC()

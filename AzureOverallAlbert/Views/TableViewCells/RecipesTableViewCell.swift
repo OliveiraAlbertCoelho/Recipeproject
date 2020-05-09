@@ -67,7 +67,7 @@ extension RecipesTableViewCell: UICollectionViewDelegate, UICollectionViewDataSo
       guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "discoverCVC", for: indexPath) as? DiscoverTypesCollectionViewCell else {return UICollectionViewCell()}
       let data = discoverData[indexPath.row]
       cell.titleLabel.text = data
-      cell.backgroundColor = indexPath.row % 2 == 0 ? .orange : .systemBlue
+//      cell.backgroundColor = indexPath.row % 2 == 0 ? .orange : .systemBlue
       return cell
    }
    
