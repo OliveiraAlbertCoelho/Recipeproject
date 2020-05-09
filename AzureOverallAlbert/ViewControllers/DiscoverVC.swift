@@ -9,14 +9,14 @@
 import UIKit
 
 class DiscoverVC: UIViewController {
-      //MARK: - Lifecycle
+   //MARK: - Lifecycle
    override func viewDidLoad() {
       super.viewDidLoad()
       setUpView()
       navigationItem.title = "Discover"
    }
-   var section = Int()
    //MARK: - Variables
+   var section = Int()
    var discoverTypes = DiscoverModel()
    //MARK: - UI Objects
    //MARK: - Objc Functions
@@ -47,7 +47,7 @@ class DiscoverVC: UIViewController {
          browseTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0),
          browseTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
          browseTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
-      
+         
       ])
    }
    private func constrainDiscoverSearchBar(){
@@ -58,10 +58,10 @@ class DiscoverVC: UIViewController {
          discoverSearchBar.heightAnchor.constraint(equalToConstant: 50),
          discoverSearchBar.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
          discoverSearchBar.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
-      
+         
       ])
    }
-
+   
 }
 extension DiscoverVC: UITableViewDelegate, UITableViewDataSource{
    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

@@ -14,10 +14,8 @@ final class BrowseVC: UIViewController {
       super.viewDidLoad()
       getRecipeData(searchInfo: searchStr, searchType: searchType ?? SearchType.suggestion )
       setUpView()
-      recipeCV.keyboardDismissMode = UIScrollView.KeyboardDismissMode.onDrag
-      self.tabBarController?.delegate = self
+      
    }
-   var previousValue = CGFloat ()
    override func viewWillAppear(_ animated: Bool) {
       super.viewWillAppear(true)
       navigationController?.navigationBar.isHidden = false
@@ -29,6 +27,7 @@ final class BrowseVC: UIViewController {
          recipeCV.reloadData()
       }
    }
+   var previousValue = CGFloat ()
    var searchStr = String()
    var searchType: SearchType?
    //MARK: - UI Objects
@@ -62,10 +61,13 @@ final class BrowseVC: UIViewController {
       setUpViewDesign()
       constrainRecipeSearchBar()
       constrainRecipeCV()
+      recipeCV.keyboardDismissMode = UIScrollView.KeyboardDismissMode.onDrag
+      self.tabBarController?.delegate = self
    }
    private func setUpViewDesign(){
       navigationItem.titleView = appTitleLabel
       view.backgroundColor = #colorLiteral(red: 0.8344202638, green: 0.8393380046, blue: 0.8478055596, alpha: 1)
+      
    }
    private func getRecipeData(searchInfo: String, searchType: SearchType){
       RecipeFetcher.manager.fetchRecipes(searchInfo: searchInfo, searchType: searchType) { (result) in
