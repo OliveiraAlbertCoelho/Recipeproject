@@ -22,6 +22,7 @@ class DiscoverTypesCollectionViewCell: UICollectionViewCell {
    //MARK: - UI Objects
    lazy var titleLabel: UILabel = {
       let label = UILabel()
+      label.textColor = .white
       label.textAlignment = .center
       label.font = .boldSystemFont(ofSize: 20)
       return label
@@ -29,7 +30,6 @@ class DiscoverTypesCollectionViewCell: UICollectionViewCell {
    //MARK: - Objc Functions
    //MARK: - Regular Functions
    private func setUpView(){
-      contentView.backgroundColor = .white
       constrainTitleLabel()
       
    }

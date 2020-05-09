@@ -18,7 +18,7 @@ class RecipesTableViewCell: UITableViewCell {
        fatalError("init(coder:) has not been implemented")
    }
    //MARK: - Variables
-   var types = [String](){
+   var discoverData = [String](){
       didSet{
          discoverTypesCollectionView.reloadData()
       }
@@ -60,24 +60,21 @@ class RecipesTableViewCell: UITableViewCell {
 }
 extension RecipesTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-      return types.count
+      return discoverData.count
    }
    
    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
       guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "discoverCVC", for: indexPath) as? DiscoverTypesCollectionViewCell else {return UICollectionViewCell()}
-      let data = types[indexPath.row]
+      let data = discoverData[indexPath.row]
       cell.titleLabel.text = data
-      cell.backgroundColor = .orange
+      cell.backgroundColor = indexPath.row % 2 == 0 ? .orange : .systemBlue
       return cell
    }
    
    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-      if types.count > 5{
-        return CGSize(width: contentView.frame.width/2.5, height: contentView.frame.height/3)
-      }
        return CGSize(width: contentView.frame.width/2.5, height: contentView.frame.height)
    }
    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-      delegate?.pressAction(row: indexPath.row, type: searchStringType)
+      delegate?.pressAction(row: indexPath.row, section: searchStringType)
    }
 }

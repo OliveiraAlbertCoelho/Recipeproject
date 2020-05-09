@@ -10,9 +10,9 @@ import Foundation
 
 class RecipeFetcher {
    static let manager = RecipeFetcher()
-   func fetchRecipes(searchInfo: String, searchType: SearchType, completionHandler: @escaping(Result<[RecipeWrapper], NetWorkError>)-> ()){
+   func fetchRecipes(searchInfo: String, fetchRecipeType: FetchRecipeType, completionHandler: @escaping(Result<[RecipeWrapper], NetWorkError>)-> ()){
       var searchCategory = String()
-      switch searchType {
+      switch fetchRecipeType {
       case .cuisine:
          searchCategory = "cuisine"
       case .diet:
@@ -20,12 +20,10 @@ class RecipeFetcher {
       default:
          searchCategory = "query"
       }
-      let urlString = "https://api.spoonacular.com/recipes/search?&\(searchCategory)=\(searchInfo)&limitLicense=false&number=10&apiKey=\(Secrets.apiKey)"
-      print(urlString)
+    let urlString = "https://api.spoonacular.com/recipes/search?&\(searchCategory)=\(searchInfo)&limitLicense=false&number=10&apiKey=\(Secrets.apiKey)"
       NetworkManager.manager.fetchData(urlString: urlString) { (result) in
          switch result{
          case .failure(let error):
-            print(urlString)
             completionHandler(.failure(error))
          case .success(let data):
             do{
@@ -38,8 +36,9 @@ class RecipeFetcher {
       }
    }
 }
-enum SearchType {
+
+enum FetchRecipeType {
    case diet
    case cuisine
-   case suggestion
+   case query
 }

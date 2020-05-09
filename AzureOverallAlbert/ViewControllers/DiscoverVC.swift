@@ -16,7 +16,6 @@ class DiscoverVC: UIViewController {
       navigationItem.title = "Discover"
    }
    //MARK: - Variables
-   var section = Int()
    var discoverTypes = DiscoverModel()
    //MARK: - UI Objects
    //MARK: - Objc Functions
@@ -65,12 +64,15 @@ class DiscoverVC: UIViewController {
 }
 extension DiscoverVC: UITableViewDelegate, UITableViewDataSource{
    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+      if type {
+         return 0
+      }
       return 1
    }
    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
       guard let cell = tableView.dequeueReusableCell(withIdentifier: "recipes") as? RecipesTableViewCell else {return UITableViewCell()}
       let data = discoverTypes.discoverTypes[indexPath.section]
-      cell.types = data
+      cell.discoverData = data
       cell.delegate = self
       cell.searchStringType = indexPath.section
       return cell
@@ -79,25 +81,30 @@ extension DiscoverVC: UITableViewDelegate, UITableViewDataSource{
       return 200
    }
    func numberOfSections(in tableView: UITableView) -> Int {
+      if type {
+         return 0
+      }
       return discoverTypes.discoverTypes.count
    }
    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+     
       return discoverTypes.titles[section]
    }
 }
 extension DiscoverVC: DiscoverTypeProtocol{
-   func pressAction(row: Int, type: Int) {
+   func pressAction(row: Int, section: Int) {
       let browseVc = BrowseVC()
-      switch type {
+      switch section {
       case 0:
-         browseVc.searchType = .cuisine
+         browseVc.recipeFetchType = .cuisine
       case 1:
-         browseVc.searchType = .diet
+         browseVc.recipeFetchType = .diet
       default:
-         browseVc.searchType = .suggestion
+         browseVc.recipeFetchType = .query
       }
-      browseVc.searchStr = discoverTypes.discoverTypes[type][row]
+      browseVc.searchStr = discoverTypes.discoverTypes[section][row]
       navigationController?.pushViewController(browseVc, animated: true)
    }
-   
 }
+
+

@@ -13,9 +13,10 @@ protocol ButtonProtocol: AnyObject {
    
 }
 protocol DiscoverTypeProtocol: AnyObject {
-      func pressAction(row: Int, type: Int)
+      func pressAction(row: Int, section: Int)
 
 }
+
 enum ButtonType  {
    case headerSec1
    case cell

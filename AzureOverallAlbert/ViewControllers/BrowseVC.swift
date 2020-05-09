@@ -12,9 +12,8 @@ final class BrowseVC: UIViewController {
    //MARK: - Lifecycle
    override func viewDidLoad() {
       super.viewDidLoad()
-      getRecipeData(searchInfo: searchStr, searchType: searchType ?? SearchType.suggestion )
+      getRecipeData(searchInfo: searchStr, searchType: recipeFetchType ?? FetchRecipeType.query )
       setUpView()
-      
    }
    override func viewWillAppear(_ animated: Bool) {
       super.viewWillAppear(true)
@@ -27,9 +26,8 @@ final class BrowseVC: UIViewController {
          recipeCV.reloadData()
       }
    }
-   var previousValue = CGFloat ()
    var searchStr = String()
-   var searchType: SearchType?
+   var recipeFetchType: FetchRecipeType?
    //MARK: - UI Objects
    lazy var recipeSearchBar: UISearchBar = {
       let searchBar = UISearchBar()
@@ -69,8 +67,8 @@ final class BrowseVC: UIViewController {
       view.backgroundColor = #colorLiteral(red: 0.8344202638, green: 0.8393380046, blue: 0.8478055596, alpha: 1)
       
    }
-   private func getRecipeData(searchInfo: String, searchType: SearchType){
-      RecipeFetcher.manager.fetchRecipes(searchInfo: searchInfo, searchType: searchType) { (result) in
+   private func getRecipeData(searchInfo: String, searchType: FetchRecipeType){
+      RecipeFetcher.manager.fetchRecipes(searchInfo: searchInfo, fetchRecipeType: searchType) { (result) in
          DispatchQueue.main.async {
             switch result{
             case .failure(let error):
@@ -164,7 +162,7 @@ extension BrowseVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
 //MARK: - UISearchBarDelegate
 extension BrowseVC: UISearchBarDelegate{
    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String){
-      getRecipeData(searchInfo: searchBar.text ?? "", searchType: .suggestion)
+      getRecipeData(searchInfo: searchBar.text ?? "", searchType: .query)
       
    }
    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
