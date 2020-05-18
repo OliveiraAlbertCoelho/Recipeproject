@@ -22,6 +22,7 @@ class RecipeFetcher {
       }
     let urlString = "https://api.spoonacular.com/recipes/search?&\(searchCategory)=\(searchInfo)&limitLicense=false&number=10&apiKey=\(Secrets.apiKey)"
       print(urlString)
+            print(urlString)
       NetworkManager.manager.fetchData(urlString: urlString) { (result) in
          switch result{
          case .failure(let error):
