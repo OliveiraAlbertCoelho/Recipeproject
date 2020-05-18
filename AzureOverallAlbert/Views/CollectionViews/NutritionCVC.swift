@@ -14,7 +14,8 @@ class NutritionCVC: UICollectionViewCell {
       super.init(frame: frame)
       constrainNutrientTitle()
       constrainNutrientAmount()
-      contentView.backgroundColor = #colorLiteral(red: 0.9568627477, green: 0.6588235497, blue: 0.5450980663, alpha: 1)
+//      contentView.backgroundColor = #colorLiteral(red: 0.9568627477, green: 0.6588235497, blue: 0.5450980663, alpha: 1)
+      contentView.backgroundColor = #colorLiteral(red: 0.09019608051, green: 0, blue: 0.3019607961, alpha: 1)
       contentView.layer.cornerRadius = 50
       contentView.layer.masksToBounds = true
    }
